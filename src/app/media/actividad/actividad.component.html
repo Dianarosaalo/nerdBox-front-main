@@ -1,0 +1,31 @@
+<br><br>
+
+<table class="excel-table">
+
+  <tr class="base">
+    <td>Título</td>
+    <td>Tipo</td>
+    <td>Género</td>
+    <td>Plataforma</td>
+    <td>Subgénero</td>
+    <td>Fecha Lanzamiento</td>
+    <td>Estado</td>
+    <td>Nota Objetiva</td>
+    <td>Nota Subjetiva</td>
+    <td>Desarolladora</td>
+  </tr>
+
+  <tr class="each" *ngFor="let media of medias">
+    <td>{{ media.titulo }}</td>
+    <td>{{ media.tipo }}</td>
+    <td>{{ media.genero }}</td>
+    <td>{{ media.plataforma }}</td>
+    <td>{{ media.subgenero }}</td>
+    <td>{{ formatDate(media.fechaLanzamiento) }}</td>
+    <td>Completado | en : {{ media.fechaTerminado[0].fecha }}</td>
+    <td>{{ media.notaObjetiva }}</td>
+    <td>{{ media.notaSubjetiva }}</td>
+    <td>{{ media.desarrolladora }}</td>
+  </tr>
+</table>
+

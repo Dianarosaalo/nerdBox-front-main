@@ -1,0 +1,27 @@
+.excel-table tr.base {
+  background: linear-gradient(to right, rgba(51, 47, 27, 0.822), rgb(176, 179, 21)); /* Force yellow background */
+  color: black !important; /* Change text color for better contrast */
+  text-align: center;
+}
+
+.excel-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.excel-table tr.each {
+  background: linear-gradient(to right, black, grey); /* Gradient from black to grey */
+}
+
+.excel-table tr.base:nth-child(odd) {
+  background-color: #f2f2f2; /* Alternate row background color */
+}
+
+.excel-table td {
+  padding: 8px;
+  border: 1px solid #dddddd;
+  color: #ffffff; /* Text color */
+}
+
+

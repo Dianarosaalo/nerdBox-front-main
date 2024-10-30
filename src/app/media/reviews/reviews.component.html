@@ -1,0 +1,14 @@
+<br>
+
+<div class="review" *ngFor="let media of medias">
+  <h3>{{media.titulo}}</h3>
+
+  <div class="score" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">{{media.notaObjetiva}}</div> <!-- Score element at top right -->
+
+  <div class="review-content">
+    <a [routerLink]="['/media', media._id]">
+      <img class="card-img-top" src="{{ media.imagen }}" />
+    </a>
+    <p class="review-text">{{media.review}}</p>
+  </div>
+</div>

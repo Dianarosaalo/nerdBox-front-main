@@ -1,0 +1,46 @@
+
+
+.review {
+  position: relative;
+  padding: 15px;
+  background: linear-gradient(to right, rgb(53, 52, 52), rgb(95, 93, 93));
+  /*margin-left:20px;*/
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+h3 {
+  margin: 0;
+  color:white;
+}
+
+.score {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 1rem;
+  text-align: right;
+  color:rgb(0, 0, 0);
+
+  padding: 15px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.review-content {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.review-content img {
+  width: 180px;
+  height: 250px;
+  border-radius: 5%;
+  margin-right: 15px; /* Space between image and review text */
+}
+
+.review-text {
+  flex: 1;
+  margin-right: 25px; /* Space before the score on the right */
+  color:white
+}

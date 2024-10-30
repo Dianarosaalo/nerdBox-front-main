@@ -1,0 +1,36 @@
+nav a{
+  font-family: Graphik-Semibold-Web,sans-serif;
+  cursor:pointer;
+  color: white;
+  margin-right:25px
+}
+
+nav a:hover{
+  color:rgb(227, 212, 0);
+}
+
+/*nav a.nav-link.active{
+  color:rgb(238, 4, 0);
+}*/
+
+@media (max-width: 910px)
+{
+  .big-nav{
+    display: none;
+  }
+
+  .small-nav{
+    display: block !important;
+  }
+}
+
+a.dropdown-item.active{
+  color:rgb(238, 255, 0);
+}
+
+nav{
+  position: fixed;
+  top: 0;z-index: 9999;
+  width: 100%;
+  border:1px rgba(0, 0, 0, 0.858) solid;
+}

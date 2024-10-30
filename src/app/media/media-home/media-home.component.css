@@ -1,0 +1,84 @@
+.col-xl-1 {
+  width: 10%;
+}
+
+@media (min-width: 2500px) {
+  .col-xl-1 {
+    width:7%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .col-xl-1 {
+    width:15%;
+  }
+}
+
+.bottom-left {
+  background-color: rgb(33, 33, 33);
+  color:white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px; /* Optional: Add padding for better readability */
+  margin-left: 10px;
+}
+
+img{
+  border-radius: 5%;
+  width: 180px;
+  height: 250px;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.mb-1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Controls spacing between images */
+  justify-content: center;
+}
+
+nav{
+  background-color: #333333;;
+}
+
+.form-control{
+  background-color: #333333;
+  color: white;
+}
+
+.image-container {
+  position: relative; /* Establishes a positioning context */
+}
+
+.card-img-top {
+  display: block; /* Ensures the image behaves like a block element */
+  width: 100%; /* Makes the image responsive */
+}
+
+.overlay {
+  position: absolute; /* Allows positioning within the container */
+  bottom: 1px; /* Closer to the bottom of the image */
+  left: 50%; /* Centering horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  padding: 10px 15px; /* Padding for larger size */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center; /* Center text within the overlay */
+  color: black; /* White text color */
+  font-weight: bold;
+  font-size: 0.9em; /* Slightly larger font size */
+  opacity: 0.9; /* Increased opacity */
+}
+
+.tiempo-overlay {
+  background-color: rgb(46, 45, 45); /* Grey background for tiempoJuego */
+  color: white; /* White text color */
+  font-size: 0.9em; /* Same font size for consistency */
+  opacity: 0.9; /* Increased opacity */
+}
+
+.btn{
+  padding: 0% !important;
+}

@@ -1,0 +1,307 @@
+<br>
+
+<ul class="tabs-container">
+  <li (click)="onTabClick('Obligatorios')" class="tab-link">Obligatorios</li>
+  <li (click)="onTabClick('Opcionales')" class="tab-link">Opcionales</li>
+  <li (click)="onTabClick('Metadatos')" class="tab-link">Metadatos</li>
+</ul>
+
+<br>
+<div class="container">
+  <form class="mt-4" (ngSubmit)="addMedia()" #mediaForm="ngForm">
+
+    <div class="obligatorios" *ngIf="activeTab === 'Obligatorios'">
+      <div class="form-row">
+        <div class="mb-3 col">
+          <label for="titulo">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            name="titulo"
+            id="titulo"
+            [(ngModel)]="newMedia.titulo"
+            placeholder="Título"
+            #tituloModel="ngModel"
+            [ngClass]="validClasses(tituloModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback">Al menos un título es requerido</div>
+        </div>
+
+        <div class="mb-3 col">
+          <label>Tipo de Media <br></label>
+          <select class="form-control" [(ngModel)]="newMedia.tipo" [ngModelOptions]="{standalone:true}">
+            <option *ngFor="let option of tipos" [value]="option.value">{{option.label}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="mb-3 col">
+          <label for="genero">Género</label>
+          <input
+            type="text"
+            class="form-control"
+            name="genero"
+            id="genero"
+            [(ngModel)]="newMedia.genero"
+            placeholder="Género de la obra"
+            #generoModel="ngModel"
+            [ngClass]="validClasses(generoModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback">Al menos un género es requerido</div>
+        </div>
+
+        <div class="mb-3 col">
+          <label for="subgenero">Subgénero</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subgenero"
+            id="subgenero"
+            [(ngModel)]="newMedia.subgenero"
+            placeholder="Subgénero de la obra"
+            #subgeneroModel="ngModel"
+            [ngClass]="validClasses(subgeneroModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback">Al menos un subgénero es requerido</div>
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="newMedia.tipo === 'Videojuego'">
+        <label for="plataforma">Plataforma</label>
+        <input
+          type="text"
+          class="form-control"
+          name="plataforma"
+          id="plataforma"
+          [(ngModel)]="newMedia.plataforma"
+          placeholder="Plataforma jugable"
+          #plataformaModel="ngModel"
+          [ngClass]="validClasses(plataformaModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback">Al menos una plataforma es requerida</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="fotoPerfil">Foto de Cover</label>
+        <input
+          type="file"
+          class="form-control"
+          id="fotoPerfil"
+          name="fotoPerfil"
+          #fileImage
+          (change)="changeImage(fileImage)"
+          ngModel
+          required
+          #imageModel="ngModel"
+          [ngClass]="validClasses(imageModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback">Una imagen es requerida</div>
+      </div>
+
+      <img
+        [src]="newMedia.imagen"
+        [ngClass]="{ 'd-none': !newMedia.imagen }"
+        class="img-thumbnail mb-3"
+      />
+
+      <div class="containermenu">
+        <h1>Fechas de Completación</h1>
+        <p (click)="showNewStateForm()" class="btn btn-warning">Añadir una fecha</p>
+
+        <div *ngIf="showNewState" class="new-trait-form">
+          <h2>Añadir una fecha</h2>
+          <input type="date" [(ngModel)]="newState.fecha" name="title" placeholder="fecha" />
+          <select class="form-control" [(ngModel)]="newState.estado" [ngModelOptions]="{standalone:true}">
+            <option *ngFor="let option of tiposEstado" [value]="option.value">{{option.label}}</option>
+          </select>
+
+          <p (click)="addState()" class="btn btn-warning">Añadir</p>
+        </div>
+
+        <div class="trait-list">
+          <h2>Fechas de Juego</h2>
+          <ul>
+            <li *ngFor="let f of newMedia.fechaTerminado">
+              <span class="trait-text">{{ (f.estado) }}</span>
+              <span class="trait-title">{{ (f.fecha) }}</span>
+              <p (click)="deleteState(f)" class="btn btn-warning">Eliminar</p>
+            </li>
+          </ul>
+        </div>
+      </div><br>
+
+    </div>
+
+
+
+    <div *ngIf="activeTab ==='Opcionales'">
+
+      <div class="mb-3">
+        <label for="name">Fecha de Lanzamiento</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaLanzamiento"
+          id="fechaLanzamiento"
+          [(ngModel)]="newMedia.fechaLanzamiento"
+          required
+          #fechaModel="ngModel"
+          [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
+          Introduce una fecha
+        </div>
+      </div>
+
+      <div class="mb-3" *ngIf="newMedia.tipo==='Videojuego'">
+        <label for="titulo" >Desarrolladora</label>
+        <input
+          type="devs"
+          class="form-control"
+          name="devs"
+          id="devs"
+          [(ngModel)]="newMedia.desarrolladora"
+          placeholder="Desarrolladora"
+          #tituloModel="ngModel"
+          [ngClass]="validClasses(tituloModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback">Al menos un título es requerido</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="fue">Nota Objetiva</label>
+        <input
+          type="number"
+          class="form-control"
+          id="notaOb"
+          name="notaOb"
+          min:0
+          [(ngModel)]="newMedia.notaObjetiva"
+          placeholder="Nota Realista"
+          required
+          #fueModel="ngModel"
+          [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
+          Nota Objetiva
+        </div>
+      </div>
+
+      <!--<div class="mb-3">
+        <label for="fue">Nota Subjetiva</label>
+        <input
+          type="number"
+          class="form-control"
+          id="notaSub"
+          name="notaSub"
+          min:0
+          [(ngModel)]="newMedia.notaSubjetiva"
+          placeholder="Nota desde el corazón :3"
+          required
+          #fueModel="ngModel"
+          [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
+          Nota Objetiva
+        </div>
+      </div>-->
+
+      <div class="mb-3">
+        <label for="tiempoJ">Tiempo Jugado</label>
+        <input
+          type="number"
+          class="form-control"
+          id="tiempoJ"
+          name="tiempoJ"
+          min:0
+          [(ngModel)]="newMedia.tiempoJuego"
+          placeholder="Tiempo Jugado"
+          required
+          #fueModel="ngModel"
+          [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
+          Tiempo Jugado
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="review">Review</label>
+        <textarea
+          class="form-control review"
+          name="review"
+          id="review"
+          [(ngModel)]="newMedia.review"
+          placeholder="Escribe tu reseña aquí"
+          #reviewModel="ngModel"
+          [ngClass]="validClasses(reviewModel, 'is-valid', 'is-invalid')"
+          rows="6"
+          style="width: 100%;"></textarea>
+        <div class="invalid-feedback">Al menos un título es requerido</div>
+      </div>
+
+    </div>
+
+    <div *ngIf="activeTab ==='Metadatos'">
+
+      <div class="mb-3">
+        <label for="name">Fecha de Creación</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaCreacion"
+          id="fechaCreacion"
+          [(ngModel)]="newMedia.fechaCreacion"
+          required
+          #fechaModel="ngModel"
+          [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
+          Introduce una fecha
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="name">Fecha de Modificación</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaMod"
+          id="nombre"
+          [(ngModel)]="newMedia.fechaModificacion"
+          required
+          #fechaModel="ngModel"
+          [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
+          Introduce una fecha
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <button *ngIf="!edit"
+        type="submit"
+        class="btn"
+        [disabled]="characterForm.invalid">
+        Crear Media
+      </button>
+
+      <button *ngIf="edit"
+        type="submit"
+        class="btn"
+        >
+        Editar Media
+      </button>
+
+    </div>
+    <br>
+
+
+  </form>
+</div>
+
+
+

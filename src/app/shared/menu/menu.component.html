@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark big-nav">
+  <div class="container-fluid big-nav">
+    <a class="navbar-brand" [routerLink]="['/media', 'home']"><img src="favicon.ico" style="width: 20%;"> NerdBox</a>
+
+    <ul class="navbar-nav mr-auto mb-lg-0">
+      <li><a class="dropdown-item" [routerLink]="['/media', 'home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home </a></li>
+      <li><a class="dropdown-item" [routerLink]="['/media', 'actividad']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Actividad</a></li>
+      <li><a class="dropdown-item" [routerLink]="['/media', 'reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Reviews</a></li>
+      <li><a class="dropdown-item" [routerLink]="['/media', 'estadisticas']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Estadísticas </a></li>
+      <li><a class="dropdown-item" [routerLink]="['/media', 'add']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Añadir Media </a></li>
+    </ul>
+  </div>
+
+</nav>

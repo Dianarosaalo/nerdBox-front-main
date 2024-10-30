@@ -1,0 +1,103 @@
+
+<br>
+
+<nav class="navbar justify-content-between mt-3 row">
+
+  <!--<ul class="nav nav-pills col-auto ms-3 designs">
+    <li class="nav-item">
+      <p (click)="queryBuscar()" class="blue btn btn-success">Search!</p>
+    </li>
+  </ul>-->
+
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search Media Here!"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+  </form> <br>
+
+  <ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="state" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfState" value={{option.value}}>State: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="year" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfYears" value={{option.value}}>Completion Year: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul *ngIf="type==='Videojuego'" class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="platform" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfPlatform" value={{option.value}}>Platform: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="subgenre" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfSubgenre" value={{option.value}}>Subgenre: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="genre" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfGenre" value={{option.value}}>Genre: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfMedia" value={{option.value}}>Type of Media: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item">
+      <select class="form-control" [(ngModel)]="order" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typeOfOrders" value={{option.value}}>Order: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+</nav>
+
+<!--App-->
+
+<div class="mb-1 mt-1 row g-1">
+  <div class="col-9 col-md-6 col-xl-1" *ngFor="let media of medias | mediaFilter:search:type:order:genre:subgenre:platform:state:year">
+
+    <a [routerLink]="['/media', media._id]" class="image-container">
+      <img class="card-img-top" src="{{ media.imagen }}" />
+      <div *ngIf="order === 'score'" class="overlay" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">
+        {{ media.notaObjetiva }}
+      </div>
+      <div *ngIf="order === 'tiempoJuego'" class="overlay tiempo-overlay">
+        {{ media.tiempoJuego }} Hrs
+      </div>
+    </a>
+
+    <p class="card-text" style=" text-align: center;"><a [routerLink]="['/media', media._id]" style="text-decoration: none; color: #ffffff;">{{ media.titulo }}</a></p>
+
+  </div>
+</div>
+
+<p class="bottom-left">{{filteredMedias.length}} obras de {{medias.length}}</p>
+
+<br><br><br><br>
