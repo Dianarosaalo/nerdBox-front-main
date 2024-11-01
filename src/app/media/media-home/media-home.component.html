@@ -106,15 +106,13 @@
 
 <p class="bottom-left">{{filteredMedias.length}} obras de {{medias.length}}</p>
 
-<br><br><br><br>
-
-<div class="mb-1 mt-1" *ngIf="smallContainer">
+<div class="mb-1 mt-1 row-g1" *ngIf="smallContainer">
   <div id="media-container">
     <ng-container *ngFor="let year of sortedYears">
       <div class="year-group">
         <h3 class="year-header">{{ year }}</h3>
         <div class="media-row">
-          <div *ngFor="let media of mediaByYear[year]" class="media-item">
+          <div *ngFor="let media of mediaByYear[year]" class="media-item col-9 col-md-6 col-xl-1">
             <a [routerLink]="['/media', media._id]" class="image-container">
               <img class="card-img-top" [src]="media.imagen" />
             </a>
@@ -127,3 +125,7 @@
     </ng-container>
   </div>
 </div>
+
+<br><br><br><br>
+
+

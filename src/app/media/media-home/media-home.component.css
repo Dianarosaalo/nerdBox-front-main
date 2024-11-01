@@ -112,8 +112,9 @@ nav{
 }
 
 .media-item {
-  flex: 0 0 calc(100% / 13 - 10px); /* 13 items per row */
-  max-width: calc(100% / 13 - 10px);
+  flex: 0 1 calc(100% / 14 - 10px); /* Allow items to grow but set a minimum width */
+  min-width: 80px; /* Set a minimum width to prevent stretching too much */
+  max-width: calc(100% / 14 - 10px);
   text-align: center;
 }
 
@@ -121,6 +122,7 @@ nav{
   width: 100%;
   max-width: 300px; /* Adjust as necessary */
   max-height: 255px;
+  min-width: 150px;
   border-radius: 8px;
 }
 
