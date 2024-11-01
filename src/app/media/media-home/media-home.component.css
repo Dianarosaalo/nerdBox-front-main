@@ -82,3 +82,52 @@ nav{
 .btn{
   padding: 0% !important;
 }
+
+
+
+/* ordenados por años */
+
+#media-container {
+  padding: 20px;
+  background-color: #333; /* Dark background */
+}
+
+.year-group {
+  margin-bottom: 40px; /* Space between each year group */
+}
+
+.year-header {
+  text-align: center;
+  font-size: 2rem; /* Larger font size */
+  color: white; /* White text */
+  margin-bottom: 20px;
+  background-color: black;
+}
+
+.media-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center-align items in the row */
+  gap: 10px;
+}
+
+.media-item {
+  flex: 0 0 calc(100% / 13 - 10px); /* 13 items per row */
+  max-width: calc(100% / 13 - 10px);
+  text-align: center;
+}
+
+.media-item img {
+  width: 100%;
+  max-width: 300px; /* Adjust as necessary */
+  max-height: 255px;
+  border-radius: 8px;
+}
+
+.media-title {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 5px;
+}

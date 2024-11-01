@@ -22,7 +22,7 @@
 
   <ul  class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
-      <button class="btn btn-dark" style="padding: 10px !important;"(click)="groupByYear()">Group by Year</button>
+      <button class="btn btn-dark" style="padding: 8px !important;"(click)="groupByYear()">Group by Year</button>
     </li>
   </ul>
 
@@ -110,5 +110,20 @@
 
 <div class="mb-1 mt-1" *ngIf="smallContainer">
   <div id="media-container">
+    <ng-container *ngFor="let year of sortedYears">
+      <div class="year-group">
+        <h3 class="year-header">{{ year }}</h3>
+        <div class="media-row">
+          <div *ngFor="let media of mediaByYear[year]" class="media-item">
+            <a [routerLink]="['/media', media._id]" class="image-container">
+              <img class="card-img-top" [src]="media.imagen" />
+            </a>
+            <p class="card-text">
+              <a [routerLink]="['/media', media._id]" class="media-title">{{ media.titulo }}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>

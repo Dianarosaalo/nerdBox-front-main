@@ -32,7 +32,7 @@ export class MediaHomeComponent {
   state:string='';
   year = 0
   bigContainer=true;
-  smallContainer=true;
+  smallContainer=false;
 
   constructor(
     private readonly mediaService:MediaService,
@@ -155,161 +155,83 @@ export class MediaHomeComponent {
     }
   }
 
+  sortedYears: string[] = []; // Define this to hold sorted years
+  mediaByYear: { [key: string]: Media[] } = {}; // Define to hold media grouped by year
+
   groupByYear(): void {
-    this.bigContainer = !this.bigContainer;
+      this.bigContainer = !this.bigContainer;
+      this.smallContainer = !this.smallContainer;
 
-    const mediaContainer = document.getElementById('media-container');
-    mediaContainer!.innerHTML = ''; // Clear existing content
+      // Clear previous media by year
+      this.mediaByYear = {};
+      this.sortedYears = [];
 
-    // Inject CSS styles directly into the document head
-    const style = document.createElement('style');
-    style.innerHTML = `
-      #media-container {
-        padding: 20px;
-        background-color: #333; /* Dark background */
-      }
+      // Filter medias based on existing criteria
+      const filteredMedias = this.medias.filter(media => {
+          const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
+          const matchesType = this.type ? media.tipo === this.type : true;
+          const matchesGenre = this.genre ? media.genero === this.genre : true;
+          const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
+          const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
+          const matchesState = this.state ? media.fechaTerminado.some((ft) => ft.estado === this.state) : true;
 
-      .year-group {
-        margin-bottom: 40px; /* Space between each year group */
-      }
-
-      .year-header {
-        text-align: center;
-        font-size: 2rem; /* Larger font size */
-        color: white; /* White text */
-        margin-bottom: 20px;
-        background-color:black;
-      }
-
-      .media-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center; /* Center-align items in the row */
-        gap: 10px;
-      }
-
-      .media-item {
-        flex: 0 0 calc(100% / 13 - 10px); /* 13 items per row */
-        max-width: calc(100% / 13 - 10px);
-        text-align: center;
-      }
-
-      .media-item img {
-        width: 100%;
-        max-width: 300px; /* Adjust as necessary */
-        max-height: 255px;
-        border-radius: 8px;
-      }
-
-      .media-title {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        display: block;
-        margin-top: 5px;
-      }
-    `;
-    document.head.appendChild(style);
-
-    const startYear = 2006;
-    const endYear = new Date().getFullYear();
-    const mediaByYear: { [key: string]: any[] } = {};
-
-    // Filter medias based on existing criteria
-    const filteredMedias = this.medias.filter(media => {
-      const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
-      const matchesType = this.type ? media.tipo === this.type : true;
-      const matchesGenre = this.genre ? media.genero === this.genre : true;
-      const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
-      const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-      const matchesState = this.state ? media.fechaTerminado.some((ft) => ft.estado === this.state) : true;
-
-      return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
-    });
-
-    // Order filtered medias
-    const orderedMedias = this.OrderBy(this.order, filteredMedias);
-
-    // Group ordered media items by year
-    orderedMedias.forEach((media) => {
-      media.fechaTerminado.forEach((ft) => {
-        const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
-
-        if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
-          const fullYear = fechaAsDate.getFullYear();
-
-          if (fullYear >= startYear && fullYear <= endYear) {
-            if (!mediaByYear[fullYear]) {
-              mediaByYear[fullYear] = [];
-            }
-            mediaByYear[fullYear].push(media);
-          }
-        }
-      });
-    });
-
-    // Sort years in descending order
-    const sortedYears = Object.keys(mediaByYear).sort((a, b) => Number(b) - Number(a));
-
-    // Generate HTML for grouped media by year
-    sortedYears.forEach((year) => {
-      const yearGroup = document.createElement('div');
-      yearGroup.className = 'year-group';
-
-      // Year header
-      const yearHeader = document.createElement('h3');
-      yearHeader.className = 'year-header';
-      yearHeader.innerText = year;
-      yearGroup.appendChild(yearHeader);
-
-      // Media row
-      const mediaRow = document.createElement('div');
-      mediaRow.className = 'media-row';
-
-      mediaByYear[year].forEach((media) => {
-        const mediaElement = document.createElement('div');
-        mediaElement.className = 'media-item';
-        mediaElement.innerHTML = `
-          <a [routerLink]="['/media', media._id]" class="image-container">
-            <img class="card-img-top" src="${media.imagen}" />
-          </a>
-          <p class="card-text">
-            <a [routerLink]="['/media', media._id]" class="media-title">${media.titulo}</a>
-          </p>
-        `;
-        mediaRow.appendChild(mediaElement);
+          return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
       });
 
-      yearGroup.appendChild(mediaRow);
-      mediaContainer!.appendChild(yearGroup);
-    });
-}
+      // Order filtered medias
+      const orderedMedias = this.OrderBy(this.order, filteredMedias);
 
-// OrderBy function
-OrderBy(order: string, medias: Media[]): Media[] {
-    const myMedia = [...medias];
-    if (order === "nombre") {
-        myMedia.sort((a, b) => {
-            if (a.titulo === b.titulo) return 0;
-            return a.titulo > b.titulo ? 1 : -1;
-        });
-    } else if (order === "score") {
-        myMedia.sort((a, b) => {
-            if (a.notaObjetiva === b.notaObjetiva) return 0;
-            return a.notaObjetiva < b.notaObjetiva ? 1 : -1;
-        });
-    } else if (order === "fechavista") {
-        myMedia.sort((a, b) => {
-            if (a.fechaTerminado[0].fecha === b.fechaTerminado[0].fecha) return 0;
-            return a.fechaTerminado[0].fecha > b.fechaTerminado[0].fecha ? 1 : -1;
-        });
-    } else if (order === "tiempoJuego") {
-        myMedia.sort((a, b) => {
-            if (a.tiempoJuego === b.tiempoJuego) return 0;
-            return a.tiempoJuego < b.tiempoJuego ? 1 : -1;
-        });
-    }
-    return myMedia;
-}
+      // Group ordered media items by year
+      const startYear = 2006;
+      const endYear = new Date().getFullYear();
+
+      orderedMedias.forEach((media) => {
+          media.fechaTerminado.forEach((ft) => {
+              const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+
+              if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+                  const fullYear = fechaAsDate.getFullYear();
+
+                  if (fullYear >= startYear && fullYear <= endYear) {
+                      if (!this.mediaByYear[fullYear]) {
+                          this.mediaByYear[fullYear] = [];
+                      }
+                      this.mediaByYear[fullYear].push(media);
+                  }
+              }
+          });
+      });
+
+      // Sort years in descending order and assign to sortedYears
+      this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => Number(b) - Number(a));
+  }
+
+  // OrderBy function
+  OrderBy(order: string, medias: Media[]): Media[] {
+      const myMedia = [...medias];
+      if (order === "nombre") {
+          myMedia.sort((a, b) => {
+              if (a.titulo === b.titulo) return 0;
+              return a.titulo > b.titulo ? 1 : -1;
+          });
+      } else if (order === "score") {
+          myMedia.sort((a, b) => {
+              if (a.notaObjetiva === b.notaObjetiva) return 0;
+              return a.notaObjetiva < b.notaObjetiva ? 1 : -1;
+          });
+      } else if (order === "fechavista") {
+          myMedia.sort((a, b) => {
+              if (a.fechaTerminado[0].fecha === b.fechaTerminado[0].fecha) return 0;
+              return a.fechaTerminado[0].fecha > b.fechaTerminado[0].fecha ? 1 : -1;
+          });
+      } else if (order === "tiempoJuego") {
+          myMedia.sort((a, b) => {
+              if (a.tiempoJuego === b.tiempoJuego) return 0;
+              return a.tiempoJuego < b.tiempoJuego ? 1 : -1;
+          });
+      }
+      return myMedia;
+  }
+
 
 }
