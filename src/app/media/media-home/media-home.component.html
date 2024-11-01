@@ -22,6 +22,12 @@
 
   <ul  class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
+      <button class="btn btn-dark" style="padding: 10px !important;"(click)="groupByYear()">Group by Year</button>
+    </li>
+  </ul>
+
+  <ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
       <select class="form-control" [(ngModel)]="state" [ngModelOptions]="{standalone:true}">
         <option *ngFor="let option of typesOfState" value={{option.value}}>State: {{option.label}}</option>
       </select>
@@ -80,7 +86,7 @@
 
 <!--App-->
 
-<div class="mb-1 mt-1 row g-1">
+<div class="mb-1 mt-1 row g-1" *ngIf="bigContainer">
   <div class="col-9 col-md-6 col-xl-1" *ngFor="let media of medias | mediaFilter:search:type:order:genre:subgenre:platform:state:year">
 
     <a [routerLink]="['/media', media._id]" class="image-container">
@@ -101,3 +107,8 @@
 <p class="bottom-left">{{filteredMedias.length}} obras de {{medias.length}}</p>
 
 <br><br><br><br>
+
+<div class="mb-1 mt-1" *ngIf="smallContainer">
+  <div id="media-container">
+  </div>
+</div>

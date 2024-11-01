@@ -16,7 +16,7 @@ export class MediaFilterPipe implements PipeTransform{
     subgenre: string,
     platform: string,
     state:string,
-    year:number
+    year?:number
 
   ): Media[] {
 
