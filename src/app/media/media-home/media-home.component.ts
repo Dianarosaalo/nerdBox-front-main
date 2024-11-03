@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BarraLateralComponent } from 'src/app/shared/barra-lateral/barra-lateral.component';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs';
@@ -14,7 +13,7 @@ import { MediaFilterPipe } from '../pipes/media.filter.pipe';
 @Component({
   selector: 'fs-media-home',
   standalone: true,
-  imports: [CommonModule, BarraLateralComponent,RouterLink,FormsModule,MediaFilterPipe],
+  imports: [CommonModule,RouterLink,FormsModule,MediaFilterPipe],
   templateUrl: './media-home.component.html',
   styleUrls: ['./media-home.component.css']
 })
@@ -43,7 +42,8 @@ export class MediaHomeComponent {
 
   ngOnInit(): void {
     this.loadMedia();
-    document.title="NerdBox"
+    document.title="NerdBox";
+    this.onMediaTypeChange();
   }
 
   loadMedia(): void {
@@ -60,6 +60,8 @@ export class MediaHomeComponent {
     {value:"tiempoJuego", label:"Time Played"},
   ]
 
+  // tipos de media y generos
+
   typesOfMedia=[
     {value:"", label:"None"},
     {value:"Videojuego", label:"Videojuegos"},
@@ -74,21 +76,69 @@ export class MediaHomeComponent {
     {value:"Miscelanea", label:"Miscelánea"},
   ]
 
-  typesOfGenre=[
-    {value:"", label:"All"},
-    {value:"JRPG", label:"JRPG"},
-    {value:"RPG", label:"RPG"}
-  ]
+  typesOfGenre: { [key: string]: { value: string; label: string }[] } ={
+    //{value:"", label:"All"},
+    'Videojuego': [
+      { value: "Acción", label: "Acción" },
+      { value: "RPG", label: "RPG" },
+      { value: "JRPG", label: "JRPG" },
+      { value: "Aventuras", label: "Aventuras" },
+    ],
+    'Pelicula': [
+      { value: "Drama", label: "Drama" },
+      { value: "Comedia", label: "Comedia" },
+    ],
+  }
 
-  typesOfSubgenre=[
-    {value:"", label:"All"},
-    {value:"ARPG", label:"ARPG"},
-  ]
+  typesOfSubgenre: { [key: string]: { value: string; label: string }[] }={
+    'RPG': [
+      { value: "CRPG", label: "CRPG" },
+      { value: "ARPG", label: "ARPG" },
+      { value: "Souls", label: "Souls" },
+      { value: "Souls-Like", label: "Souls-Like" },
+    ],
+  }
+
+  availableGenres:{ value: string; label: string }[] = [];
+  availableSubgenres:{ value: string; label: string }[] = [];
+
+  onMediaTypeChange() {
+    this.availableGenres = this.typesOfGenre[this.type] || [];
+    this.genre = "";
+    this.availableSubgenres = [];
+  }
+
+  onGenreChange() {
+    this.availableSubgenres = this.typesOfSubgenre[this.genre] || [];
+    this.subgenre = "";
+  }
+
+  // plataformas
 
   typesOfPlatform=[
     {value:"", label:"All"},
+    {value:"PS1", label:"PS1"},
+    {value:"PS2", label:"PS2"},
+    {value:"PS3", label:"PS3"},
+    {value:"PS4", label:"PS4"},
+    {value:"PS5", label:"PS5"},
+    {value:"PSP", label:"PSP"},
+    {value:"PSVITA", label:"PSVITA"},
+    {value:"MS-DOS", label:"MS-DOS"},
+    {value:"PC", label:"PC"},
+    {value:"Web Browser", label:"Web Browser"},
+    {value:"Xbox", label:"Xbox"},
+    {value:"Xbox 360", label:"Xbox 360"},
+    {value:"Xbox One", label:"Xbox One"},
+    {value:"Nintendo Nes", label:"Nintendo Nes"},
+    {value:"Nintendo Snes", label:"Nintendo Snes"},
+    {value:"Nintendo 64", label:"Nintendo 64"},
+    {value:"Nintendo GameCube", label:"Nintendo GC"},
     {value:"Nintendo DS", label:"Nintendo DS"},
     {value:"Nintendo 3DS", label:"Nintendo 3DS"},
+    {value:"Nintendo Wii", label:"Nintendo Wii"},
+    {value:"Nintendo Wii U", label:"Nintendo Wii U"},
+    {value:"Nintendo Switch", label:"Nintendo Switch"},
   ]
 
   typesOfState=[

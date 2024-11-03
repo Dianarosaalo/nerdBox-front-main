@@ -102,6 +102,9 @@ nav{
   color: white; /* White text */
   margin-bottom: 20px;
   background-color: black;
+  border-color: grey;
+  border: 1px solid #887f7f;
+  padding: 4px;
 }
 
 .media-row {
@@ -113,7 +116,7 @@ nav{
 
 .media-item {
   flex: 0 1 calc(100% / 14 - 10px); /* Allow items to grow but set a minimum width */
-  min-width: 80px; /* Set a minimum width to prevent stretching too much */
+  min-width: 175px; /* Set a minimum width to prevent stretching too much */
   max-width: calc(100% / 14 - 10px);
   text-align: center;
 }

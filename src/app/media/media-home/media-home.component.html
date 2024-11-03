@@ -1,6 +1,3 @@
-
-<br>
-
 <nav class="navbar justify-content-between mt-3 row">
 
   <!--<ul class="nav nav-pills col-auto ms-3 designs">
@@ -53,22 +50,24 @@
   <ul class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
       <select class="form-control" [(ngModel)]="subgenre" [ngModelOptions]="{standalone:true}">
-        <option *ngFor="let option of typesOfSubgenre" value={{option.value}}>Subgenre: {{option.label}}</option>
+        <option value="" disabled selected>Subgenre:</option>
+        <option *ngFor="let option of availableSubgenres" value={{option.value}}>Subgenre: {{option.label}}</option>
       </select>
     </li>
   </ul>
 
   <ul class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
-      <select class="form-control" [(ngModel)]="genre" [ngModelOptions]="{standalone:true}">
-        <option *ngFor="let option of typesOfGenre" value={{option.value}}>Genre: {{option.label}}</option>
+      <select class="form-control" [(ngModel)]="genre" [ngModelOptions]="{standalone:true}" (change)="onGenreChange()">
+        <option value="" disabled selected>Genre:</option>
+        <option *ngFor="let option of availableGenres" value={{option.value}}>Genre: {{option.label}}</option>
       </select>
     </li>
   </ul>
 
   <ul class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
-      <select class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone:true}">
+      <select class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone:true}" (change)="onMediaTypeChange()">
         <option *ngFor="let option of typesOfMedia" value={{option.value}}>Type of Media: {{option.label}}</option>
       </select>
     </li>

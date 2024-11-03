@@ -22,7 +22,11 @@
     <td>{{ media.plataforma }}</td>
     <td>{{ media.subgenero }}</td>
     <td>{{ formatDate(media.fechaLanzamiento) }}</td>
-    <td>Completado | en : {{ media.fechaTerminado[0].fecha }}</td>
+    <td>
+      <ng-container *ngFor="let item of media.fechaTerminado">
+        <strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br>
+      </ng-container>
+    </td>
     <td>{{ media.notaObjetiva }}</td>
     <td>{{ media.notaSubjetiva }}</td>
     <td>{{ media.desarrolladora }}</td>

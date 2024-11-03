@@ -29,7 +29,7 @@
 
       <div class="card-text">
         <small class="text-muted">
-          <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento }}
+          <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento | date:'dd/MM/yyyy'}}
         </small>
         <br>
         <small class="text-muted">
@@ -44,8 +44,8 @@
     </div>
 
     <div class="card-footer">
-      <small class="text-muted">Media Creada en: {{ media.fechaCreacion }}</small><br>
-      <small class="text-muted">Modificada por ültima vez: {{ media.fechaModificacion }}</small>
+      <small class="text-muted">Media Creada en: {{ media.fechaCreacion | date:'dd-MM-yyyy'}}</small><br>
+      <small class="text-muted">Modificada por ültima vez: {{ media.fechaModificacion | date:'dd-MM-yyyy'}}</small>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
     <h4 class="card-title">{{ media.titulo }}</h4><br>
     <div class="card-text">
       <small class="text-muted">
-        <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento }}
+        <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento | date:'dd-MM-yyyy' }}
       </small>
       <br>
       <small class="text-muted">
@@ -62,7 +62,7 @@
       </small>
 
       <small class="text-muted">
-        <strong>Género: </strong>{{ media.tipo }}
+        <strong>Género: </strong>{{ media.genero }}
         <br>
       </small>
 
@@ -77,8 +77,9 @@
       </small>
 
       <small class="text-muted">
-        <strong>Estado: </strong>{{ media.fechaTerminado }}
-        <br>
+        <ng-container *ngFor="let item of media.fechaTerminado">
+          <strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br>
+        </ng-container>
       </small>
 
       <small class="text-muted">

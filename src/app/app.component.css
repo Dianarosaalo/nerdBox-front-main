@@ -2,11 +2,3 @@
   display: grid;
 }
 
-app-barra-lateral{
-  margin-top:1.20%;
-  background-color: #212529;
-  border:1px rgba(0, 0, 0, 0.858) solid;
-  height:1290%;
-  width: 13.5%;
-  position: fixed;
-}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BarraLateralComponent } from 'src/app/shared/barra-lateral/barra-lateral.component';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs';
@@ -13,7 +12,7 @@ import { MediaResponse, MediasResponse } from '../interfaces/mediaResponse';
 @Component({
   selector: 'fs-actividad',
   standalone: true,
-  imports: [CommonModule, BarraLateralComponent,RouterLink,FormsModule],
+  imports: [CommonModule,RouterLink,FormsModule],
   templateUrl: './actividad.component.html',
   styleUrls: ['./actividad.component.css']
 })
