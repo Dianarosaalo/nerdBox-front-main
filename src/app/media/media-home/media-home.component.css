@@ -186,7 +186,7 @@ nav{
 }
 
 .botonMedia{
-  padding: 5px !important;
+  padding: 6px !important;
   color:white;
-  border: 1px solid white;
+  border: 1px solid #ced4da;
 }

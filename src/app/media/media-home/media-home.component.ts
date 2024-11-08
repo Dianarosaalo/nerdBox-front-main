@@ -63,7 +63,7 @@ export class MediaHomeComponent {
   // tipos de media y generos
 
   typesOfMedia=[
-    {value:"", label:"None"},
+    {value:"", label:"[Todos]"},
     {value:"Videojuego", label:"Videojuegos"},
     {value:"Anime", label:"Animes"},
     {value:"Manga", label:"Mangas"},
