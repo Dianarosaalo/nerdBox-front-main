@@ -56,8 +56,8 @@
       <!-- Dropdown that appears when clicked -->
       <ul *ngIf="dropdownVisible" class="dropdown-menu show flex-column">
         <li class="nav-item btn" *ngFor="let typeOption of typesOfMedia"
-            (mouseenter)="onMediaTypeHover(typeOption.value)">
-          <span (click)="selectType(typeOption.value)">{{ typeOption.label }}</span>
+          >
+          <span (click)="onMediaTypeHover(typeOption.value)">{{ typeOption.label }}</span>
 
           <!-- Genres (Displayed on hover of Type) -->
           <ul *ngIf="availableGenres.length > 0 && hoveredType === typeOption.value" class="dropdown-menu show flex-column">

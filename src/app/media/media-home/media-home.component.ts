@@ -63,7 +63,6 @@ export class MediaHomeComponent {
   // tipos de media y generos
 
   typesOfMedia=[
-    {value:"", label:"[Todos]"},
     {value:"Videojuego", label:"Videojuegos"},
     {value:"Anime", label:"Animes"},
     {value:"Manga", label:"Mangas"},
@@ -74,6 +73,7 @@ export class MediaHomeComponent {
     {value:"Comic", label:"Cómics"},
     {value:"Rol", label:"Rol"},
     {value:"Miscelanea", label:"Miscelánea"},
+    {value:"", label:"[Todos]"},
   ]
 
   typesOfGenre: { [key: string]: { value: string; label: string }[] } ={
@@ -300,6 +300,7 @@ onMediaTypeHover(type: string) {
   this.availableGenres = this.typesOfGenre[type] || [];
   this.genre = "";
   this.availableSubgenres = [];
+  this.onMediaTypeChange();
 }
 
 // Called when hovering over a genre
