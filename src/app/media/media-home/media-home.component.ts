@@ -104,13 +104,14 @@ export class MediaHomeComponent {
 
   onMediaTypeChange() {
     this.availableGenres = this.typesOfGenre[this.type] || [];
-    this.genre = "";
-    this.availableSubgenres = [];
+    this.genre = '';  // Reset genre
+    this.availableSubgenres = [];  // Clear subgenres
+    this.subgenre = '';  // Reset subgenre
   }
 
   onGenreChange() {
     this.availableSubgenres = this.typesOfSubgenre[this.genre] || [];
-    this.subgenre = "";
+    this.subgenre = '';  // Reset subgenre
   }
 
   // plataformas
@@ -288,6 +289,44 @@ export class MediaHomeComponent {
       }
       return myMedia;
   }
+
+  hoveredType: string | null = null;
+hoveredGenre: string | null = null;
+
+// Called when hovering over a media type
+onMediaTypeHover(type: string) {
+  this.hoveredType = type;
+  this.type = type; // Temporarily select it
+  this.availableGenres = this.typesOfGenre[type] || [];
+  this.genre = "";
+  this.availableSubgenres = [];
+}
+
+// Called when hovering over a genre
+onGenreHover(genre: string) {
+  this.hoveredGenre = genre;
+  this.availableSubgenres = this.typesOfSubgenre[genre] || [];
+}
+
+// Selectors to update model on click
+selectType(type: string) {
+  this.type = type;
+  this.onMediaTypeChange();
+}
+
+selectGenre(genre: string) {
+  this.genre = genre;
+  this.onGenreChange();
+}
+
+selectSubgenre(subgenre: string) {
+  this.subgenre = subgenre;
+}
+
+dropdownVisible= false;
+toggleDropdown() {
+  this.dropdownVisible = !this.dropdownVisible; // Toggle visibility
+}
 
 
 }

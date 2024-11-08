@@ -47,29 +47,34 @@
     </li>
   </ul>
 
-  <ul class="nav nav-pills col-auto ms-3">
+  <ul class="nav col-auto ms-3">
     <li class="nav-item btn">
-      <select class="form-control" [(ngModel)]="subgenre" [ngModelOptions]="{standalone:true}">
-        <option value="" disabled selected>Subgenre:</option>
-        <option *ngFor="let option of availableSubgenres" value={{option.value}}>Subgenre: {{option.label}}</option>
-      </select>
-    </li>
-  </ul>
+      <button class="btn botonMedia" type="button" (click)="toggleDropdown()">
+        Type of Media
+      </button>
 
-  <ul class="nav nav-pills col-auto ms-3">
-    <li class="nav-item btn">
-      <select class="form-control" [(ngModel)]="genre" [ngModelOptions]="{standalone:true}" (change)="onGenreChange()">
-        <option value="" disabled selected>Genre:</option>
-        <option *ngFor="let option of availableGenres" value={{option.value}}>Genre: {{option.label}}</option>
-      </select>
-    </li>
-  </ul>
+      <!-- Dropdown that appears when clicked -->
+      <ul *ngIf="dropdownVisible" class="dropdown-menu show flex-column">
+        <li class="nav-item btn" *ngFor="let typeOption of typesOfMedia"
+            (mouseenter)="onMediaTypeHover(typeOption.value)">
+          <span (click)="selectType(typeOption.value)">{{ typeOption.label }}</span>
 
-  <ul class="nav nav-pills col-auto ms-3">
-    <li class="nav-item btn">
-      <select class="form-control" [(ngModel)]="type" [ngModelOptions]="{standalone:true}" (change)="onMediaTypeChange()">
-        <option *ngFor="let option of typesOfMedia" value={{option.value}}>Type of Media: {{option.label}}</option>
-      </select>
+          <!-- Genres (Displayed on hover of Type) -->
+          <ul *ngIf="availableGenres.length > 0 && hoveredType === typeOption.value" class="dropdown-menu show flex-column">
+            <li class="nav-item btn" *ngFor="let genreOption of availableGenres"
+                (mouseenter)="onGenreHover(genreOption.value)">
+              <span (click)="selectGenre(genreOption.value)">{{ genreOption.label }}</span>
+
+              <!-- Subgenres (Displayed on hover of Genre) -->
+              <ul *ngIf="availableSubgenres.length > 0 && hoveredGenre === genreOption.value" class="dropdown-menu show flex-column">
+                <li class="nav-item btn" *ngFor="let subgenreOption of availableSubgenres">
+                  <span (click)="selectSubgenre(subgenreOption.value)">{{ subgenreOption.label }}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </li>
   </ul>
 

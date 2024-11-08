@@ -136,3 +136,57 @@ nav{
   display: block;
   margin-top: 5px;
 }
+
+.dropdown-menu {
+  background-color: #343a40; /* Dark background for dropdown */
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: auto; /* Auto width for the dropdown */
+}
+
+.nav-item.btn {
+  padding: 8px 16px;
+  border-radius: 0.25rem;
+}
+
+.nav-item.btn:hover {
+  background-color: #495057; /* Hover effect on buttons */
+  color: #ffffff;
+}
+
+.nav-item.btn span {
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.nav-item.btn span:hover {
+  color: #f8fc03; /* Hover color change for text */
+}
+
+/* Ensure dropdowns are vertically aligned */
+.dropdown-menu.show {
+  display: block;
+}
+
+.nav-item {
+  margin-bottom: 5px; /* Add space between items */
+}
+
+.nav-item.btn {
+  display: block; /* Make each item a block element to stack vertically */
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column; /* Stack the items vertically */
+}
+
+.nav {
+  margin: 0; /* Ensure no extra margin around nav */
+}
+
+.botonMedia{
+  padding: 5px !important;
+  color:white;
+  border: 1px solid white;
+}
