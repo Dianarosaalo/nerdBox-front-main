@@ -125,7 +125,11 @@ export class MediaHomeComponent {
     {value:"PSP", label:"PSP"},
     {value:"PSVITA", label:"PSVITA"},
     {value:"MS-DOS", label:"MS-DOS"},
-    {value:"PC", label:"PC"},
+    {value:"PC 1º", label:"PC 1º"},
+    {value:"PC 2º", label:"PC 2º"},
+    {value:"PC 3º", label:"PC 3º"},
+    {value:"PC 4º", label:"PC 4º"},
+    {value:"PC 5º", label:"PC 5º"},
     {value:"Web Browser", label:"Web Browser"},
     {value:"Xbox", label:"Xbox"},
     {value:"Xbox 360", label:"Xbox 360"},
@@ -139,6 +143,8 @@ export class MediaHomeComponent {
     {value:"Nintendo Wii", label:"Nintendo Wii"},
     {value:"Nintendo Wii U", label:"Nintendo Wii U"},
     {value:"Nintendo Switch", label:"Nintendo Switch"},
+    {value:"Sega MegaDrive", label:"Sega MegaDrive"},
+    {value:"Sega DreamCast", label:"Sega DreamCast"},
   ]
 
   typesOfState=[

@@ -124,7 +124,7 @@
           <ul>
             <li *ngFor="let f of newMedia.fechaTerminado">
               <span class="trait-text">{{ (f.estado) }}</span>
-              <span class="trait-title">{{ (f.fecha) }}</span>
+              <span class="trait-title">{{ (f.fecha | date:'dd-MM-yyyy')}}</span>
               <p (click)="deleteState(f)" class="btn btn-warning">Eliminar</p>
             </li>
           </ul>
