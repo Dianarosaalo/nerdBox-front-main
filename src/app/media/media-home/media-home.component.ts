@@ -63,6 +63,7 @@ export class MediaHomeComponent {
   // tipos de media y generos
 
   typesOfMedia=[
+    {value:"", label:"[Todos]"},
     {value:"Videojuego", label:"Videojuegos"},
     {value:"Anime", label:"Animes"},
     {value:"Manga", label:"Mangas"},
@@ -73,7 +74,6 @@ export class MediaHomeComponent {
     {value:"Comic", label:"Cómics"},
     {value:"Rol", label:"Rol"},
     {value:"Miscelanea", label:"Miscelánea"},
-    {value:"", label:"[Todos]"},
   ]
 
   typesOfGenre: { [key: string]: { value: string; label: string }[] } ={
@@ -82,7 +82,29 @@ export class MediaHomeComponent {
       { value: "Acción", label: "Acción" },
       { value: "RPG", label: "RPG" },
       { value: "JRPG", label: "JRPG" },
-      { value: "Aventuras", label: "Aventuras" },
+      { value: "Aventura", label: "Aventuras" },
+      { value: "Hack N' Slash", label: "Hack N' Slash" },
+      { value: "Hunting", label: "Hunting" },
+      { value: "Estrategia", label: "Estrategia" },
+      { value: "Sandbox", label: "Sandbox" },
+      { value: "Survival", label: "Survival" },
+      { value: "Survival Horror", label: "Survival Horror" },
+      { value: "MMORPG", label: "MMORPG" },
+      { value: "Moba", label: "Moba" },
+      { value: "Shooter", label: "Shooter" },
+      { value: "Fighting", label: "Fighting" },
+      { value: "Plataformas", label: "Plataformas" },
+      { value: "Point & Click", label: "Point & Click" },
+      { value: "Racing", label: "Racing" },
+      { value: "Deporte", label: "Deporte" },
+      { value: "Killing Friends", label: "Killing Friends" },
+      { value: "Arcade", label: "Arcade" },
+      { value: "Mundo Abierto", label: "Mundo Abierto" },
+      { value: "Monsters", label: "Monsters" },
+      { value: "Metroidvania", label: "Metroidvania" },
+      { value: "Rogue-Lite", label: "Rogue-Lite" },
+      { value: "Indie JRPG", label: "Indie JRPG" },
+      { value: "Expansion", label: "Expansion" },
     ],
     'Pelicula': [
       { value: "Drama", label: "Drama" },

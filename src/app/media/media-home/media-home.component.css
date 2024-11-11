@@ -138,10 +138,11 @@ nav{
 }
 
 .dropdown-menu {
-  background-color: #343a40; /* Dark background for dropdown */
+  position: absolute;
+  background-color: #343a40;
   border-radius: 0.25rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: auto; /* Auto width for the dropdown */
+  width: auto;
 }
 
 .nav-item.btn {
@@ -190,3 +191,14 @@ nav{
   color:white;
   border: 1px solid #ced4da;
 }
+
+.nav-item .dropdown-menu .dropdown-menu {
+  left: -100%; /* Move it to the left of the parent */
+  top: 10%; /* Align it at the height of the selected type */
+}
+
+.nav-item .dropdown-menu .dropdown-menu .dropdown-menu {
+  left: -100%; /* Position it to the left of the genre dropdown */
+  top: 0;
+}
+

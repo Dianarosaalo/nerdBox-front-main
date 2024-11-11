@@ -61,7 +61,7 @@
 
           <!-- Genres (Displayed on hover of Type) -->
           <ul *ngIf="availableGenres.length > 0 && hoveredType === typeOption.value" class="dropdown-menu show flex-column">
-            <li class="nav-item btn" *ngFor="let genreOption of availableGenres"
+            <li class="nav-item btn genres" *ngFor="let genreOption of availableGenres"
                 (click)="onGenreHover(genreOption.value)">
               <span (click)="selectGenre(genreOption.value)">{{ genreOption.label }}</span>
 
