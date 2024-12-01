@@ -115,9 +115,9 @@ nav{
 }
 
 .media-item {
-  flex: 0 1 calc(100% / 14 - 10px); /* Allow items to grow but set a minimum width */
+  flex: 0 1 calc(100% / 20 - 10px); /* Allow items to grow but set a minimum width */
   min-width: 175px; /* Set a minimum width to prevent stretching too much */
-  max-width: calc(100% / 14 - 10px);
+  max-width: calc(100% / 20 - 10px);
   text-align: center;
 }
 
@@ -202,3 +202,28 @@ nav{
   top: 0;
 }
 
+@media (min-width: 2500px) {
+  .col-xl-1 {
+    width:5.5%;
+  }
+
+  img {
+    max-height: 280px;
+    border-radius: 5%;
+    width: 180px; /* Controls the image width */
+    height: auto; /* Automatically adjusts height to maintain aspect ratio */
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .media-item img {
+    width: 100%;
+    height: auto; /* Ensures natural aspect ratio */
+    max-width: 300px; /* Maximum width to prevent oversizing */
+    min-width: 150px; /* Minimum width for consistency */
+    border-radius: 8px;
+  }
+
+
+}
