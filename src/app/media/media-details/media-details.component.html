@@ -9,6 +9,9 @@
     <h2 class="title">{{ media.titulo }}</h2>
     <div class="info">
       <p><strong>Fecha de Lanzamiento:</strong> {{ media.fechaLanzamiento | date:'dd/MM/yyyy' }}</p>
+      <ng-container *ngFor="let item of media.fechaTerminado">
+        <p><strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd/MM/yyyy' }}</strong></p>
+      </ng-container>
       <p><strong>Tipo de Media:</strong> {{ media.tipo }}</p>
       <p><strong>Género:</strong> {{ media.genero }}</p>
       <p><strong>Subgénero:</strong> {{ media.subgenero }}</p>

@@ -252,7 +252,10 @@ export class MediaHomeComponent {
           const matchesGenre = this.genre ? media.genero === this.genre : true;
           const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
           const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-          const matchesState = this.state ? media.fechaTerminado.some((ft) => ft.estado === this.state) : true;
+          const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play"];
+        const matchesState = this.state
+    ? media.fechaTerminado.some((ft) => ft.estado === this.state)
+    : media.fechaTerminado.some((ft) => validStates.includes(ft.estado));
 
           return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
       });
