@@ -3,7 +3,8 @@
 <ul class="tabs-container">
   <li (click)="onTabClick('Obligatorios')" class="tab-link">Obligatorios</li>
   <li (click)="onTabClick('Opcionales')" class="tab-link">Opcionales</li>
-  <li (click)="onTabClick('Metadatos')" class="tab-link">Metadatos</li>
+  <!--<li (click)="onTabClick('Metadatos')" class="tab-link">Metadatos</li>-->
+  <li (click)="onTabClick('Review')" class="tab-link">Review</li>
 </ul>
 
 <br>
@@ -226,21 +227,6 @@
         </div>
       </div>
 
-      <div class="mb-3">
-        <label for="review">Review</label>
-        <textarea
-          class="form-control review"
-          name="review"
-          id="review"
-          [(ngModel)]="newMedia.review"
-          placeholder="Escribe tu reseña aquí"
-          #reviewModel="ngModel"
-          [ngClass]="validClasses(reviewModel, 'is-valid', 'is-invalid')"
-          rows="6"
-          style="width: 100%;"></textarea>
-        <div class="invalid-feedback">Al menos un título es requerido</div>
-      </div>
-
     </div>
 
     <div *ngIf="activeTab ==='Metadatos'">
@@ -277,6 +263,25 @@
         <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
           Introduce una fecha
         </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="activeTab === 'Review'">
+
+      <div class="mb-3">
+        <label for="review">Review</label>
+        <textarea
+          class="form-control review"
+          name="review"
+          id="review"
+          [(ngModel)]="newMedia.review"
+          placeholder="Escribe tu reseña aquí"
+          #reviewModel="ngModel"
+          [ngClass]="validClasses(reviewModel, 'is-valid', 'is-invalid')"
+          rows="6"
+          style="width: 100%;"></textarea>
+        <div class="invalid-feedback">Al menos un título es requerido</div>
       </div>
 
     </div>

@@ -1,106 +1,31 @@
-<br><br><!--
-
-<h1 style="text-align: center; color: white">{{media.titulo}}</h1>
-<img class="card-img-top" src="{{ media.imagen }}" style="width: 700px; height: 1000px; text-align: center;" />
-<br><br>
-<button type="button" class="btn btn-danger" [routerLink]="['/media', media._id, 'edit']">Editar</button>&nbsp;
-<br>
-
-<p>{{media.tipo}}</p>
-<p>{{media.genero}}</p>
-<p>{{media.plataforma}}</p>
-<p>{{media.fechaLanzamiento}}</p>
-<p>{{media.fechaTerminado}}</p>
-<p>{{media.notaObjetiva}}</p>
-<p>{{media.notaSubjetiva}}</p>
-<p>{{media.desarrolladora}}</p>
-<p>{{media.subgenero}}</p>
-<p>{{media.fechaCreacion}}</p>
-<p>{{media.fechaModificacion}}</p>
-<p>{{media.review}}</p>-->
-
-<div class="row">
-  <div class="card-neon card h-100 shadow col-md-6" style="margin-left:25%">
-
-      <img class="card-img-top" src="{{ media.imagen}}" style="text-align: center; border-radius: 2%;" />
-
-    <div class="small-card card-body">
-      <h4 class="card-title">>{{ media.titulo }}</h4>
-
-      <div class="card-text">
-        <small class="text-muted">
-          <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento | date:'dd/MM/yyyy'}}
-        </small>
-        <br>
-        <small class="text-muted">
-          <strong>Type of media: </strong>{{ media.tipo }}
-          <br>
-        </small>
-
-      </div>
-      <br>
-      <p class="card-text reviewTextstring" >{{ media.review }}</p>
-      <div class="score">{{media.notaObjetiva}}</div>
-    </div>
-
-    <div class="card-footer">
-      <small class="text-muted">Media Creada en: {{ media.fechaCreacion | date:'dd-MM-yyyy'}}</small><br>
-      <small class="text-muted">Modificada por ültima vez: {{ media.fechaModificacion | date:'dd-MM-yyyy'}}</small>
-    </div>
+<div class="row minimalistic-container">
+  <!-- Left Column for Image -->
+  <div class="col-md-3 image-container">
+    <img class="card-img-top" src="{{ media.imagen }}" alt="{{ media.titulo }}" />
   </div>
 
-  <div class="big-card card-body col-md-6">
-    <h4 class="card-title">{{ media.titulo }}</h4><br>
-    <div class="card-text">
-      <small class="text-muted">
-        <strong>Fecha de Lanzamiento: </strong>{{ media.fechaLanzamiento | date:'dd-MM-yyyy' }}
-      </small>
-      <br>
-      <small class="text-muted">
-        <strong>Tipo of media: </strong>{{ media.tipo }}
-        <br>
-      </small>
-
-      <small class="text-muted">
-        <strong>Género: </strong>{{ media.genero }}
-        <br>
-      </small>
-
-      <small class="text-muted">
-        <strong>Subgénero: </strong>{{ media.subgenero }}
-        <br>
-      </small>
-
-      <small class="text-muted">
-        <strong>Plataforma: </strong>{{ media.plataforma }}
-        <br>
-      </small>
-
-      <small class="text-muted">
-        <ng-container *ngFor="let item of media.fechaTerminado">
-          <strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br>
-        </ng-container>
-      </small>
-
-      <small class="text-muted">
-        <strong>Desarrolladores: </strong>{{ media.desarrolladora }}
-        <br>
-      </small>
-
-      <small class="text-muted">
-        <strong>Tiempo de Juego: </strong>{{ media.tiempoJuego }} horas
-        <br>
-      </small>
-
-      <div class="score" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">{{media.notaObjetiva}}</div>
-
+  <!-- Right Column for Details -->
+  <div class="col-md-9 details-container">
+    <h2 class="title">{{ media.titulo }}</h2>
+    <div class="info">
+      <p><strong>Fecha de Lanzamiento:</strong> {{ media.fechaLanzamiento | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Tipo de Media:</strong> {{ media.tipo }}</p>
+      <p><strong>Género:</strong> {{ media.genero }}</p>
+      <p><strong>Subgénero:</strong> {{ media.subgenero }}</p>
+      <p><strong>Plataforma:</strong> {{ media.plataforma }}</p>
+      <p><strong>Tiempo de Juego:</strong> {{ media.tiempoJuego }} horas</p>
+      <p><strong>Desarrolladores:</strong> {{ media.desarrolladora }}</p>
     </div>
-    <br>
-    <p class="card-text reviewTextstring">{{ media.review }}</p>
+    <div class="review-section">
+      <h3>Review:</h3>
+      <p class="review-text">{{ media.review }}</p>
+    </div>
+    <div class="score">
+      {{ media.notaObjetiva }}
+    </div>
   </div>
-
 </div>
 
-<div class="mt-4 mb-4">
-  <button type="button" class="btn btn-danger" style="margin-left:96%;" [routerLink]="['/media', media._id, 'edit'] ">Editar</button>&nbsp;
+<div class="edit-button">
+  <button type="button" class="btn btn-danger" [routerLink]="['/media', media._id, 'edit']">Editar Media!</button>
 </div>

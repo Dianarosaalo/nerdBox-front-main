@@ -209,6 +209,7 @@ nav{
 
   img {
     max-height: 280px;
+    min-height: 238px;
     border-radius: 5%;
     width: 180px; /* Controls the image width */
     height: auto; /* Automatically adjusts height to maintain aspect ratio */
@@ -218,6 +219,7 @@ nav{
   }
 
   .media-item img {
+    max-height: 238px;
     width: 100%;
     height: auto; /* Ensures natural aspect ratio */
     max-width: 300px; /* Maximum width to prevent oversizing */
