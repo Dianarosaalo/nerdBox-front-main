@@ -133,6 +133,7 @@ export class MediaFormComponent {
     {value:"Completed", label:"Completed"},
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
+    {value:"Watched", label:"Watched"},
     {value:"Wanna Play", label:"Wanna Play"},
     {value:"Not Played", label:"Not Played"},
     ]

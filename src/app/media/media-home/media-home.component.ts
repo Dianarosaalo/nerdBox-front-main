@@ -175,6 +175,7 @@ export class MediaHomeComponent {
     {value:"Completed", label:"Completed"},
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
+    {value:"Watched", label:"Watched"},
     {value:"Wanna Play", label:"Wanna Play"},
     {value:"Not Played", label:"Not Played"},
   ]
@@ -246,43 +247,49 @@ export class MediaHomeComponent {
     this.mediaByYear = {};
     this.sortedYears = [];
 
+    // Create an array with transformed media items, removing originals with multiple fechas
+    const separatedMedias: any[] = [];
+    this.medias.forEach((media) => {
+    if (media.fechaTerminado.length > 1) {
+        media.fechaTerminado.forEach((ft) => {
+            const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+
+            // Ensure the date is valid
+            if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+                const clonedMedia = {
+                    ...media,
+                    fechaTerminado: [{
+                        fecha: ft.fecha,
+                        estado: ft.estado // Assign the correct estado for each fecha
+                    }]
+                }; // Clone media with only this specific date and its estado
+                console.log(clonedMedia);
+                separatedMedias.push(clonedMedia);
+            }
+        });
+    } else {
+        // If only one fechaTerminado, keep the original item
+        separatedMedias.push(media);
+    }
+  });
+
     // Filter medias based on existing criteria
-    const filteredMedias = this.medias.filter((media) => {
+    const filteredMedias = separatedMedias.filter((media) => {
         const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
         const matchesType = this.type ? media.tipo === this.type : true;
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
         const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-        const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play", "Not Played"];
+        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Wanna Play", "Not Played"];
         const matchesState = this.state
-            ? media.fechaTerminado.some((ft) => ft.estado === this.state)
-            : media.fechaTerminado.some((ft) => validStates.includes(ft.estado));
+            ? media.fechaTerminado.some((ft: { estado: string; }) => ft.estado === this.state)
+            : media.fechaTerminado.some((ft: { estado: string; }) => validStates.includes(ft.estado));
 
         return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
     });
 
-    // Create an array with transformed media items, removing originals with multiple fechas
-    const separatedMedias: any[] = [];
-    filteredMedias.forEach((media) => {
-        if (media.fechaTerminado.length > 1) {
-            media.fechaTerminado.forEach((ft) => {
-                const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
-
-                // Ensure the date is valid
-                if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
-                    const clonedMedia = { ...media, fechaTerminado: [ft] }; // Clone media with only this date
-                    console.log(clonedMedia);
-                    separatedMedias.push(clonedMedia);
-                }
-            });
-        } else {
-            // If only one fechaTerminado, keep the original item
-            separatedMedias.push(media);
-        }
-    });
-
     // Order filtered medias
-    const orderedMedias = this.OrderBy(this.order, separatedMedias);
+    const orderedMedias = this.OrderBy(this.order, filteredMedias);
 
     // Group separated media items by year
     const startYear = 2006;

@@ -42,7 +42,7 @@ export class MediaFilterPipe implements PipeTransform{
       );
     } else {
       // If no specific state, filter by predefined valid states
-      const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play", "Not Played"]; // Define valid states directly
+      const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Wanna Play", "Not Played"]; // Define valid states directly
       medias = medias.filter((m) =>
         m.fechaTerminado.some((ft) => validStates.includes(ft.estado)) // Check if `estado` matches any valid state
       );
