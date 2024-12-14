@@ -176,6 +176,7 @@ export class MediaHomeComponent {
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
     {value:"Wanna Play", label:"Wanna Play"},
+    {value:"Not Played", label:"Not Played"},
   ]
 
   typesOfYears = [
@@ -252,7 +253,7 @@ export class MediaHomeComponent {
           const matchesGenre = this.genre ? media.genero === this.genre : true;
           const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
           const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-          const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play"];
+          const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play", "Not Played"];
         const matchesState = this.state
     ? media.fechaTerminado.some((ft) => ft.estado === this.state)
     : media.fechaTerminado.some((ft) => validStates.includes(ft.estado));

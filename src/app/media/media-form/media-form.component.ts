@@ -55,7 +55,7 @@ export class MediaFormComponent {
       genero:'',
       plataforma:'',
       fechaLanzamiento:new Date(),
-      fechaTerminado:[],
+      fechaTerminado:[{ "fecha": new Date(2003, 11, 25), "estado": "Not Played" }],
       notaObjetiva:0,
       notaSubjetiva:0,
       desarrolladora:'',
@@ -134,6 +134,7 @@ export class MediaFormComponent {
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
     {value:"Wanna Play", label:"Wanna Play"},
+    {value:"Not Played", label:"Not Played"},
     ]
 
     // state and date handler
