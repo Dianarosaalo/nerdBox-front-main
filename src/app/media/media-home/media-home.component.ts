@@ -239,55 +239,75 @@ export class MediaHomeComponent {
   mediaByYear: { [key: string]: Media[] } = {}; // Define to hold media grouped by year
 
   groupByYear(): void {
-      this.bigContainer = !this.bigContainer;
-      this.smallContainer = !this.smallContainer;
+    this.bigContainer = !this.bigContainer;
+    this.smallContainer = !this.smallContainer;
 
-      // Clear previous media by year
-      this.mediaByYear = {};
-      this.sortedYears = [];
+    // Clear previous media by year
+    this.mediaByYear = {};
+    this.sortedYears = [];
 
-      // Filter medias based on existing criteria
-      const filteredMedias = this.medias.filter(media => {
-          const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
-          const matchesType = this.type ? media.tipo === this.type : true;
-          const matchesGenre = this.genre ? media.genero === this.genre : true;
-          const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
-          const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-          const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play", "Not Played"];
+    // Filter medias based on existing criteria
+    const filteredMedias = this.medias.filter((media) => {
+        const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
+        const matchesType = this.type ? media.tipo === this.type : true;
+        const matchesGenre = this.genre ? media.genero === this.genre : true;
+        const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
+        const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
+        const validStates = ["Completed", "Unfinished", "Dropped", "Wanna Play", "Not Played"];
         const matchesState = this.state
-    ? media.fechaTerminado.some((ft) => ft.estado === this.state)
-    : media.fechaTerminado.some((ft) => validStates.includes(ft.estado));
+            ? media.fechaTerminado.some((ft) => ft.estado === this.state)
+            : media.fechaTerminado.some((ft) => validStates.includes(ft.estado));
 
-          return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
-      });
+        return matchesSearch && matchesType && matchesGenre && matchesSubgenre && matchesPlatform && matchesState;
+    });
 
-      // Order filtered medias
-      const orderedMedias = this.OrderBy(this.order, filteredMedias);
+    // Create an array with transformed media items, removing originals with multiple fechas
+    const separatedMedias: any[] = [];
+    filteredMedias.forEach((media) => {
+        if (media.fechaTerminado.length > 1) {
+            media.fechaTerminado.forEach((ft) => {
+                const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
 
-      // Group ordered media items by year
-      const startYear = 2006;
-      const endYear = new Date().getFullYear();
+                // Ensure the date is valid
+                if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+                    const clonedMedia = { ...media, fechaTerminado: [ft] }; // Clone media with only this date
+                    console.log(clonedMedia);
+                    separatedMedias.push(clonedMedia);
+                }
+            });
+        } else {
+            // If only one fechaTerminado, keep the original item
+            separatedMedias.push(media);
+        }
+    });
 
-      orderedMedias.forEach((media) => {
-          media.fechaTerminado.forEach((ft) => {
-              const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+    // Order filtered medias
+    const orderedMedias = this.OrderBy(this.order, separatedMedias);
 
-              if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
-                  const fullYear = fechaAsDate.getFullYear();
+    // Group separated media items by year
+    const startYear = 2006;
+    const endYear = new Date().getFullYear();
 
-                  if (fullYear >= startYear && fullYear <= endYear) {
-                      if (!this.mediaByYear[fullYear]) {
-                          this.mediaByYear[fullYear] = [];
-                      }
-                      this.mediaByYear[fullYear].push(media);
-                  }
-              }
-          });
-      });
+    orderedMedias.forEach((media) => {
+        const ft = media.fechaTerminado[0]; // Each separatedMedia has only one fechaTerminado
+        const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
 
-      // Sort years in descending order and assign to sortedYears
-      this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => Number(b) - Number(a));
-  }
+        if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+            const fullYear = fechaAsDate.getFullYear();
+
+            if (fullYear >= startYear && fullYear <= endYear) {
+                if (!this.mediaByYear[fullYear]) {
+                    this.mediaByYear[fullYear] = [];
+                }
+                this.mediaByYear[fullYear].push(media);
+            }
+        }
+    });
+
+    // Sort years in descending order and assign to sortedYears
+    this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => Number(b) - Number(a));
+}
+
 
   // OrderBy function
   OrderBy(order: string, medias: Media[]): Media[] {
