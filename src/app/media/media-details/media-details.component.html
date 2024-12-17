@@ -23,7 +23,7 @@
       <h3>Review:</h3>
       <p class="review-text">{{ media.review }}</p>
     </div>
-    <div class="score">
+    <div class="score" [ngStyle]="getScoreColor(media.notaObjetiva)">
       {{ media.notaObjetiva }}
     </div>
   </div>

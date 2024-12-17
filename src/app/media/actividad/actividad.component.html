@@ -24,7 +24,8 @@
     <td>{{ formatDate(media.fechaLanzamiento) }}</td>
     <td>
       <ng-container *ngFor="let item of media.fechaTerminado">
-        <strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br>
+        <div *ngIf="item.estado!=='Not Played'"><strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br></div>
+        <div *ngIf="item.estado==='Not Played'"><strong style="color:red;">{{ item.estado }}</strong></div>
       </ng-container>
     </td>
     <td>{{ media.notaObjetiva }}</td>

@@ -110,6 +110,10 @@ export class MediaHomeComponent {
       { value: "Drama", label: "Drama" },
       { value: "Comedia", label: "Comedia" },
     ],
+    'Miscelanea': [
+      { value: "Musica", label: "Música" },
+      { value: "Ropa", label: "Ropa" },
+    ],
   }
 
   typesOfSubgenre: { [key: string]: { value: string; label: string }[] }={
@@ -119,6 +123,9 @@ export class MediaHomeComponent {
       { value: "Souls", label: "Souls" },
       { value: "Souls-Like", label: "Souls-Like" },
     ],
+    'Ropa':[
+      {value: "Jersei", label: "Jerseis"}
+    ]
   }
 
   availableGenres:{ value: string; label: string }[] = [];
@@ -176,6 +183,7 @@ export class MediaHomeComponent {
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
     {value:"Watched", label:"Watched"},
+    {value:"Tried", label:"Tried"},
     {value:"Wanna Play", label:"Wanna Play"},
     {value:"Not Played", label:"Not Played"},
   ]
@@ -231,6 +239,8 @@ export class MediaHomeComponent {
       return '#a1eb34'; // Yellowish green for scores between 70 and 74
     } else if (score >= 45 && score < 70) {
       return 'yellow'; // Yellow for scores between 45 and 69
+    } else if (score == 0) {
+      return 'rgb(0, 0, 0)'; // Yellow for scores between 45 and 69
     } else {
       return 'red'; // Red for scores under 45
     }
@@ -280,7 +290,7 @@ export class MediaHomeComponent {
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
         const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Wanna Play", "Not Played"];
+        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Not Played"];
         const matchesState = this.state
             ? media.fechaTerminado.some((ft: { estado: string; }) => ft.estado === this.state)
             : media.fechaTerminado.some((ft: { estado: string; }) => validStates.includes(ft.estado));

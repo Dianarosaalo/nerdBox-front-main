@@ -33,13 +33,17 @@ export class MediaDetailsComponent {
     })
   }
 
-  getScoreColor(score: number): string {
-    if (score > 70) {
-      return 'rgb(6, 230, 6)';
-    } else if (score < 45) {
-      return 'red';
+  getScoreColor(score: number): { [key: string]: string } {
+    if (score > 74) {
+      return { 'background-color': 'rgb(6, 230, 6)', 'color': 'black' }; // Bright green with black text
+    } else if (score >= 70 && score <= 74) {
+      return { 'background-color': '#a1eb34', 'color': 'black' }; // Yellowish green with black text
+    } else if (score >= 45 && score < 70) {
+      return { 'background-color': 'yellow', 'color': 'black' }; // Yellow with black text
+    } else if (score === 0) {
+      return { 'background-color': 'rgb(0, 0, 0)', 'color': 'white' }; // Black with white text
     } else {
-      return 'yellow';
+      return { 'background-color': 'red', 'color': 'white' }; // Red with white text
     }
   }
 }
