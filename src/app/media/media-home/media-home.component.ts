@@ -249,6 +249,14 @@ export class MediaHomeComponent {
   sortedYears: string[] = []; // Define this to hold sorted years
   mediaByYear: { [key: string]: Media[] } = {}; // Define to hold media grouped by year
 
+  group='CompletionYear';
+  typesOfGroup=[
+    {value:"CompletionYear", label:"Completion Year"},
+    {value:"ReleaseDate", label:"Release Date"},
+    {value:"Console", label:"Console"},
+    {value:"Score", label:"Score"},
+  ]
+
   groupByYear(): void {
     this.bigContainer = !this.bigContainer;
     this.smallContainer = !this.smallContainer;
@@ -258,30 +266,38 @@ export class MediaHomeComponent {
     this.sortedYears = [];
 
     // Create an array with transformed media items, removing originals with multiple fechas
-    const separatedMedias: any[] = [];
-    this.medias.forEach((media) => {
-    if (media.fechaTerminado.length > 1) {
-        media.fechaTerminado.forEach((ft) => {
-            const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+    let separatedMedias: any[] = [];
+    if (this.group==="CompletionYear")
+    {
+      this.medias.forEach((media) => {
+        if (media.fechaTerminado.length > 1) {
+            media.fechaTerminado.forEach((ft) => {
+                const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
 
-            // Ensure the date is valid
-            if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
-                const clonedMedia = {
-                    ...media,
-                    fechaTerminado: [{
-                        fecha: ft.fecha,
-                        estado: ft.estado // Assign the correct estado for each fecha
-                    }]
-                }; // Clone media with only this specific date and its estado
-                console.log(clonedMedia);
-                separatedMedias.push(clonedMedia);
-            }
-        });
-    } else {
-        // If only one fechaTerminado, keep the original item
-        separatedMedias.push(media);
+                // Ensure the date is valid
+                if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+                    const clonedMedia = {
+                        ...media,
+                        fechaTerminado: [{
+                            fecha: ft.fecha,
+                            estado: ft.estado // Assign the correct estado for each fecha
+                        }]
+                    }; // Clone media with only this specific date and its estado
+                    console.log(clonedMedia);
+                    separatedMedias.push(clonedMedia);
+                }
+            });
+        } else {
+            // If only one fechaTerminado, keep the original item
+            separatedMedias.push(media);
+        }
+      });
     }
-  });
+
+    if (this.group==="ReleaseDate")
+    {
+      separatedMedias = this.medias;
+    }
 
     // Filter medias based on existing criteria
     const filteredMedias = separatedMedias.filter((media) => {
@@ -305,14 +321,35 @@ export class MediaHomeComponent {
     const startYear = 2006;
     const endYear = new Date().getFullYear();
 
-    orderedMedias.forEach((media) => {
-        const ft = media.fechaTerminado[0]; // Each separatedMedia has only one fechaTerminado
-        const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+    if (this.group==="CompletionYear")
+    {
+      orderedMedias.forEach((media) => {
+          const ft = media.fechaTerminado[0]; // Each separatedMedia has only one fechaTerminado
+          const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+
+          if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+              const fullYear = fechaAsDate.getFullYear();
+
+              if (fullYear >= startYear && fullYear <= endYear) {
+                  if (!this.mediaByYear[fullYear]) {
+                      this.mediaByYear[fullYear] = [];
+                  }
+                  this.mediaByYear[fullYear].push(media);
+              }
+          }
+      });
+    }
+
+    if (this.group==="ReleaseDate")
+    {
+      orderedMedias.forEach((media) => {
+        const ft = media.fechaLanzamiento; // Each separatedMedia has only one fechaTerminado
+        const fechaAsDate = typeof ft === 'string' ? new Date(ft) : ft;
 
         if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
             const fullYear = fechaAsDate.getFullYear();
 
-            if (fullYear >= startYear && fullYear <= endYear) {
+            if (fullYear >= 1960 && fullYear <= endYear) {
                 if (!this.mediaByYear[fullYear]) {
                     this.mediaByYear[fullYear] = [];
                 }
@@ -320,6 +357,7 @@ export class MediaHomeComponent {
             }
         }
     });
+    }
 
     // Sort years in descending order and assign to sortedYears
     this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => Number(b) - Number(a));

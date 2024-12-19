@@ -6,6 +6,20 @@
     </li>
   </ul>-->
 
+  <ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <select class="form-control" [(ngModel)]="group" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typesOfGroup" value={{option.value}}>Group by: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+
+  <ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <button class="btn btn-dark" style="padding: 8px !important;"(click)="groupByYear()">Group!</button>
+    </li>
+  </ul>
+
   <form class="container-fluid col">
     <input
       class="form-control"
@@ -16,12 +30,6 @@
       [(ngModel)]="search"
     />
   </form> <br>
-
-  <ul  class="nav nav-pills col-auto ms-3">
-    <li class="nav-item btn">
-      <button class="btn btn-dark" style="padding: 8px !important;"(click)="groupByYear()">Group by Year</button>
-    </li>
-  </ul>
 
   <ul  class="nav nav-pills col-auto ms-3">
     <li class="nav-item btn">
