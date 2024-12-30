@@ -21,11 +21,32 @@
             name="titulo"
             id="titulo"
             [(ngModel)]="newMedia.titulo"
+            required
             placeholder="Título"
             #tituloModel="ngModel"
             [ngClass]="validClasses(tituloModel, 'is-valid', 'is-invalid')"
           />
           <div class="invalid-feedback">Al menos un título es requerido</div>
+
+          <br>
+          <a (click)="searchGames()" class="search-button btn btn-warning">Buscar!</a>
+          <div *ngIf="games.length > 0">
+            <ul>
+              <li
+                style="color:white;"
+                *ngFor="let game of games"
+                (click)="selectGame(game)"
+              >
+                {{ game.name }}
+                <span *ngIf="game.platforms && game.platforms.length > 0">
+                  [<span [textContent]="game.platforms[0].name"></span>]
+                </span>
+                <span *ngIf="game.release_dates && game.release_dates.length > 0">
+                  (<span [textContent]="game.release_dates[0]?.y"></span>)
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="mb-3 col">
@@ -106,6 +127,23 @@
         class="img-thumbnail mb-3"
       />
 
+      <div class="mb-3">
+        <label for="fechaLanzamiento">Fecha de Lanzamiento</label>
+        <input
+          type="date"
+          class="form-control"
+          name="fechaLanzamiento"
+          id="fechaLanzamiento"
+          [(ngModel)]="newMedia.fechaLanzamiento"
+          required
+          #fechaModel="ngModel"
+          [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
+          Introduce una fecha
+        </div>
+      </div>
+
       <div class="containermenu">
         <h1>Fechas de Completación</h1>
         <p (click)="showNewStateForm()" class="btn btn-warning">Añadir una fecha</p>
@@ -138,22 +176,6 @@
 
     <div *ngIf="activeTab ==='Opcionales'">
 
-      <div class="mb-3">
-        <label for="fechaLanzamiento">Fecha de Lanzamiento</label>
-        <input
-          type="date"
-          class="form-control"
-          name="fechaLanzamiento"
-          id="fechaLanzamiento"
-          [(ngModel)]="newMedia.fechaLanzamiento"
-          required
-          #fechaModel="ngModel"
-          [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"
-        />
-        <div class="invalid-feedback" *ngIf="fechaModel.errors?.['required']">
-          Introduce una fecha
-        </div>
-      </div>
 
       <div class="mb-3" *ngIf="newMedia.tipo==='Videojuego'">
         <label for="titulo" >Desarrolladora</label>

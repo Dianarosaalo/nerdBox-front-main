@@ -318,7 +318,7 @@ export class MediaHomeComponent {
     const orderedMedias = this.OrderBy(this.order, filteredMedias);
 
     // Group separated media items by year
-    const startYear = 2006;
+    const startYear = 2003;
     const endYear = new Date().getFullYear();
 
     if (this.group==="CompletionYear")

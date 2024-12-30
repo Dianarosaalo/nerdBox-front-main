@@ -6,6 +6,7 @@ import { Media } from '../interfaces/media';
 import { Router } from '@angular/router';
 import { MediaService } from '../services/media.service';
 import { fechaTerminado } from '../interfaces/media';
+import { IgdbService } from '../services/igdb.service';
 
 @Component({
   selector: 'fs-media-form',
@@ -28,6 +29,7 @@ export class MediaFormComponent {
     private readonly location: Location,
     private readonly mediaService:MediaService,
     private readonly http: HttpClient,
+    private igdbService: IgdbService
   ) {}
 
   ngOnInit(): void {
@@ -109,8 +111,8 @@ export class MediaFormComponent {
 
           error: (error) => console.error(error),
         });
-        //this.router.navigate(['/characters', this.newCharacter._id]);
-        this.router.navigate(['/media','home']);
+        this.router.navigate(['/media', this.newMedia._id]);
+        //this.router.navigate(['/media','home']);
 
       }
 
@@ -167,5 +169,68 @@ export class MediaFormComponent {
         this.newMedia.fechaTerminado.splice(index, 1);
       }
     }
+
+    // IGDB Integration
+
+    games: any[] = [];
+    //titulo es mi searchBar
+
+    searchGames() {
+      if (this.newMedia.titulo.trim()) {
+        this.igdbService.searchGames(this.newMedia.titulo).subscribe(
+          (data) => {
+            this.games = data;
+            console.log(this.games);
+          },
+          (error) => {
+            console.error('Error fetching games:', error);
+          }
+        );
+      }
+    }
+
+    selectGame(game: any): void {
+      this.newMedia = {
+        _id: this.newMedia._id,
+        titulo: game.name, // Mapping API 'name' to 'titulo'
+        imagen: this.newMedia.imagen,
+        tipo: this.newMedia.tipo,
+        genero: game.genres ? game.genres[0].name : '', // Assuming there's a genre, use first if multiple
+        plataforma: game.platforms ? game.platforms.map((p: any) => p.name).join(', ') : '', // Joining multiple platforms if needed
+        fechaLanzamiento: game.release_dates && game.release_dates.length > 0 && game.release_dates[0].y
+        ? new Date(game.release_dates[0].y, 0, 1) // January is month 0 in JavaScript
+        : new Date(), // Default to current date if not available
+        fechaTerminado: this.newMedia.fechaTerminado,
+        notaObjetiva: this.newMedia.notaObjetiva,
+        notaSubjetiva: this.newMedia.notaSubjetiva,
+        desarrolladora: game.developers ? game.developers.map((d: any) => d.name).join(', ') : '', // Joining multiple developers if needed
+        subgenero: this.newMedia.subgenero,
+        fechaCreacion: this.newMedia.fechaCreacion,
+        fechaModificacion: this.newMedia.fechaCreacion,
+        review: this.newMedia.review,
+        tiempoJuego: this.newMedia.tiempoJuego
+      };
+      //console.log(this.newMedia)
+      //console.log(game.release_dates);
+      //console.log(game.first_release_date);
+      if (game.cover && game.cover.url) {
+        this.http.get(game.cover.url, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            // Convert the image to a base64 string and assign it to 'imagen'
+            this.newMedia.imagen = reader.result as string; // base64 string
+          };
+          reader.readAsDataURL(imageBlob); // Read the image as base64
+        });
+      } else {
+        this.newMedia.imagen = ''; // If no image available, set to empty string
+      }
+    }
+
+    formatDate(date: number): string {
+      const d = new Date(date * 1000); // Assuming the release date is in seconds (UNIX timestamp)
+      return d.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+    }
+
 
 }
