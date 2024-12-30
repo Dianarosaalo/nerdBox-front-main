@@ -1,8 +1,14 @@
-<br><br>
+<div class="year-buttons">
+  <button (click)="selectYear('All')" [class.active]="selectedYear === 'All'">All</button>
+  <button *ngFor="let year of years" (click)="selectYear(year)" [class.active]="selectedYear === year">
+    {{ year }}
+  </button>
+</div>
+
 
 <table class="excel-table">
-
   <tr class="base">
+    <td *ngIf="selectedYear !== 'All'">º</td>
     <td>Título</td>
     <td>Tipo</td>
     <td>Género</td>
@@ -12,10 +18,11 @@
     <td>Estado</td>
     <td>Nota Objetiva</td>
     <td>Nota Subjetiva</td>
-    <td>Desarolladora</td>
+    <td>Desarrolladora</td>
   </tr>
 
-  <tr class="each" *ngFor="let media of medias">
+  <tr class="each" *ngFor="let media of filteredMedias; let i = index">
+    <td *ngIf="selectedYear !== 'All'">{{ getItemIndex(i) }}</td>
     <td>{{ media.titulo }}</td>
     <td>{{ media.tipo }}</td>
     <td>{{ media.genero }}</td>
@@ -23,14 +30,31 @@
     <td>{{ media.subgenero }}</td>
     <td>{{ formatDate(media.fechaLanzamiento) }}</td>
     <td>
-      <ng-container *ngFor="let item of media.fechaTerminado">
-        <div *ngIf="item.estado!=='Not Played'"><strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br></div>
-        <div *ngIf="item.estado==='Not Played'"><strong style="color:red;">{{ item.estado }}</strong></div>
+      <ng-container *ngIf="selectedYear === 'All'; else filteredView">
+        <ng-container *ngFor="let item of media.fechaTerminado">
+          <div *ngIf="item.estado!=='Not Played'">
+            <strong>{{ item.estado }}</strong> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong><br>
+          </div>
+          <div *ngIf="item.estado==='Not Played'">
+            <strong style="color:red;">{{ item.estado }}</strong>
+          </div>
+        </ng-container>
       </ng-container>
+      <ng-template #filteredView>
+        <ng-container *ngFor="let item of media.fechaTerminado">
+          <div
+            *ngIf="isYearMatch(item.fecha)"
+            [ngClass]="{'completed': item.estado === 'Completed', 'not-completed': item.estado !== 'Completed'}">
+            <strong>{{ item.estado }}</strong>
+            <span *ngIf="item.estado === 'Completed'"> on the: <strong>{{ item.fecha | date:'dd-MM-yyyy' }}</strong></span>
+          </div>
+        </ng-container>
+      </ng-template>
     </td>
     <td>{{ media.notaObjetiva }}</td>
     <td>{{ media.notaSubjetiva }}</td>
     <td>{{ media.desarrolladora }}</td>
   </tr>
 </table>
+
 
