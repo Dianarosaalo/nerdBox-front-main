@@ -18,7 +18,22 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   medias: Media[] = [];
-  chartData: ChartConfiguration<'doughnut'>['data'] = {
+  selectedMediaType= '';  // This will store the selected media type
+  typesOfMedia = [
+    { value: '', label: '[Todos]' },
+    { value: 'Videojuego', label: 'Videojuegos' },
+    { value: 'Anime', label: 'Animes' },
+    { value: 'Manga', label: 'Mangas' },
+    { value: 'Libro', label: 'Libros' },
+    { value: 'Pelicula', label: 'Películas' },
+    { value: 'Serie', label: 'Series' },
+    { value: 'Cartoons', label: 'Cartoons' },
+    { value: 'Comic', label: 'Cómics' },
+    { value: 'Rol', label: 'Rol' },
+    { value: 'Miscelanea', label: 'Miscelánea' }
+  ];
+
+  chartData: ChartConfiguration<'pie'>['data'] = {
     labels: [],
     datasets: [
       {
@@ -33,21 +48,35 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
           '#FFEB3B', // Cartoons - Yellow
           '#8D6E63', // Comics - Brown
           '#1E88E5', // Peliculas (Anime genre) - Dark Blue
+          'Black', // Peliculas (Anime genre) - Dark Blue
         ],
       },
     ],
   };
 
-  chartOptions: ChartConfiguration<'doughnut'>['options'] = {
+  chartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
     plugins: {
       legend: {
         display: false, // Hide the legend
       },
+      tooltip: {
+        enabled: false, // Completely disable tooltips
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        external: () => {}, // Ensure no external tooltip rendering
+      },
     },
+    hover: {
+      mode: 'nearest', // Set hover mode to nearest, but we'll override with interaction
+    },
+    interaction: {
+      mode: 'nearest', // Ensures the interaction is based on the nearest element
+      intersect: true,  // Only trigger interaction when directly over a segment
+    },
+    events: ['click'],  // Only allow 'click' interactions, if necessary (no hover)
   };
 
-  chartType: ChartType = 'doughnut';
+  chartType: ChartType = 'pie';
 
   constructor(
     private readonly mediaService: MediaService,
@@ -72,13 +101,27 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onMediaTypeChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
+    const selectedType = selectElement.value;
+    this.selectedMediaType = selectedType;  // Update the selected media type
+    this.prepareChartData();  // Re-prepare chart data based on the selected type
+  }
+
   prepareChartData(): void {
     const mediaCounts = this.medias.reduce((acc: Record<string, number>, media) => {
-      console.log('Processing Media:', media); // Log each media item
-      if (media.tipo === 'Peliculas' && media.genero === 'Anime') {
-        acc['Peliculas (Anime)'] = (acc['Peliculas (Anime)'] || 0) + 1;
-      } else {
-        acc[media.tipo] = (acc[media.tipo] || 0) + 1;
+      // Ensure that if there is no genre, we assign 'Unknown'
+      const genre = media.genero || 'Unknown';
+
+      // Check if the selected type is "Todos" or any other type
+      if (this.selectedMediaType === '' || media.tipo === this.selectedMediaType) {
+        if (this.selectedMediaType === '') {
+          // Count based on 'tipo' only, no need to check 'genero'
+          acc[media.tipo] = (acc[media.tipo] || 0) + 1;
+        } else {
+          // If filtering by a specific type, only count the genre (use 'Unknown' if no genre)
+          acc[genre] = (acc[genre] || 0) + 1;
+        }
       }
       return acc;
     }, {});
@@ -97,4 +140,5 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
       this.chart.chart.update();
     }
   }
+
 }

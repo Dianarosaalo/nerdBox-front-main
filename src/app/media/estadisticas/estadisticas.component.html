@@ -1,3 +1,9 @@
+<select (change)="onMediaTypeChange($event)">
+  <option *ngFor="let option of typesOfMedia" [value]="option.value">
+    {{ option.label }}
+  </option>
+</select>
+
 <div class="chart-wrapper">
   <div class="legend">
     <div *ngFor="let label of chartData.labels; let i = index">
@@ -10,3 +16,4 @@
     <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
   </div>
 </div>
+
