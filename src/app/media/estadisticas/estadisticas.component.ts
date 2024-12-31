@@ -88,8 +88,14 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.chart && this.chart.chart) {
-      this.chart.chart.update();
+    if (this.chart?.chart) {
+      const chartInstance = this.chart.chart;
+
+      // Check if chartInstance.options.plugins and chartInstance.options.plugins.legend are defined
+      if (chartInstance.options.plugins && chartInstance.options.plugins.legend) {
+        chartInstance.options.plugins.legend.display = false;
+        chartInstance.update(); // Update the chart to apply changes
+      }
     }
   }
 
