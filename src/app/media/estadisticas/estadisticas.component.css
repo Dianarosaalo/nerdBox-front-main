@@ -52,3 +52,56 @@
 .legend-item strong {
   font-weight: bold; /* Make label text bold */
 }
+
+select {
+  font-family: 'Arial', sans-serif; /* Clean, modern font */
+  font-size: 1.2rem; /* Slightly larger text for readability */
+  padding: 10px 20px; /* Add padding for spacing */
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text color for contrast */
+  border: 2px solid #444; /* Subtle border to make it pop */
+  border-radius: 8px; /* Rounded corners for a soft, modern look */
+  appearance: none; /* Remove default dropdown arrow */
+  -webkit-appearance: none; /* Safari fix */
+  -moz-appearance: none; /* Firefox fix */
+  cursor: pointer; /* Show pointer on hover */
+  transition: all 0.3s ease; /* Smooth transition effect */
+  width: 200px; /* Set a fixed width for the select */
+  text-align: center; /* Center text */
+}
+
+select:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #42A5F5; /* Change border color when focused */
+  box-shadow: 0 0 5px rgba(66, 165, 245, 0.5); /* Add a glow effect on focus */
+}
+
+option {
+  background-color: #333; /* Match option background color */
+  color: #fff; /* Text color */
+  padding: 10px; /* Add padding inside options */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+option:hover {
+  background-color: #42A5F5; /* Highlight option on hover */
+}
+
+select::-ms-expand {
+  display: none; /* Remove the default IE dropdown icon */
+}
+
+.legend-item {
+  margin-bottom: 20px; /* Increase space between legend items */
+  font-size: 1.5rem; /* Larger font size for legend items */
+  line-height: 1.8; /* Increase line height for better readability */
+  display: flex; /* Make the legend items align in a row */
+  align-items: center; /* Vertically center the content */
+}
+
+.legend-item .color-square {
+  width: 20px; /* Square size */
+  height: 20px; /* Square size */
+  margin-right: 10px; /* Space between the color square and text */
+  border-radius: 2px; /* Slightly rounded corners for the color square */
+}

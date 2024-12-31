@@ -9,7 +9,10 @@
   <div class="legend">
     <div *ngFor="let label of chartData.labels; let i = index">
       <span class="legend-item">
-        <strong>{{ label }}:</strong> {{ chartData.datasets[0].data[i] }}
+        <!-- Color square with a fallback for undefined backgroundColor -->
+        <span class="color-square" [style.background-color]="getColor(i)"></span>
+        <strong>{{ label }}:&nbsp; </strong>
+        {{ chartData.datasets[0].data[i] }}
       </span>
     </div>
   </div>

@@ -47,7 +47,7 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
           '#CE93D8', // Series - Light Purple
           '#FFEB3B', // Cartoons - Yellow
           '#8D6E63', // Comics - Brown
-          '#1E88E5', // Peliculas (Anime genre) - Dark Blue
+          'Pink', // Peliculas (Anime genre) - Dark Blue
           'Black', // Peliculas (Anime genre) - Dark Blue
         ],
       },
@@ -138,6 +138,17 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
     this.chartData.labels = Object.keys(mediaCounts);
     this.chartData.datasets[0].data = Object.values(mediaCounts);
 
+    // Ensure backgroundColor is an array and matches the number of chart data items
+    const defaultColors = [
+      '#FFA726', '#42A5F5', '#EF5350', '#66BB6A', '#AB47BC',
+      '#CE93D8', '#FFEB3B', '#8D6E63', 'Pink', 'Black'
+    ];
+
+    // Assign the backgroundColor array and ensure it's correctly set
+    this.chartData.datasets[0].backgroundColor = this.chartData.labels.map((_, i) =>
+      defaultColors[i % defaultColors.length] // Cycle through colors if there are more labels than colors
+    );
+
     // Manually trigger change detection to update the view
     this.cdr.detectChanges();
 
@@ -145,6 +156,11 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
     if (this.chart && this.chart.chart) {
       this.chart.chart.update();
     }
+  }
+
+  getColor(i: number): string {
+    const backgroundColor = this.chartData.datasets[0]?.backgroundColor as string[];
+    return backgroundColor?.[i] || '#ccc';  // Fallback to '#ccc' if undefined
   }
 
 }
