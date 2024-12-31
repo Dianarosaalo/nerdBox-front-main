@@ -1,1 +1,12 @@
-<p>estadisticas works!</p>
+<div class="chart-wrapper">
+  <div class="legend">
+    <div *ngFor="let label of chartData.labels; let i = index">
+      <span class="legend-item">
+        <strong>{{ label }}:</strong> {{ chartData.datasets[0].data[i] }}
+      </span>
+    </div>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
+  </div>
+</div>

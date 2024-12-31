@@ -29,6 +29,7 @@
     <td>{{ media.plataforma }}</td>
     <td>{{ media.subgenero }}</td>
     <td>{{ formatDate(media.fechaLanzamiento) }}</td>
+
     <td>
       <ng-container *ngIf="selectedYear === 'All'; else filteredView">
         <ng-container *ngFor="let item of media.fechaTerminado">
@@ -51,6 +52,7 @@
         </ng-container>
       </ng-template>
     </td>
+
     <td>{{ media.notaObjetiva }}</td>
     <td>{{ media.notaSubjetiva }}</td>
     <td>{{ media.desarrolladora }}</td>
