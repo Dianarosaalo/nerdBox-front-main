@@ -5,6 +5,7 @@
 </select>
 
 <div class="chart-wrapper">
+  <!-- Legend Section -->
   <div class="legend">
     <div *ngFor="let label of chartData.labels; let i = index">
       <span class="legend-item">
@@ -12,8 +13,12 @@
       </span>
     </div>
   </div>
-  <div class="chart-container">
-    <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
+
+  <!-- Chart Section -->
+  <div class="canvas-wrapper">
+    <div class="chart-container">
+      <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
+    </div>
   </div>
 </div>
 
