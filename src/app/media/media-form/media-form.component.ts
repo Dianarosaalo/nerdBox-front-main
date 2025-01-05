@@ -57,7 +57,7 @@ export class MediaFormComponent {
       genero:'',
       plataforma:'',
       fechaLanzamiento:new Date(),
-      fechaTerminado:[{ "fecha": new Date(2003, 11, 25), "estado": "Not Played" }],
+      fechaTerminado:[{ "fecha": new Date(2150, 11, 25), "estado": "Not Played" }],
       notaObjetiva:0,
       notaSubjetiva:0,
       desarrolladora:'',
