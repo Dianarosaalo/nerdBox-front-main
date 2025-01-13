@@ -410,6 +410,13 @@ onMediaTypeHover(type: string) {
   this.genre = "";
   this.availableSubgenres = [];
   this.onMediaTypeChange();
+
+  if (this.smallContainer) // works normally, but if "group" is selected, groupByYear will be triggered when changing from type to another, so it changes despite being static
+  {
+    this.groupByYear();
+    this.bigContainer=false;
+    this.smallContainer=true;
+  }
 }
 
 // Called when hovering over a genre
