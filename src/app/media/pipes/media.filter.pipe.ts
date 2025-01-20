@@ -6,7 +6,7 @@ import { Media } from "../interfaces/media";
   standalone: true,
 })
 
-export class MediaFilterPipe implements PipeTransform{
+export class MediaFilterPipe implements PipeTransform {
   transform(
     medias: Media[],
     search: string,
@@ -15,102 +15,90 @@ export class MediaFilterPipe implements PipeTransform{
     genre: string,
     subgenre: string,
     platform: string,
-    state:string,
-    year?:number
-
+    state: string,
+    year?: number
   ): Media[] {
 
-    if (genre)
-    {
-      medias=medias.filter((m)=>m.genero===genre)
+    // First, apply the sorting based on the chosen order
+    let sortedMedias = this.OrderBy(order, medias);
+
+    // Then filter by genre if provided
+    if (genre) {
+      sortedMedias = sortedMedias.filter((m) => m.genero === genre);
     }
 
-    if (subgenre)
-    {
-      medias=medias.filter((m)=>m.subgenero===subgenre)
+    // Filter by subgenre if provided
+    if (subgenre) {
+      sortedMedias = sortedMedias.filter((m) => m.subgenero === subgenre);
     }
 
-    if (platform)
-    {
-      medias=medias.filter((m)=>m.plataforma===platform)
+    // Filter by platform if provided
+    if (platform) {
+      sortedMedias = sortedMedias.filter((m) => m.plataforma === platform);
     }
 
+    // Filter by state if provided
     if (state) {
-      // If a specific state is provided, filter by it
-      medias = medias.filter((m) =>
-        m.fechaTerminado.some((ft) => ft.estado === state) // Check if any `estado` matches the specific state
+      sortedMedias = sortedMedias.filter((m) =>
+        m.fechaTerminado.some((ft) => ft.estado === state)
       );
     } else {
-      // If no specific state, filter by predefined valid states
-      const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Not Played"]; // Define valid states directly
-      medias = medias.filter((m) =>
-        m.fechaTerminado.some((ft) => validStates.includes(ft.estado)) // Check if `estado` matches any valid state
+      const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Not Played"];
+      sortedMedias = sortedMedias.filter((m) =>
+        m.fechaTerminado.some((ft) => validStates.includes(ft.estado))
       );
     }
 
+    // Filter by year if provided
     if (year && year !== 0) {
-      medias = medias.filter((m) =>
-          m.fechaTerminado.some((ft) => {
-              const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
-
-              if (!(fechaAsDate instanceof Date) || isNaN(fechaAsDate.getTime())) {
-                  console.log(`Invalid date for media item:`, ft.fecha);
-                  return false;
-              }
-
-              const fullYear = fechaAsDate.getFullYear();
-              console.log(`Comparing year ${fullYear} with target year ${year}`);
-              console.log(Number(fullYear)===Number(year))
-              return Number(fullYear) === Number(year);
-          })
+      sortedMedias = sortedMedias.filter((m) =>
+        m.fechaTerminado.some((ft) => {
+          const fechaAsDate = typeof ft.fecha === 'string' ? new Date(ft.fecha) : ft.fecha;
+          if (!(fechaAsDate instanceof Date) || isNaN(fechaAsDate.getTime())) {
+            console.log(`Invalid date for media item:`, ft.fecha);
+            return false;
+          }
+          return fechaAsDate.getFullYear() === year;
+        })
       );
-  }
+    }
 
+    // Filter by type if provided
     const filteredByType = type
-      ? medias.filter((m) => m.tipo===type)
-      : medias;
+      ? sortedMedias.filter((m) => m.tipo === type)
+      : sortedMedias;
 
+    // Finally, filter by search term
     return search
-      ? filteredByType.filter((c) =>
-          c.titulo.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        )
-      : this.OrderBy(order, filteredByType);
+      ? filteredByType.filter((m) => m.titulo.toLowerCase().includes(search.toLowerCase()))
+      : filteredByType;
   }
 
-  OrderBy(order:string, medias:Media[]){
+  OrderBy(order: string, medias: Media[]) {
+    const myMedia = [...medias];
 
-    const myMedia=[...medias];
-    if (order==="nombre")
-    {
-      myMedia.sort((a,b)=>{
-        if (a.titulo===b.titulo) return 0;
-        return a.titulo > b.titulo ? 1 : -1
+    // Sorting by name
+    if (order === "nombre") {
+      myMedia.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+    // Sorting by score
+    else if (order === "score") {
+      myMedia.sort((a, b) => b.notaObjetiva - a.notaObjetiva);
+    }
+    // Sorting by completion date
+    else if (order === "fechavista") {
+      myMedia.sort((a, b) => {
+        const fechaA = new Date(a.fechaTerminado[0].fecha);
+        const fechaB = new Date(b.fechaTerminado[0].fecha);
+        return fechaA.getTime() - fechaB.getTime();
       });
     }
-    else if (order==="score")
-    {
-      myMedia.sort((a,b)=>{
-        if (a.notaObjetiva===b.notaObjetiva) return 0;
-        return a.notaObjetiva < b.notaObjetiva ? 1 : -1
-      });
-    }
-
-    else if (order==="fechavista")
-    {
-      myMedia.sort((a,b)=>{
-        if (a.fechaTerminado[0].fecha===b.fechaTerminado[0].fecha) return 0;
-        return a.fechaTerminado[0].fecha > b.fechaTerminado[0].fecha ? 1 : -1
-      });
-    }
-
-  else if (order==="tiempoJuego")
-    {
-      myMedia.sort((a,b)=>{
-        if (a.tiempoJuego===b.tiempoJuego) return 0;
-        return a.tiempoJuego < b.tiempoJuego ? 1 : -1
-      });
+    // Sorting by playtime
+    else if (order === "tiempoJuego") {
+      myMedia.sort((a, b) => b.tiempoJuego - a.tiempoJuego);
     }
 
     return myMedia;
   }
 }
+
