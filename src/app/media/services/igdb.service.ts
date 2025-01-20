@@ -18,9 +18,9 @@ export class IgdbService {
     });
 
     const body = `
-      fields name, cover.url, release_dates.y, platforms.name, summary;
-      search "${query}";
-      limit 10;`;
+    fields name, cover.url, release_dates.date, release_dates.y, platforms.name, summary, genres.name;
+    search "${query}";
+    limit 10;`;
 
     // The request should go through the proxy and forward the correct headers
     return this.http.post('/api/v4/games', body, { headers });

@@ -14,8 +14,8 @@
     <td>Género</td>
     <td>Plataforma</td>
     <td>Subgénero</td>
-    <td>Fecha Lanzamiento</td>
     <td>Estado</td>
+    <td>Fecha Lanzamiento</td>
     <td>Nota Objetiva</td>
     <td>Nota Subjetiva</td>
     <td>Desarrolladora</td>
@@ -28,7 +28,6 @@
     <td>{{ media.genero }}</td>
     <td>{{ media.plataforma }}</td>
     <td>{{ media.subgenero }}</td>
-    <td>{{ formatDate(media.fechaLanzamiento) }}</td>
 
     <td>
       <ng-container *ngIf="selectedYear === 'All'; else filteredView">
@@ -53,6 +52,7 @@
       </ng-template>
     </td>
 
+    <td>{{ formatDate(media.fechaLanzamiento) }}</td>
     <td>{{ media.notaObjetiva }}</td>
     <td>{{ media.notaSubjetiva }}</td>
     <td>{{ media.desarrolladora }}</td>

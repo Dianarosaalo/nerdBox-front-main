@@ -218,6 +218,10 @@ nav{
     box-sizing: border-box;
   }
 
+  img.notGroupedImg{
+    min-height: 280px;
+  }
+
   .media-item img {
     max-height: 238px;
     width: 100%;

@@ -195,11 +195,11 @@ export class MediaFormComponent {
         titulo: game.name, // Mapping API 'name' to 'titulo'
         imagen: this.newMedia.imagen,
         tipo: this.newMedia.tipo,
-        genero: game.genres ? game.genres[0].name : '', // Assuming there's a genre, use first if multiple
-        plataforma: game.platforms ? game.platforms.map((p: any) => p.name).join(', ') : '', // Joining multiple platforms if needed
-        fechaLanzamiento: game.release_dates && game.release_dates.length > 0 && game.release_dates[0].y
-        ? new Date(game.release_dates[0].y, 0, 1) // January is month 0 in JavaScript
-        : new Date(), // Default to current date if not available
+        genero: game.genres && game.genres.length > 0 ? game.genres[0].name : 'Unknown Genre', // Handle missing genres
+        plataforma: game.platforms && game.platforms.length > 0 ? game.platforms[0].name : '', // Use only the first platform//game.platforms ? game.platforms.map((p: any) => p.name).join(', ') : '', // Joining multiple platforms if needed
+        fechaLanzamiento: game.release_dates && game.release_dates.length > 0
+      ? new Date(game.release_dates[0].date) // Parse full date here
+      : new Date(), // Default to current date if not available
         fechaTerminado: this.newMedia.fechaTerminado,
         notaObjetiva: this.newMedia.notaObjetiva,
         notaSubjetiva: this.newMedia.notaSubjetiva,
@@ -210,11 +210,11 @@ export class MediaFormComponent {
         review: this.newMedia.review,
         tiempoJuego: this.newMedia.tiempoJuego
       };
-      //console.log(this.newMedia)
-      //console.log(game.release_dates);
-      //console.log(game.first_release_date);
+
+      // Fetch the cover image with better quality
       if (game.cover && game.cover.url) {
-        this.http.get(game.cover.url, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
+        const highResUrl = game.cover.url.replace('t_thumb', 't_cover_big'); // Replace 't_thumb' with 't_cover_big'
+        this.http.get(highResUrl, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
           const reader = new FileReader();
           reader.onloadend = () => {
             // Convert the image to a base64 string and assign it to 'imagen'
