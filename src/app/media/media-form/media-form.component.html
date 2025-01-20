@@ -128,13 +128,13 @@
       />
 
       <div class="mb-3">
-        <label for="fechaLanzamiento">Fecha de Lanzamiento</label>
+        <label for="fechaLanzamiento">Fecha de Lanzamiento</label> &nbsp; <span style="color:red;">{{ fechaLanzamientoFormatted }}</span>
         <input
           type="date"
           class="form-control"
           name="fechaLanzamiento"
           id="fechaLanzamiento"
-          [(ngModel)]="fechaLanzamientoFormatted"
+          [(ngModel)]="newMedia.fechaLanzamiento"
           required
           #fechaModel="ngModel"
           [ngClass]="validClasses(fechaModel, 'is-valid', 'is-invalid')"

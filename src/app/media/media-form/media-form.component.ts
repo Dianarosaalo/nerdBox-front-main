@@ -250,9 +250,19 @@ export class MediaFormComponent {
 
     // Getter and setter for formatted date
     get fechaLanzamientoFormatted(): string {
-      return this.newMedia.fechaLanzamiento
+      /*return this.newMedia.fechaLanzamiento
         ? this.newMedia.fechaLanzamiento.toISOString().split('T')[0]
-        : '';
+        : '';*/
+        if (!this.newMedia.fechaLanzamiento) {
+          return '';
+        }
+
+        const date = new Date(this.newMedia.fechaLanzamiento);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = date.getFullYear(); // Get the last two digits of the year
+
+        return `${day}/${month}/${year}`;
     }
 
     set fechaLanzamientoFormatted(value: string) {
