@@ -191,40 +191,72 @@ export class MediaFormComponent {
 
     selectGame(game: any): void {
       this.newMedia = {
+        ...this.newMedia,
         _id: this.newMedia._id,
-        titulo: game.name, // Mapping API 'name' to 'titulo'
+        titulo: game.name,
         imagen: this.newMedia.imagen,
         tipo: this.newMedia.tipo,
-        genero: game.genres && game.genres.length > 0 ? game.genres[0].name : 'Unknown Genre', // Handle missing genres
-        plataforma: game.platforms && game.platforms.length > 0 ? game.platforms[0].name : '', // Use only the first platform//game.platforms ? game.platforms.map((p: any) => p.name).join(', ') : '', // Joining multiple platforms if needed
+        genero: game.genres && game.genres.length > 0 ? game.genres[0].name : 'Unknown Genre',
+        plataforma: game.platforms && game.platforms.length > 0 ? game.platforms[0].name : '',
         fechaLanzamiento: game.release_dates && game.release_dates.length > 0
-      ? new Date(game.release_dates[0].date) // Parse full date here
-      : new Date(), // Default to current date if not available
+          ? new Date(game.release_dates[0].date * 1000)
+          : new Date(),
         fechaTerminado: this.newMedia.fechaTerminado,
         notaObjetiva: this.newMedia.notaObjetiva,
         notaSubjetiva: this.newMedia.notaSubjetiva,
-        desarrolladora: game.developers ? game.developers.map((d: any) => d.name).join(', ') : '', // Joining multiple developers if needed
+        desarrolladora: '',
         subgenero: this.newMedia.subgenero,
         fechaCreacion: this.newMedia.fechaCreacion,
         fechaModificacion: this.newMedia.fechaCreacion,
         review: this.newMedia.review,
-        tiempoJuego: this.newMedia.tiempoJuego
+        tiempoJuego: this.newMedia.tiempoJuego,
       };
 
-      // Fetch the cover image with better quality
       if (game.cover && game.cover.url) {
-        const highResUrl = game.cover.url.replace('t_thumb', 't_cover_big'); // Replace 't_thumb' with 't_cover_big'
+        const highResUrl = game.cover.url.replace('t_thumb', 't_cover_big');
         this.http.get(highResUrl, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
           const reader = new FileReader();
           reader.onloadend = () => {
-            // Convert the image to a base64 string and assign it to 'imagen'
-            this.newMedia.imagen = reader.result as string; // base64 string
+            this.newMedia.imagen = reader.result as string;
           };
-          reader.readAsDataURL(imageBlob); // Read the image as base64
+          reader.readAsDataURL(imageBlob);
         });
       } else {
-        this.newMedia.imagen = ''; // If no image available, set to empty string
+        this.newMedia.imagen = '';
       }
+
+      // Fetch developer names
+      if (game.developers && game.developers.length > 0) {
+        const developerIds = game.developers.map((developer: any) => developer.id);
+
+        this.igdbService.getDevelopersByIds(developerIds).subscribe(
+          (developers) => {
+            console.log("Developers fetched:", developers); // Debugging line
+            if (developers && developers.length > 0) {
+              const developerNames = developers.map((d: any) => d.name).join(', ');
+              this.newMedia.desarrolladora = developerNames;
+            } else {
+              console.log("No developers found");
+            }
+          },
+          (error) => {
+            console.error('Error fetching developers:', error);
+          }
+        );
+      }
+    }
+
+
+
+    // Getter and setter for formatted date
+    get fechaLanzamientoFormatted(): string {
+      return this.newMedia.fechaLanzamiento
+        ? this.newMedia.fechaLanzamiento.toISOString().split('T')[0]
+        : '';
+    }
+
+    set fechaLanzamientoFormatted(value: string) {
+      this.newMedia.fechaLanzamiento = value ? new Date(value) : new Date(); // Default to current date
     }
 
     formatDate(date: number): string {

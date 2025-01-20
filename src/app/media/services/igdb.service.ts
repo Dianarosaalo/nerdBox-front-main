@@ -25,4 +25,18 @@ export class IgdbService {
     // The request should go through the proxy and forward the correct headers
     return this.http.post('/api/v4/games', body, { headers });
   }
+
+  getDevelopersByIds(ids: number[]): Observable<any> {
+    const headers = new HttpHeaders({
+      'Client-ID': this.clientId,
+      'Authorization': `Bearer ${this.accessToken}`,
+    });
+
+    const body = `
+      fields name;
+      where id = (${ids.join(',')});
+      limit ${ids.length};`;
+
+    return this.http.post('/api/v4/developers', body, { headers });
+  }
 }
