@@ -166,6 +166,9 @@ export class MediaHomeComponent {
     {value:"Xbox One", label:"Xbox One"},
     {value:"Nintendo Nes", label:"Nintendo Nes"},
     {value:"Nintendo Snes", label:"Nintendo Snes"},
+    {value:"Nintendo GB", label:"Nintendo GB"},
+    {value:"Nintendo GBC", label:"Nintendo GBC"},
+    {value:"Nintendo GBA", label:"Nintendo GBA"},
     {value:"Nintendo 64", label:"Nintendo 64"},
     {value:"Nintendo GameCube", label:"Nintendo GC"},
     {value:"Nintendo DS", label:"Nintendo DS"},
@@ -173,8 +176,10 @@ export class MediaHomeComponent {
     {value:"Nintendo Wii", label:"Nintendo Wii"},
     {value:"Nintendo Wii U", label:"Nintendo Wii U"},
     {value:"Nintendo Switch", label:"Nintendo Switch"},
-    {value:"Sega MegaDrive", label:"Sega MegaDrive"},
-    {value:"Sega DreamCast", label:"Sega DreamCast"},
+    {value:"Sega Game Gear", label:"Sega Game Gear"},
+    {value:"Sega Genesis", label:"Sega Genesis"},
+    {value:"Sega Saturn", label:"Sega Saturn"},
+    {value:"Sega Dreamcast", label:"Sega DreamCast"},
   ]
 
   typesOfState=[
@@ -296,6 +301,10 @@ export class MediaHomeComponent {
         separatedMedias = this.medias;
     }
 
+    if (this.group === "Console") {
+      separatedMedias = this.medias;
+  }
+
     // Filter medias based on existing criteria
     const filteredMedias = separatedMedias.filter((media) => {
         const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
@@ -355,6 +364,28 @@ export class MediaHomeComponent {
         });
     }
 
+    if (this.group === "Console") {
+      orderedMedias.forEach((media) => {
+          const platform = media.plataforma;
+
+          if (platform) {
+              if (!this.mediaByYear[platform]) {
+                  this.mediaByYear[platform] = [];
+              }
+              this.mediaByYear[platform].push(media);
+          }
+      });
+
+      // Sort platforms alphabetically by their names
+      this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => a.localeCompare(b));
+
+      // Sort the media for each platform alphabetically by title
+      this.sortedYears.forEach((platform) => {
+          this.mediaByYear[platform].sort((a, b) => a.titulo.localeCompare(b.titulo));
+      });
+    }
+
+    if (this.group!=="Console"){
     // Sort years in descending order, ensuring 2150 is below 2003
     this.sortedYears = Object.keys(this.mediaByYear)
         .sort((a, b) => {
@@ -367,10 +398,8 @@ export class MediaHomeComponent {
 
             return yearB - yearA; // Default descending order
         });
+  }
 }
-
-
-
 
   // OrderBy function
   OrderBy(order: string, medias: Media[]): Media[] {
