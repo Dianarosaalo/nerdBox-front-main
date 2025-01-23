@@ -24,7 +24,15 @@
   <tr class="each" *ngFor="let media of filteredMedias; let i = index">
     <td *ngIf="selectedYear !== 'All'">{{ getItemIndex(i) }}</td>
     <td>{{ media.titulo }}</td>
-    <td>{{ media.tipo }}</td>
+
+    <td>
+      <div [ngClass]="getClass(media.tipo)">
+        <div>
+          <strong>{{ media.tipo }}</strong>
+        </div>
+      </div>
+    </td>
+
     <td>{{ media.genero }}</td>
     <td>{{ media.plataforma }}</td>
     <td>{{ media.subgenero }}</td>

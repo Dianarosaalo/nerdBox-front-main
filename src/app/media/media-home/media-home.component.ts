@@ -103,7 +103,11 @@ export class MediaHomeComponent {
       { value: "Monsters", label: "Monsters" },
       { value: "Metroidvania", label: "Metroidvania" },
       { value: "Rogue-Lite", label: "Rogue-Lite" },
-      { value: "Indie JRPG", label: "Indie JRPG" },
+      { value: "Indie", label: "Indie" },
+      { value: "Visual", label: "Visual" },
+      { value: "Beat Em' Up", label: "Beat Em' Up" },
+      { value: "Gacha", label: "Gacha" },
+      { value: "Shitgames", label: "Shitgames" },
       { value: "Expansion", label: "Expansion" },
     ],
     'Pelicula': [
@@ -122,6 +126,14 @@ export class MediaHomeComponent {
       { value: "ARPG", label: "ARPG" },
       { value: "Souls", label: "Souls" },
       { value: "Souls-Like", label: "Souls-Like" },
+      { value: "Shooter RPG", label: "Shooter RPG" },
+    ],
+    'Indie': [
+      { value: "Indie JRPG", label: "Indie JRPG" },
+    ],
+    'Visual': [
+      { value: "Visual Adventure", label: "Visual Adventure" },
+      { value: "Visual Novel", label: "Visual Novel" },
     ],
     'Ropa':[
       {value: "Jersei", label: "Jerseis"}

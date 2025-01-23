@@ -76,65 +76,58 @@
   border-radius: 5px;
 }
 
-.videojuegos {
-  background-color: #ffe5b4; /* Light orange */
-  color: #e67300; /* Dark orange */
+.videojuego-class {
+  background-color: #f0ad4e; /* Light orange */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.animes {
-  background-color: #d1ecf1; /* Light blue */
-  color: #0c5460; /* Dark blue */
+.anime-class {
+  background-color: #5bc0de; /* Light blue */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.mangas {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
+.manga-class {
+  background-color: #d9534f; /* Light red */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.libros {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green */
+.libro-class {
+  background-color: #ffc107; /* Light yellow */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.peliculas {
-  background-color: #e2d4f7; /* Light purple */
-  color: #5a008f; /* Dark purple */
+.pelicula-class {
+  background-color: #9b59b6; /* Light purple */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.peliculas-anime {
-  background-color: #5b9bd5; /* Dark blue */
-  color: #ffffff; /* White text */
+.serie-class {
+  background-color: #ff69b4; /* Light pink */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.series {
-  background-color: #f3e8ff; /* Light lavender */
-  color: #6c3483; /* Dark lavender */
+.cartoons-class {
+  background-color: #f7b267; /* Light yellow/orangish */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
 
-.cartoons {
-  background-color: #fff4cc; /* Light yellow */
-  color: #c79500; /* Dark yellow */
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.comic {
-  background-color: #efd9c1; /* Light brown */
-  color: #8b4513; /* Dark brown */
+.comic-class {
+  background-color: #6b3e26; /* Dark brown */
+  color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }

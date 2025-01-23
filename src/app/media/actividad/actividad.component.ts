@@ -112,5 +112,29 @@ export class ActividadComponent implements OnInit {
     const date = new Date(fecha);
     return date.getFullYear() === this.selectedYear;
   }
+
+  getClass(tipo: string): string {
+    switch (tipo) {
+      case 'Videojuego':
+        return 'videojuego-class';
+      case 'Anime':
+        return 'anime-class';
+      case 'Manga':
+        return 'manga-class';
+      case 'Libro':
+        return 'libro-class';
+      case 'Pelicula':
+        return 'pelicula-class';
+      case 'Serie':
+        return 'serie-class';
+      case 'Cartoons':
+        return 'cartoons-class';
+      case 'Comic':
+        return 'comic-class';
+      default:
+        return '';
+    }
+  }
+
 }
 
