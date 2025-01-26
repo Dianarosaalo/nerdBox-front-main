@@ -98,7 +98,7 @@
 }
 
 .libro-class {
-  background-color: #ffc107; /* Light yellow */
+  background-color: #c5f78d; /* Light yellow */
   color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
@@ -119,7 +119,7 @@
 }
 
 .cartoons-class {
-  background-color: #f7b267; /* Light yellow/orangish */
+  background-color: #f7e869; /* Light yellow/orangish */
   color: black; /* Dark text */
   padding: 5px;
   border-radius: 5px;
@@ -127,7 +127,7 @@
 
 .comic-class {
   background-color: #6b3e26; /* Dark brown */
-  color: black; /* Dark text */
+  color: rgb(255, 255, 255); /* Dark text */
   padding: 5px;
   border-radius: 5px;
 }
