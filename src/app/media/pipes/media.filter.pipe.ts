@@ -88,9 +88,9 @@ export class MediaFilterPipe implements PipeTransform {
     // Sorting by completion date
     else if (order === "fechavista") {
       myMedia.sort((a, b) => {
-        const fechaA = new Date(a.fechaTerminado[0].fecha);
-        const fechaB = new Date(b.fechaTerminado[0].fecha);
-        return fechaA.getTime() - fechaB.getTime();
+        const fechaA = a.fechaTerminado.length > 0 ? new Date(a.fechaTerminado[0].fecha).getTime() : 0;
+        const fechaB = b.fechaTerminado.length > 0 ? new Date(b.fechaTerminado[0].fecha).getTime() : 0;
+        return fechaA - fechaB; // Sort by most recent first
       });
     }
     // Sorting by playtime
