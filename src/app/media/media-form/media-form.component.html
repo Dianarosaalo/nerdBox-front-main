@@ -306,6 +306,21 @@
         <div class="invalid-feedback">Al menos un título es requerido</div>
       </div>
 
+      <div class="mb-3">
+        <label for="anotaciones">Anotaciones</label>
+        <textarea
+          class="form-control review"
+          name="anotaciones"
+          id="anotaciones"
+          [(ngModel)]="newMedia.anotaciones"
+          placeholder="Escribe tus anotaciones aquí!"
+          #anotacionesModel="ngModel"
+          [ngClass]="validClasses(reviewModel, 'is-valid', 'is-invalid')"
+          rows="6"
+          style="width: 100%;"></textarea>
+        <div class="invalid-feedback">Al menos un título es requerido</div>
+      </div>
+
     </div>
 
     <div>

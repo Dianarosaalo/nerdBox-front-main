@@ -23,6 +23,10 @@
       <h3>Review:</h3>
       <p class="review-text">{{ media.review }}</p>
     </div>
+    <div class="review-section">
+      <h3>Anotaciones:</h3>
+      <p class="review-text">{{ media.anotaciones }}</p>
+    </div>
     <div class="score" [ngStyle]="getScoreColor(media.notaObjetiva)">
       {{ media.notaObjetiva }}
     </div>

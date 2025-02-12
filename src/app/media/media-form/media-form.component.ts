@@ -65,7 +65,8 @@ export class MediaFormComponent {
       fechaCreacion:new Date(),
       fechaModificacion: new Date(),
       review:'',
-      tiempoJuego: 0
+      tiempoJuego: 0,
+      anotaciones:''
 
     }}
 
