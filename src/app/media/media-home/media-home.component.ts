@@ -109,35 +109,42 @@ export class MediaHomeComponent {
       { value: "Gacha", label: "Gacha" },
       { value: "Shitgames", label: "Shitgames" },
       { value: "Expansion", label: "Expansion" },
-    ],
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+
     'Pelicula': [
       { value: "Drama", label: "Drama" },
       { value: "Comedia", label: "Comedia" },
-    ],
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+
     'Miscelanea': [
       { value: "Musica", label: "Música" },
       { value: "Ropa", label: "Ropa" },
-    ],
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+
   }
 
   typesOfSubgenre: { [key: string]: { value: string; label: string }[] }={
+
     'RPG': [
       { value: "CRPG", label: "CRPG" },
       { value: "ARPG", label: "ARPG" },
       { value: "Souls", label: "Souls" },
       { value: "Souls-Like", label: "Souls-Like" },
       { value: "Shooter RPG", label: "Shooter RPG" },
-    ],
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+
     'Indie': [
       { value: "Indie JRPG", label: "Indie JRPG" },
     ],
+
     'Visual': [
       { value: "Visual Adventure", label: "Visual Adventure" },
       { value: "Visual Novel", label: "Visual Novel" },
-    ],
+    ].sort((a, b) => a.label.localeCompare(b.label)),
+
     'Ropa':[
       {value: "Jersei", label: "Jerseis"}
-    ]
+    ].sort((a, b) => a.label.localeCompare(b.label))
   }
 
   availableGenres:{ value: string; label: string }[] = [];
