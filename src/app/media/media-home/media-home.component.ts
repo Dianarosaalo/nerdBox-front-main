@@ -366,22 +366,26 @@ export class MediaHomeComponent {
     }
 
     if (this.group === "ReleaseDate") {
-        orderedMedias.forEach((media) => {
-            const ft = media.fechaLanzamiento; // Each separatedMedia has only one fechaTerminado
-            const fechaAsDate = typeof ft === 'string' ? new Date(ft) : ft;
+      orderedMedias.forEach((media) => {
+          const ft = media.fechaLanzamiento; // Each separatedMedia has only one fechaTerminado
+          const fechaAsDate = typeof ft === 'string' ? new Date(ft) : ft;
 
-            if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
-                const fullYear = fechaAsDate.getFullYear();
+          let fullYear: number;
 
-                if (fullYear >= 1960 && fullYear <= endYear) {
-                    if (!this.mediaByYear[fullYear]) {
-                        this.mediaByYear[fullYear] = [];
-                    }
-                    this.mediaByYear[fullYear].push(media);
-                }
-            }
-        });
-    }
+          if (fechaAsDate instanceof Date && !isNaN(fechaAsDate.getTime())) {
+              fullYear = fechaAsDate.getFullYear();
+          } else {
+              fullYear = 2150; // Default year for missing or invalid fechaLanzamiento
+          }
+
+          if ((fullYear >= 1960 && fullYear <= endYear) || fullYear === 2150) {
+              if (!this.mediaByYear[fullYear]) {
+                  this.mediaByYear[fullYear] = [];
+              }
+              this.mediaByYear[fullYear].push(media);
+          }
+      });
+  }
 
     if (this.group === "Console") {
       orderedMedias.forEach((media) => {
