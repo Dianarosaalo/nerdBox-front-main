@@ -209,6 +209,7 @@ export class MediaHomeComponent {
     {value:"Watched", label:"Watched"},
     {value:"Tried", label:"Tried"},
     {value:"Wanna Play", label:"Wanna Play"},
+    {value:"Backlogged", label:"Backlogged"},
     {value:"Not Played", label:"Not Played"},
   ]
 
