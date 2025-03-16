@@ -84,3 +84,9 @@ img{
 .edit-button .btn:hover {
   background-color: #5730a8;
 }
+
+.details-container span {
+
+  font-size: 1.2rem; /* Match the paragraph font size */
+  margin-bottom: 0.5rem; /* Match paragraph spacing */
+}
