@@ -95,7 +95,7 @@ export class MediaFilterPipe implements PipeTransform {
     }
     // Sorting by playtime
     else if (order === "tiempoJuego") {
-      myMedia.sort((a, b) => b.tiempoJuego - a.tiempoJuego);
+      myMedia.sort((a, b) => (b.tiempoJuego ?? 0) - (a.tiempoJuego ?? 0));
     }
 
     return myMedia;
