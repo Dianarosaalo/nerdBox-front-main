@@ -333,7 +333,7 @@ export class MediaHomeComponent {
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
         const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Not Played"];
+        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Played", "Backlogged", "Not Played"];
         const matchesState = this.state
             ? media.fechaTerminado.some((ft: { estado: string }) => ft.estado === this.state)
             : media.fechaTerminado.some((ft: { estado: string }) => validStates.includes(ft.estado));
