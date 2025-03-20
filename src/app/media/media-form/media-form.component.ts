@@ -134,6 +134,7 @@ export class MediaFormComponent {
 
     tiposEstado=[
     {value:"Completed", label:"Completed"},
+    {value:"Played", label:"Played"},
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
     {value:"Watched", label:"Watched"},

@@ -204,6 +204,7 @@ export class MediaHomeComponent {
   typesOfState=[
     {value:"", label:"All"},
     {value:"Completed", label:"Completed"},
+    {value:"Played", label:"Played"},
     {value:"Unfinished", label:"Unfinished"},
     {value:"Dropped", label:"Dropped"},
     {value:"Watched", label:"Watched"},

@@ -43,7 +43,7 @@ export class MediaFilterPipe implements PipeTransform {
         m.fechaTerminado.some((ft) => ft.estado === state)
       );
     } else {
-      const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Not Played"];
+      const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Backlogged", "Played", "Not Played"];
       sortedMedias = sortedMedias.filter((m) =>
         m.fechaTerminado.some((ft) => validStates.includes(ft.estado))
       );
