@@ -328,7 +328,9 @@ export class MediaHomeComponent {
 
     // Filter medias based on existing criteria
     const filteredMedias = separatedMedias.filter((media) => {
-        const matchesSearch = this.search ? media.titulo.includes(this.search) : true;
+      const matchesSearch = this.search
+      ? media.titulo.toLowerCase().includes(this.search.trim().toLowerCase())
+      : true;
         const matchesType = this.type ? media.tipo === this.type : true;
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
