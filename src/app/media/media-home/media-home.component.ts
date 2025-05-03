@@ -393,7 +393,7 @@ export class MediaHomeComponent {
 
     if (this.group === "Console") {
       orderedMedias.forEach((media) => {
-          const platform = media.plataforma;
+          const platform = media.plataforma || "No Tiene Consola";
 
           if (platform) {
               if (!this.mediaByYear[platform]) {
