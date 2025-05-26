@@ -4,7 +4,7 @@
   <li (click)="onTabClick('Obligatorios')" class="tab-link">Obligatorios</li>
   <li (click)="onTabClick('Opcionales')" class="tab-link">Opcionales</li>
   <!--<li (click)="onTabClick('Metadatos')" class="tab-link">Metadatos</li>-->
-  <li (click)="onTabClick('Review')" class="tab-link">Review</li>
+  <li (click)="onTabClick('Review')" class="tab-link">Review & Anotaciones</li>
 </ul>
 
 <br>
@@ -73,7 +73,7 @@
           <div class="invalid-feedback">Al menos un género es requerido</div>
         </div>
 
-        <div class="mb-3 col">
+        <div class="mb-3 col" *ngIf="newMedia.genero">
           <label for="subgenero">Subgénero</label>
           <input
             type="text"
@@ -174,7 +174,7 @@
 
 
 
-    <div *ngIf="activeTab ==='Opcionales'">
+    <div *ngIf="activeTab ==='Opcionales'" class="obligatorios">
 
 
       <div class="mb-3" *ngIf="newMedia.tipo==='Videojuego'">
@@ -192,23 +192,46 @@
         <div class="invalid-feedback">Al menos un título es requerido</div>
       </div>
 
-      <div class="mb-3">
-        <label for="fue">Nota Objetiva</label>
-        <input
-          type="number"
-          class="form-control"
-          id="notaOb"
-          name="notaOb"
-          min:0
-          [(ngModel)]="newMedia.notaObjetiva"
-          placeholder="Nota Realista"
-          required
-          #fueModel="ngModel"
-          [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
-        />
-        <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
-          Nota Objetiva
+      <div class="form-row">
+
+        <div class="mb-3 col">
+          <label for="notaOb">Nota Objetiva</label>
+          <input
+            type="number"
+            class="form-control"
+            id="notaOb"
+            name="notaOb"
+            min:0
+            [(ngModel)]="newMedia.notaObjetiva"
+            placeholder="Nota Realista"
+            required
+            #fueModel="ngModel"
+            [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
+            Nota Objetiva
+          </div>
         </div>
+
+        <div class="mb-3 col">
+          <label for="notaSu">Nota Subjetiva</label>
+          <input
+            type="number"
+            class="form-control"
+            id="notaSu"
+            name="notaSu"
+            min:0
+            [(ngModel)]="newMedia.notaSubjetiva"
+            placeholder="Nota del Corazón"
+            required
+            #fueModel="ngModel"
+            [ngClass]="validClasses(fueModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback" *ngIf="fueModel.errors?.['required']">
+            Nota Subjetiva
+          </div>
+        </div>
+
       </div>
 
       <!--<div class="mb-3">

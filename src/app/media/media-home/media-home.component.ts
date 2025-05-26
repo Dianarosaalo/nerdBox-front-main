@@ -104,6 +104,7 @@ export class MediaHomeComponent {
       { value: "Metroidvania", label: "Metroidvania" },
       { value: "Rogue-Lite", label: "Rogue-Lite" },
       { value: "Indie", label: "Indie" },
+      { value: "Terror", label: "Terror" },
       { value: "Visual", label: "Visual" },
       { value: "Beat Em' Up", label: "Beat Em' Up" },
       { value: "Gacha", label: "Gacha" },
@@ -112,8 +113,9 @@ export class MediaHomeComponent {
     ].sort((a, b) => a.label.localeCompare(b.label)),
 
     'Pelicula': [
-      { value: "Drama", label: "Drama" },
-      { value: "Comedia", label: "Comedia" },
+      { value: "Actores", label: "Actores" },
+      { value: "Anime", label: "Anime" },
+      { value: "Cartoons", label: "Cartoons" },
     ].sort((a, b) => a.label.localeCompare(b.label)),
 
     'Miscelanea': [

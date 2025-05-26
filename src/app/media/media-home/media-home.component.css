@@ -231,5 +231,18 @@ nav{
     border-radius: 8px;
   }
 
+  .more-rectangular-img {
+    width: 200px;
+    height: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    object-fit: contain;   /* Keeps full image visible */
+    border-radius: 5%;
+    display: block;        /* Needed to apply margin auto */
+    margin: 0 auto;
+  }
+
 
 }

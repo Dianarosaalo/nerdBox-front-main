@@ -102,7 +102,7 @@
   <div class="col-9 col-md-6 col-xl-1" *ngFor="let media of medias | mediaFilter:search:type:order:genre:subgenre:platform:state:year">
 
     <a [routerLink]="['/media', media._id]" class="image-container">
-      <img class="card-img-top notGroupedImg" src="{{ media.imagen }}" />
+      <img [src]="media.imagen" class="card-img-top" [ngClass]="{'more-rectangular-img': type === 'Miscelanea'}" />
       <div *ngIf="order === 'score'" class="overlay" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">
         {{ media.notaObjetiva }}
       </div>
@@ -126,7 +126,7 @@
         <div class="media-row">
           <div *ngFor="let media of mediaByYear[year]" class="media-item col-9 col-md-6 col-xl-1">
             <a [routerLink]="['/media', media._id]" class="image-container">
-              <img class="card-img-top" [src]="media.imagen" />
+              <img [src]="media.imagen" class="card-img-top" [ngClass]="{'more-rectangular-img': type === 'Miscelanea'}" />
             </a>
             <p class="card-text">
               <a [routerLink]="['/media', media._id]" class="media-title">{{ media.titulo }}</a>

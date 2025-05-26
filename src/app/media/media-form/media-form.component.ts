@@ -103,7 +103,8 @@ export class MediaFormComponent {
             console.log("Correcto");
           }
         });
-        this.router.navigate(['/media','home']);
+        //this.router.navigate(['/media','home']);
+        this.ngOnInit();
       }
 
       else{
