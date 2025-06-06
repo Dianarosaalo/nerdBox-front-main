@@ -98,21 +98,29 @@
 
 <!--App-->
 
-<div class="mb-1 mt-1 row g-1" *ngIf="bigContainer">
-  <div class="col-9 col-md-6 col-xl-1" *ngFor="let media of medias | mediaFilter:search:type:order:genre:subgenre:platform:state:year">
+<div class="mb-1 mt-1" *ngIf="bigContainer">
+  <div class="media-grid-wrapper">
+    <div class="media-grid">
+      <div class="media-item" *ngFor="let media of medias | mediaFilter:search:type:order:genre:subgenre:platform:state:year">
 
-    <a [routerLink]="['/media', media._id]" class="image-container">
-      <img [src]="media.imagen" class="card-img-top" [ngClass]="{'more-rectangular-img': type === 'Miscelanea'}" />
-      <div *ngIf="order === 'score'" class="overlay" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">
-        {{ media.notaObjetiva }}
+        <a [routerLink]="['/media', media._id]" class="image-container">
+          <img [src]="media.imagen" class="card-img-top" [ngClass]="{'more-rectangular-img': type === 'Miscelanea'}" />
+          <div *ngIf="order === 'score'" class="overlay" [ngStyle]="{'background-color': getScoreColor(media.notaObjetiva)}">
+            {{ media.notaObjetiva }}
+          </div>
+          <div *ngIf="order === 'tiempoJuego'" class="overlay tiempo-overlay">
+            {{ media.tiempoJuego }} Hrs
+          </div>
+        </a>
+
+        <p class="card-text" style="text-align: center;">
+          <a [routerLink]="['/media', media._id]" style="text-decoration: none; color: #ffffff;">
+            {{ media.titulo }}
+          </a>
+        </p>
+
       </div>
-      <div *ngIf="order === 'tiempoJuego'" class="overlay tiempo-overlay">
-        {{ media.tiempoJuego }} Hrs
-      </div>
-    </a>
-
-    <p class="card-text" style=" text-align: center;"><a [routerLink]="['/media', media._id]" style="text-decoration: none; color: #ffffff;">{{ media.titulo }}</a></p>
-
+    </div>
   </div>
 </div>
 

@@ -244,5 +244,17 @@ nav{
     margin: 0 auto;
   }
 
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr); /* 20 items per line */
+    gap: 0.5rem; /* Adjust spacing between items */
+    justify-content: center; /* This makes the last row centered */
+  }
+
+  .media-grid-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
 
 }

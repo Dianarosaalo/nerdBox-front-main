@@ -142,10 +142,24 @@ export class MediaHomeComponent {
     'Visual': [
       { value: "Visual Adventure", label: "Visual Adventure" },
       { value: "Visual Novel", label: "Visual Novel" },
+      { value: "Point & Click", label: "Point & Click" },
     ].sort((a, b) => a.label.localeCompare(b.label)),
 
     'Ropa':[
-      {value: "Jersei", label: "Jerseis"}
+      {value: "Jersei", label: "Jerseis"},
+      {value: "Chaqueta", label: "Chaquetas"},
+      {value: "Sudadera", label: "Sudaderas"},
+      {value: "Botas", label: "Botas"},
+      {value: "Pantalones", label: "Pantalones"},
+      {value: "Zapatillas", label: "Zapatillas"},
+      {value: "Vestido", label: "Vestidos"},
+      {value: "Falda", label: "Faldas"},
+      {value: "Camiseta", label: "Camisetas"},
+      {value: "Top", label: "Tops"},
+      {value: "Camisa", label: "Camisas"},
+      {value: "Mono", label: "Monos"},
+      {value: "Knee Socks", label: "Knee Socks"},
+      {value: "Pijamas", label: "Pijamas"},
     ].sort((a, b) => a.label.localeCompare(b.label))
   }
 
