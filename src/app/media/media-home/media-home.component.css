@@ -258,3 +258,34 @@ nav{
 
 
 }
+
+  @media (max-width: 2499px) {
+    .media-grid-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      box-sizing: border-box;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Fit items nicely */
+      gap: 0.5rem;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .media-item {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .media-item img {
+      width: 100%;
+      height: auto;
+      max-width: 150px;
+      min-width: 100px;
+      object-fit: cover;
+    }
+  }

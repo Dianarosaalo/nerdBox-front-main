@@ -88,23 +88,23 @@ export class MediaHomeComponent {
       { value: "Estrategia", label: "Estrategia" },
       { value: "Sandbox", label: "Sandbox" },
       { value: "Survival", label: "Survival" },
-      { value: "Survival Horror", label: "Survival Horror" },
+
       { value: "MMORPG", label: "MMORPG" },
       { value: "Moba", label: "Moba" },
       { value: "Shooter", label: "Shooter" },
       { value: "Fighting", label: "Fighting" },
       { value: "Plataformas", label: "Plataformas" },
       { value: "Point & Click", label: "Point & Click" },
-      { value: "Racing", label: "Racing" },
+
       { value: "Deporte", label: "Deporte" },
       { value: "Killing Friends", label: "Killing Friends" },
-      { value: "Arcade", label: "Arcade" },
-      { value: "Mundo Abierto", label: "Mundo Abierto" },
-      { value: "Monsters", label: "Monsters" },
-      { value: "Metroidvania", label: "Metroidvania" },
-      { value: "Rogue-Lite", label: "Rogue-Lite" },
+
+
+
+
+
       { value: "Indie", label: "Indie" },
-      { value: "Terror", label: "Terror" },
+
       { value: "Visual", label: "Visual" },
       { value: "Beat Em' Up", label: "Beat Em' Up" },
       { value: "Gacha", label: "Gacha" },
@@ -137,6 +137,22 @@ export class MediaHomeComponent {
 
     'Indie': [
       { value: "Indie JRPG", label: "Indie JRPG" },
+      { value: "Monster Taming", label: "Monster Taming" },
+      { value: "Rogue-Lite", label: "Rogue-Lite" },
+    ],
+
+    'Acción': [
+      { value: "Mundo Abierto", label: "Mundo Abierto" },
+      { value: "Survival Horror", label: "Survival Horror" },
+      { value: "Terror", label: "Terror" },
+    ],
+
+    'Plataformas': [
+      { value: "Metroidvania", label: "Metroidvania" },
+    ],
+
+    'Deporte': [
+      { value: "Racing", label: "Racing" },
     ],
 
     'Visual': [
