@@ -242,6 +242,9 @@ export class MediaHomeComponent {
     {value:"Watched", label:"Watched"},
     {value:"Tried", label:"Tried"},
     {value:"Wanna Play", label:"Wanna Play"},
+    {value:"Would Play", label:"Would Play"},
+    {value:"Will Play", label:"Will Play"},
+    {value:"Should Play", label:"Should Play"},
     {value:"Backlogged", label:"Backlogged"},
     {value:"Not Played", label:"Not Played"},
   ]
@@ -367,7 +370,7 @@ export class MediaHomeComponent {
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
         const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Played", "Backlogged", "Not Played"];
+        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Will Play", "Would Play", "Should Play", "Played", "Backlogged", "Not Played"];
         const matchesState = this.state
             ? media.fechaTerminado.some((ft: { estado: string }) => ft.estado === this.state)
             : media.fechaTerminado.some((ft: { estado: string }) => validStates.includes(ft.estado));

@@ -141,6 +141,9 @@ export class MediaFormComponent {
     {value:"Watched", label:"Watched"},
     {value:"Tried", label:"Tried"},
     {value:"Wanna Play", label:"Wanna Play"},
+    {value:"Would Play", label:"Would Play"},
+    {value:"Will Play", label:"Will Play"},
+    {value:"Should Play", label:"Should Play"},
     {value:"Backlogged", label:"Backlogged"},
     {value:"Not Played", label:"Not Played"},
     ]
