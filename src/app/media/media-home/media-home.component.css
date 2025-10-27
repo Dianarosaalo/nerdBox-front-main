@@ -202,7 +202,7 @@ nav{
   top: 0;
 }
 
-@media (min-width: 2500px) {
+@media (min-width: 3000px) {
   .col-xl-1 {
     width:5.5%;
   }
@@ -259,7 +259,7 @@ nav{
 
 }
 
-  @media (max-width: 2499px) {
+  @media (max-width: 2999px) {
     .media-grid-wrapper {
       display: flex;
       justify-content: center;
