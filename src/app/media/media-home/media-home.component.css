@@ -286,6 +286,8 @@ nav{
       height: auto;
       max-width: 150px;
       min-width: 100px;
+      min-height: 204px;
+      max-height: 204px;
       object-fit: cover;
     }
   }
