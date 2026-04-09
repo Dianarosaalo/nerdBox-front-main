@@ -272,6 +272,21 @@
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="nombrePersonal">Nombre Personal</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nombrePersonal"
+          id="nombrePersonal"
+          [(ngModel)]="newMedia.nombrePersonal"
+          placeholder=""
+          #nombrePersonalModel="ngModel"
+          [ngClass]="validClasses(nombrePersonalModel, 'is-valid', 'is-invalid')"
+        />
+        <div class="invalid-feedback">opcional</div>
+      </div>
+
     </div>
 
     <div *ngIf="activeTab ==='Metadatos'">

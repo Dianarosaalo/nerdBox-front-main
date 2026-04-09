@@ -79,7 +79,11 @@ export class MediaFilterPipe implements PipeTransform {
 
     // Sorting by name
     if (order === "nombre") {
-      myMedia.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        myMedia.sort((a, b) => {
+        const nameA = a.nombrePersonal?.trim() || a.titulo;
+        const nameB = b.nombrePersonal?.trim() || b.titulo;
+        return nameA.localeCompare(nameB);
+      });
     }
     // Sorting by score
     else if (order === "score") {

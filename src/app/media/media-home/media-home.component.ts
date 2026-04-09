@@ -468,8 +468,9 @@ export class MediaHomeComponent {
       const myMedia = [...medias];
       if (order === "nombre") {
           myMedia.sort((a, b) => {
-              if (a.titulo === b.titulo) return 0;
-              return a.titulo > b.titulo ? 1 : -1;
+              const nameA = a.nombrePersonal?.trim() || a.titulo;
+              const nameB = b.nombrePersonal?.trim() || b.titulo;
+              return nameA.localeCompare(nameB);
           });
       } else if (order === "score") {
           myMedia.sort((a, b) => {

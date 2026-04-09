@@ -15,7 +15,8 @@ export interface Media {
   fechaModificacion:Date,
   review:string,
   tiempoJuego:number,
-  anotaciones:string
+  anotaciones:string,
+  nombrePersonal:string
 }
 
 export interface fechaTerminado{
