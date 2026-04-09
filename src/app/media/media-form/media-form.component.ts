@@ -97,8 +97,13 @@ export class MediaFormComponent {
     addMedia() {
       this.saved = true;
 
+      const now = new Date();
+
       if (!this.edit)
       {
+        this.newMedia.fechaCreacion = now
+        this.newMedia.fechaModificacion = now
+
         this.mediaService.post(this.newMedia).subscribe({
           next: () => {
             console.log("Correcto");
@@ -109,6 +114,8 @@ export class MediaFormComponent {
       }
 
       else{
+        this.newMedia.fechaModificacion = now
+
         this.mediaService.edit(this.newMedia).subscribe({
           next: () => {console.log("correcto")},
 
@@ -215,7 +222,7 @@ export class MediaFormComponent {
         desarrolladora: '',
         subgenero: this.newMedia.subgenero,
         fechaCreacion: this.newMedia.fechaCreacion,
-        fechaModificacion: this.newMedia.fechaCreacion,
+        fechaModificacion: this.newMedia.fechaModificacion,
         review: this.newMedia.review,
         tiempoJuego: this.newMedia.tiempoJuego,
       };

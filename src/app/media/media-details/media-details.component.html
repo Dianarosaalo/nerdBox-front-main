@@ -22,6 +22,7 @@
       <p><strong>Tiempo de Juego:</strong> {{ media.tiempoJuego }} horas</p>
       <p><strong>Desarrolladores:</strong> {{ media.desarrolladora }}</p>
     </div>
+
     <div class="review-section">
       <h3>Review:</h3>
       <p class="review-text">{{ media.review }}</p>
@@ -33,6 +34,10 @@
     <div class="score" [ngStyle]="getScoreColor(media.notaObjetiva)">
       {{ media.notaObjetiva }}
     </div>
+
+    <p><strong>Fecha de creación:</strong> {{ media.fechaCreacion | date:'dd/MM/yyyy | HH:mm:ss' }}</p>
+    <p><strong>Última modificación:</strong> {{ media.fechaModificacion | date:'dd/MM/yyyy | HH:mm:ss' }}</p>
+
   </div>
 </div>
 
