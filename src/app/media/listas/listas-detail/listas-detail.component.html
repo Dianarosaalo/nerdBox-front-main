@@ -1,1 +1,24 @@
-<p>listas-detail works!</p>
+<div class="list-detail">
+
+  <h2>{{ list.nombre }}</h2>
+
+  <p>{{ list.descripcion }}</p>
+
+  <p>{{list.fechaCreacion | date:'dd/MM/yyyy | HH:mm:ss'}}</p>
+  <p>{{list.fechaModificacion| date:'dd/MM/yyyy | HH:mm:ss'}}</p>
+
+  <div class="media-grid">
+
+    <div class="media-item" *ngFor="let media of mediasFull">
+
+    <a [routerLink]="['/media', media._id]">
+      <img [src]="media.imagen" />
+      <h4>{{ media.titulo }}</h4>
+    </a>
+
+    </div>
+
+  </div>
+
+
+</div>
