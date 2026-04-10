@@ -64,7 +64,7 @@
 
             <input
               type="button"
-              class="btn btn-primary"
+              class="btn btn-warning"
               value="Buscar"
               (click)="searchMedia()"
             />
@@ -72,10 +72,14 @@
         </div>
 
         <div *ngIf="results.length > 0">
+          <hr>
         <h5>Resultados</h5>
 
-        <div *ngFor="let media of results" class="search-item">
-          <span>{{ media.titulo }}</span>
+        <div *ngFor="let media of results" class="result-item">
+
+          <span class="media-name">
+            {{ media.titulo }}
+          </span>
 
           <button
             type="button"
@@ -84,25 +88,52 @@
           >
             Añadir
           </button>
+
         </div>
+
       </div>
 
       <div *ngIf="newList.medias.length > 0">
+        <hr>
       <h5>Medias añadidas</h5>
 
-      <div *ngFor="let id of newList.medias" class="selected-item">
-        {{ id }}
+        <div *ngFor="let media of selectedMediaList" class="selected-item">
 
-        <button
-          type="button"
-          class="btn btn-sm btn-danger"
-          (click)="removeMedia(id)"
-        >
-          X
-        </button>
-      </div>
-    </div>
+    <span class="media-name">
+      {{ media.titulo }}
+    </span>
+
+    <span class="media-id">
+      ({{ media._id }})
+    </span>
+
+    <button
+      type="button"
+      class="btn btn-sm btn-danger"
+      (click)="removeMedia(media._id!)"
+    >
+      X
+    </button>
+
+  </div>
+</div>
 
     <!--fin des las listas-->
+
+    <div>
+    <button *ngIf="!edit"
+      type="submit"
+      class="btn btn-danger"
+    >
+      Crear
+    </button>
+
+    <button *ngIf="edit"
+      type="submit"
+      class="btn btn-danger"
+      >
+      Editar
+    </button>
+
 
 </div>

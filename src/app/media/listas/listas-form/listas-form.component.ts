@@ -101,6 +101,7 @@ export class ListasFormComponent {
 
     searchText = '';
     results: Media[] = [];
+    selectedMediaList: Media[] = [];
 
     searchMedia() {
     if (!this.searchText.trim()) return;
@@ -116,11 +117,13 @@ export class ListasFormComponent {
 
   if (!this.newList.medias.includes(media._id)) {
     this.newList.medias.push(media._id);
+    this.selectedMediaList.push(media);
   }
 }
 
   removeMedia(id: string) {
   this.newList.medias = this.newList.medias.filter(m => m !== id);
+  this.selectedMediaList = this.selectedMediaList.filter(m => m._id !== id);
 }
 
 }

@@ -175,3 +175,39 @@ textarea {
   justify-content: flex-end;
   margin-top: 8px;
 }
+
+.selected-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.media-name {
+  color: white;
+  font-weight: 500;
+}
+
+.media-id {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 6px 0;
+  gap: 10px;
+}
+
+.media-name {
+  color: white;
+  font-weight: 500;
+}
+
+h5, hr{
+  color:white;
+  text-align: center;
+}

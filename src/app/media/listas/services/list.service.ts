@@ -12,25 +12,25 @@ export class ListService{
 
   getAll(): Observable<List[]> {
     return this.http
-      .get<ListasResponse>('listas')
+      .get<ListasResponse>('lists')
       .pipe(map((l) => l.listas));
   }
 
   getById(_id: string): Observable<List> {
     return this.http
-      .get<ListaResponse>(`listas/${_id}`)
+      .get<ListaResponse>(`lists/${_id}`)
       .pipe(map((l) => l.lista));
   }
 
   post(lista: List): Observable<List> {
     return this.http
-      .post<List>('listas', lista)
+      .post<List>('lists', lista)
       .pipe(map((l) => l));
   }
 
   edit(lista: List): Observable<List> {
     return this.http
-      .put<ListaResponse>(`listas/${lista._id}`, lista)
+      .put<ListaResponse>(`lists/${lista._id}`, lista)
       .pipe(map((resp) => resp.lista));
   }
 
