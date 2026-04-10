@@ -1,1 +1,108 @@
-<p>listas-form works!</p>
+<div class="container">
+  <form class="mt-4" (ngSubmit)="addList()" #listForm="ngForm">
+
+      <div class="form-row">
+        <div class="mb-3 col">
+          <label for="nombre">Nombre de la Lista</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            id="nombre"
+            [(ngModel)]="newList.nombre"
+            required
+            placeholder="Nombre de la lista"
+            #nombreModel="ngModel"
+            [ngClass]="validClasses(nombreModel, 'is-valid', 'is-invalid')"
+          />
+          <div class="invalid-feedback">Al menos un nombre es requerido</div>
+
+    <div class="form-row">
+      <div class="mb-3 col">
+        <label for="descripcion">Descripción</label>
+        <input
+          type="text"
+          class="form-control"
+          name="descripcion"
+          id="descripcion"
+          [(ngModel)]="newList.descripcion"
+          required
+          placeholder="Nombre de la descripcion"
+          #descripcionModel="ngModel"
+          [ngClass]="validClasses(descripcionModel, 'is-valid', 'is-invalid')"
+        />
+    <div class="invalid-feedback">Al menos una descripción es requerida</div>
+
+    <div class="form-row">
+      <div class="mb-3 col">
+        <label for="tipoLista">Tipo de Lista</label>
+        <input
+          type="text"
+          class="form-control"
+          name="tipoLista"
+          id="tipoLista"
+          [(ngModel)]="newList.tipoLista"
+          required
+          placeholder="Añade un tipo de organización a tu lista"
+          #tipoListaModel="ngModel"
+          [ngClass]="validClasses(tipoListaModel, 'is-valid', 'is-invalid')"
+        />
+    <div class="invalid-feedback">Al menos un tipo de lista es requerido</div>
+
+    <!--listas-->
+        <div class="mb-3">
+          <label>Buscar media</label>
+
+          <div class="d-flex gap-2">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchText"
+              name="searchText"
+              placeholder="Escribe nombre de obra"
+            />
+
+            <input
+              type="button"
+              class="btn btn-primary"
+              value="Buscar"
+              (click)="searchMedia()"
+            />
+          </div>
+        </div>
+
+        <div *ngIf="results.length > 0">
+        <h5>Resultados</h5>
+
+        <div *ngFor="let media of results" class="search-item">
+          <span>{{ media.titulo }}</span>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-success"
+            (click)="addMediaToList(media)"
+          >
+            Añadir
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="newList.medias.length > 0">
+      <h5>Medias añadidas</h5>
+
+      <div *ngFor="let id of newList.medias" class="selected-item">
+        {{ id }}
+
+        <button
+          type="button"
+          class="btn btn-sm btn-danger"
+          (click)="removeMedia(id)"
+        >
+          X
+        </button>
+      </div>
+    </div>
+
+    <!--fin des las listas-->
+
+</div>
