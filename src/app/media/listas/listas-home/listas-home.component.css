@@ -47,3 +47,15 @@
   transform: translateX(-50%) translateY(-2px);
   box-shadow: 0 10px 24px rgba(168, 85, 247, 0.5);
 }
+
+.listas-title {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  color: #9333ea; /* amarillo suave */
+  font-weight: 600;
+  font-size: 28px;
+
+  letter-spacing: 1px;
+}
