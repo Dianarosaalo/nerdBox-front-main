@@ -2,6 +2,38 @@
   Mis Listas
 </h2>
 
+<!---->
+
+<div class="media-card" *ngFor="let list of lists">
+
+  <div class="media-collage" *ngIf="list.mediasFull">
+
+    <!-- GRANDE -->
+    <div class="main-img">
+      <img *ngIf="list.mediasFull?.[0]" [src]="list.mediasFull[0].imagen" />
+      <div *ngIf="!list.mediasFull?.[0]" class="empty"></div>
+    </div>
+
+    <!-- PEQUEÑAS -->
+    <div class="side-grid">
+      <div class="mini-img" *ngFor="let i of [1,2,3,4]">
+        <img *ngIf="list.mediasFull?.[i]" [src]="list.mediasFull[i].imagen" />
+        <div *ngIf="!list.mediasFull?.[i]" class="empty"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="list-title">
+    <a [routerLink]="['/list', list._id]">
+      {{ list.nombre }}
+    </a>
+  </div>
+
+</div>
+
+<!---->
+
 <button
   type="button"
   class="btn btn-lila fab-center"

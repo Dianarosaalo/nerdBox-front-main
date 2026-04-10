@@ -9,4 +9,6 @@ export interface List {
   descripcion: string,
   tipoLista:string,
 
+  mediasFull?: Media[];
+
 }
