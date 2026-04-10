@@ -11,4 +11,9 @@ export const APP_ROUTES: Routes = [
     loadChildren: () =>
       import('./media/routes').then((m) => m.MEDIA_ROUTES),
   },
+  {
+    path: 'list',
+    loadChildren: () =>
+      import('./media/listas/routes').then((l) => l.LIST_ROUTES),
+  }
 ];
