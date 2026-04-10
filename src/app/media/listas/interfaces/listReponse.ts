@@ -1,9 +1,9 @@
 import { List } from "./list"
 
 export interface ListasResponse{
-  listas: List[]
+  lists: List[]
 }
 
 export interface ListaResponse{
-  lista: List
+  list: List
 }

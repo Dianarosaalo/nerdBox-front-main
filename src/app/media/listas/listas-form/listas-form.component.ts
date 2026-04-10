@@ -43,8 +43,16 @@ export class ListasFormComponent {
       console.log(id);
       this.listService.getById(String(id)).subscribe(
         c => {
+          console.log(c)
           this.newList = c
+          this.selectedMediaList = [];
+
+          this.mediaService.getAll().subscribe(allMedia => {
+          this.selectedMediaList = allMedia.filter(m =>
+            this.newList.medias.includes(m._id!)
+          );
         });
+      });
     }
   }
 

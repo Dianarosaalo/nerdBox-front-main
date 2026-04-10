@@ -211,3 +211,28 @@ h5, hr{
   color:white;
   text-align: center;
 }
+
+.form-actions {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  justify-content: center;
+
+  z-index: 1000;
+}
+
+.form-actions button {
+  min-width: 220px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.form-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}

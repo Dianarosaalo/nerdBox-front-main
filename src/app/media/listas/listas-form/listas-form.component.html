@@ -49,6 +49,17 @@
         />
     <div class="invalid-feedback">Al menos un tipo de lista es requerido</div>
 
+    <div class="form-actions" *ngIf="!edit">
+    <button
+      type="submit"
+      class="btn btn-warning btn-lg"
+      [disabled]="listForm.invalid"
+    >
+      Crear
+    </button>
+  </div>
+
+
     <!--listas-->
         <div class="mb-3">
           <label>Buscar media</label>
@@ -115,25 +126,21 @@
       X
     </button>
 
-  </div>
-</div>
+     <!--fin des las listas-->
 
-    <!--fin des las listas-->
 
-    <div>
-    <button *ngIf="!edit"
+  <div class="form-actions" *ngIf="edit">
+    <button
       type="submit"
-      class="btn btn-danger"
+      class="btn btn-warning btn-lg"
+      [disabled]="listForm.invalid"
     >
-      Crear
-    </button>
-
-    <button *ngIf="edit"
-      type="submit"
-      class="btn btn-danger"
-      >
       Editar
     </button>
+  </div>
+
+  </div>
+
 
 
 </div>
