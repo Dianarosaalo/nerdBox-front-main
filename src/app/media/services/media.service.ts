@@ -38,4 +38,12 @@ export class MediaService{
       .pipe(map((resp) => resp.media));
   }
 
+  searchByName(nombre: string): Observable<Media[]> {
+  return this.http
+    .get<{ medias: Media[] }>('busqueda', {
+      params: { nombre }
+    })
+    .pipe(map(res => res.medias));
+}
+
 }
