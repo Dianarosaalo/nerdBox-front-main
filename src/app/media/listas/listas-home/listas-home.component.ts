@@ -18,41 +18,42 @@ import { MediaService } from '../../services/media.service';
 })
 export class ListasHomeComponent {
 
-lists!:List[]
-allMedias: Media[] = [];
+  lists: List[] = [];
 
- constructor(
+  constructor(
     private readonly router: Router,
     private readonly listService: ListService,
     private readonly mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
-    this.mediaService.getAll().subscribe(medias => {
-    this.allMedias = medias;
+    document.title = "NerdBox Listas";
     this.loadLists();
-  })
-    document.title="NerdBox Listas";
   }
 
   loadLists(): void {
-  this.listService.getAll().subscribe((lists: List[]) => {
+    this.listService.getAll().subscribe((lists: List[]) => {
 
-    this.lists = lists.map(list => {
-      console.log(lists);
+      this.lists = lists;
 
-      const mediasFull = this.allMedias.filter(m =>
-        list.medias.map(String).includes(String(m._id))
-      );
+      // 1. sacar todos los IDs
+      const allIds = lists.flatMap(l => l.medias);
+      const uniqueIds = [...new Set(allIds)];
 
-      return {
-        ...list,
-        mediasFull
-      };
+      // 2. pedir SOLO esas medias
+      this.mediaService.getByIds(uniqueIds).subscribe(allMedias => {
+
+        // 3. mapear listas con mediasFull
+        this.lists = this.lists.map(list => ({
+          ...list,
+          mediasFull: allMedias.filter(m =>
+            list.medias.includes(String(m._id))
+          )
+        }));
+
+      });
 
     });
-
-  });
-}
+  }
 
 }

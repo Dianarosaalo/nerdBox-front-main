@@ -44,6 +44,12 @@ export class MediaService{
       params: { titulo }
     })
     .pipe(map(res => res.medias));
-}
+  }
+
+  getByIds(ids: string[]): Observable<Media[]> {
+    return this.http
+      .post<{ medias: Media[] }>('medias/batch', { ids })
+      .pipe(map(res => res.medias));
+  }
 
 }

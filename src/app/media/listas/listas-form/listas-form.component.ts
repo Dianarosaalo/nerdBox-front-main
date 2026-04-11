@@ -47,10 +47,8 @@ export class ListasFormComponent {
           this.newList = c
           this.selectedMediaList = [];
 
-          this.mediaService.getAll().subscribe(allMedia => {
-          this.selectedMediaList = allMedia.filter(m =>
-            this.newList.medias.includes(m._id!)
-          );
+          this.mediaService.getByIds(this.newList.medias).subscribe(medias => {
+          this.selectedMediaList = medias;
         });
       });
     }

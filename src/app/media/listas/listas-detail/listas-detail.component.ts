@@ -38,13 +38,9 @@ export class ListasDetailComponent {
   }
 
   loadMedias(): void {
-  this.mediaService.getAll().subscribe(allMedia => {
-
-    this.mediasFull = allMedia.filter(m =>
-      this.list.medias.includes(String(m._id))
-    );
-
+  this.mediaService.getByIds(this.list.medias).subscribe(medias => {
+  this.mediasFull = medias;
   });
-}
+  }
 
 }
