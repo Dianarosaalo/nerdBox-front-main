@@ -1,11 +1,13 @@
 <div class="list-detail">
 
-  <h2>{{ list.nombre }}</h2>
+  <h2 class="title">{{ list.nombre }}</h2>
 
-  <p>{{ list.descripcion }}</p>
+  <h5 class="desc">{{ list.descripcion }}</h5>
 
-  <p>{{list.fechaCreacion | date:'dd/MM/yyyy | HH:mm:ss'}}</p>
-  <p>{{list.fechaModificacion| date:'dd/MM/yyyy | HH:mm:ss'}}</p>
+  <p class="desc">fecha de creación: {{list.fechaCreacion | date:'dd/MM/yyyy | HH:mm:ss'}}</p>
+  <p class="desc">fecha de modificación: {{list.fechaModificacion| date:'dd/MM/yyyy | HH:mm:ss'}}</p>
+
+  <hr>
 
   <div class="media-grid">
 
@@ -20,5 +22,14 @@
 
   </div>
 
+</div>
 
+<div class="edit-button">
+  <button
+    type="button"
+    class="btn btn-edit"
+    [routerLink]="['/list', list._id, 'edit']"
+  >
+    Editar Lista
+  </button>
 </div>
