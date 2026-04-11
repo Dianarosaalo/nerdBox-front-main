@@ -6,6 +6,7 @@
 
 <div class="media-card" *ngFor="let list of lists">
 
+  <a [routerLink]="['/list', list._id]">
   <div class="media-collage" *ngIf="list.mediasFull">
 
     <!-- GRANDE -->
@@ -23,6 +24,7 @@
     </div>
 
   </div>
+  </a>
 
   <div class="list-title">
     <a [routerLink]="['/list', list._id]">
