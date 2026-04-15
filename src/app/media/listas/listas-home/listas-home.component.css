@@ -130,3 +130,11 @@ a {
   color: white;
   background: #1e1e1e;
 }
+
+.media-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centra las cards */
+  gap: 20px; /* separación entre listas */
+  padding: 10px;
+}
