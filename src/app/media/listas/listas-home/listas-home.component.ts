@@ -8,11 +8,13 @@ import { ListService } from '../services/list.service';
 import { ListaResponse, ListasResponse } from '../interfaces/listReponse';
 import { Media } from '../../interfaces/media';
 import { MediaService } from '../../services/media.service';
+import { FormsModule } from '@angular/forms';
+import { ListFilterPipe } from '../pipes/list.filter.pipe';
 
 @Component({
   selector: 'fs-listas-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule, ListFilterPipe],
   templateUrl: './listas-home.component.html',
   styleUrls: ['./listas-home.component.css']
 })
@@ -54,6 +56,22 @@ export class ListasHomeComponent {
       });
 
     });
+  }
+
+  search="";
+  order="";
+  typeOfOrders=[
+    {value:"", label:"None"},
+    {value:"nombre", label:"Name"},
+    {value:"cantidad", label:"Amount"},
+    {value:"reciente", label:"Recent"}
+  ]
+
+  thisFormShows=false;
+
+  hideForm()
+  {
+    this.thisFormShows=!this.thisFormShows;
   }
 
 }

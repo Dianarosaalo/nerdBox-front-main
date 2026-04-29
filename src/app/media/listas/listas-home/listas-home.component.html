@@ -1,10 +1,33 @@
 <h2 class="listas-title">
-  Mis Listas
+  Mis Listas ({{lists.length}}) <span (click)="hideForm()">📝 </span>
 </h2>
+
+<nav class="navbar justify-content-between mt-3 row" *ngIf="thisFormShows">
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search Media Here!"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+  </form>
+
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item">
+      <select class="form-control" [(ngModel)]="order" [ngModelOptions]="{standalone:true}">
+        <option *ngFor="let option of typeOfOrders" value={{option.value}}>Order: {{option.label}}</option>
+      </select>
+    </li>
+  </ul>
+  <br>
+</nav>
+
 
 <!---->
 <div class="media-grid">
-<div class="media-card" *ngFor="let list of lists">
+<div class="media-card" *ngFor="let list of lists | listFilter:search:order">
 
   <a [routerLink]="['/list', list._id]">
   <div class="media-collage" *ngIf="list.mediasFull">

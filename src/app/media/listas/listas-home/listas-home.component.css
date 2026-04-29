@@ -138,3 +138,12 @@ a {
   gap: 20px; /* separación entre listas */
   padding: 10px;
 }
+
+nav{
+  background-color: #333333;;
+}
+
+.form-control{
+  background-color: #333333;
+  color: white;
+}
