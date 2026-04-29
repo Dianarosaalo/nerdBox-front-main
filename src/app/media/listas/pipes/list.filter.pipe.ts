@@ -17,11 +17,22 @@ export class ListFilterPipe implements PipeTransform {
 
     let filteredLists = [...lists];
 
-    // 🔎 SEARCH
     if (search) {
-      filteredLists = filteredLists.filter(l =>
-        l.nombre.toLowerCase().includes(search.toLowerCase())
-      );
+      const searchLower = search.toLowerCase();
+
+      filteredLists = filteredLists.filter(list => {
+
+        const matchList = list.nombre
+          ?.toLowerCase()
+          .includes(searchLower);
+
+        const matchMedia = list.mediasFull?.some(m =>
+          (m.titulo?.toLowerCase().includes(searchLower)) ||
+          (m.nombrePersonal?.toLowerCase().includes(searchLower))
+        );
+
+        return matchList || matchMedia;
+      });
     }
 
     // 🔃 ORDER
@@ -49,7 +60,7 @@ export class ListFilterPipe implements PipeTransform {
       sorted.sort((a, b) => {
         const fechaA = new Date(a.fechaModificacion).getTime() || 0;
         const fechaB = new Date(b.fechaModificacion).getTime() || 0;
-        return fechaB - fechaA; // más reciente primero
+        return fechaB - fechaA;
       });
     }
 
