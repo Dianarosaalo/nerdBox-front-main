@@ -1,0 +1,43 @@
+<nav class="navbar justify-content-between mt-3 row">
+
+<ul  class="nav nav-pills col-auto ms-3">
+    <li class="nav-item btn">
+      <button class="btn btn-dark" style="padding: 8px !important;"(click)="searchMedia()">Buscar!</button>
+    </li>
+  </ul>
+
+<form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search Media Here!"
+      aria-label="Search"
+      [(ngModel)]="search"
+    />
+  </form> <br>
+
+</nav>
+<br>
+
+<div class="nothingText" *ngIf="medias.length===0">
+  Busca Media o seguiré apareciendooo aquí, !Boooo!
+</div>
+
+<div class="media-grid">
+
+    <div class="media-item" *ngFor="let media of medias">
+
+    <a [routerLink]="['/media', media._id]">
+      <img [src]="media.imagen" />
+    </a>
+    <p class="card-text" style="text-align: center;">
+          <a [routerLink]="['/media', media._id]" style="text-decoration: none; color: #ffffff;">
+            {{ media.titulo }}
+          </a>
+        </p>
+
+
+    </div>
+
+</div>

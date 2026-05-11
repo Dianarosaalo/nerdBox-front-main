@@ -43,6 +43,14 @@ export const MEDIA_ROUTES: Routes = [
   },
 
   {
+    path: 'search',
+    loadComponent: () =>
+      import('./media-search/media-search.component').then(
+        (m) => m.MediaSearchComponent
+      ),
+  },
+
+  {
     path: ':id',
     loadComponent: () =>
       import('./media-details/media-details.component').then(
