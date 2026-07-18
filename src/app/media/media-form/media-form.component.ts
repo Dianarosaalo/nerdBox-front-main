@@ -153,6 +153,7 @@ export class MediaFormComponent {
     {value:"Will Play", label:"Will Play"},
     {value:"Should Play", label:"Should Play"},
     {value:"Backlogged", label:"Backlogged"},
+    {value:"Played as a Kid", label:"Played as a Kid"},
     {value:"Not Played", label:"Not Played"},
     ]
 

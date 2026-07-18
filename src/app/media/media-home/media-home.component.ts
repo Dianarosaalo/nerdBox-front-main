@@ -246,6 +246,7 @@ export class MediaHomeComponent {
     {value:"Will Play", label:"Will Play"},
     {value:"Should Play", label:"Should Play"},
     {value:"Backlogged", label:"Backlogged"},
+    {value:"Played as a Kid", label:"Played as a Kid"},
     {value:"Not Played", label:"Not Played"},
   ]
 
@@ -361,6 +362,10 @@ export class MediaHomeComponent {
       separatedMedias = this.medias;
   }
 
+  if (this.group === "Score") {
+    separatedMedias = this.medias;
+}
+
     // Filter medias based on existing criteria
     const filteredMedias = separatedMedias.filter((media) => {
       const matchesSearch = this.search
@@ -370,7 +375,7 @@ export class MediaHomeComponent {
         const matchesGenre = this.genre ? media.genero === this.genre : true;
         const matchesSubgenre = this.subgenre ? media.subgenero === this.subgenre : true;
         const matchesPlatform = this.platform ? media.plataforma === this.platform : true;
-        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Will Play", "Would Play", "Should Play", "Played", "Backlogged", "Not Played"];
+        const validStates = ["Completed", "Unfinished", "Dropped", "Watched", "Tried", "Wanna Play", "Will Play", "Would Play", "Should Play", "Played", "Backlogged", "Not Played", "Played as a Kid"];
         const matchesState = this.state
             ? media.fechaTerminado.some((ft: { estado: string }) => ft.estado === this.state)
             : media.fechaTerminado.some((ft: { estado: string }) => validStates.includes(ft.estado));
@@ -447,7 +452,35 @@ export class MediaHomeComponent {
       });
     }
 
-    if (this.group!=="Console"){
+    if (this.group === "Score") {
+    orderedMedias.forEach((media) => {
+        // Si no tiene nota, lo agrupamos en "Sin nota"
+        const score = media.notaObjetiva ?? "Sin nota";
+
+        if (!this.mediaByYear[score]) {
+            this.mediaByYear[score] = [];
+        }
+
+        this.mediaByYear[score].push(media);
+    });
+
+    // Ordenar las notas de mayor a menor dejando "Sin nota" al final
+    this.sortedYears = Object.keys(this.mediaByYear).sort((a, b) => {
+        if (a === "Sin nota") return 1;
+        if (b === "Sin nota") return -1;
+
+        return Number(b) - Number(a);
+    });
+
+    // Ordenar los juegos dentro de cada nota alfabéticamente
+    this.sortedYears.forEach((score) => {
+        this.mediaByYear[score].sort((a, b) =>
+            a.titulo.localeCompare(b.titulo)
+        );
+    });
+}
+
+    if (this.group!=="Console" && this.group !== "Score"){
     // Sort years in descending order, ensuring 2150 is below 2003
     this.sortedYears = Object.keys(this.mediaByYear)
         .sort((a, b) => {
