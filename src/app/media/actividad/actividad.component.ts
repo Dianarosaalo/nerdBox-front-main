@@ -43,7 +43,7 @@ export class ActividadComponent implements OnInit {
   }
 
   loadMedia(): void {
-    this.mediaService.getAll().subscribe((medias: Media[]) => {
+    this.mediaService.getActivity().subscribe((medias: Media[]) => {
       this.medias = medias;
       this.filterMedia(); // Initially show all media
     });

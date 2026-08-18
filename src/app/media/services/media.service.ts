@@ -63,4 +63,10 @@ export class MediaService{
     .pipe(map(res => res.medias));
 }
 
+  getActivity(): Observable<Media[]> {
+    return this.http
+      .get<MediasResponse>('medias/actividad')
+      .pipe(map((c) => c.medias));
+  }
+
 }
