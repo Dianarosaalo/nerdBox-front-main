@@ -2,149 +2,215 @@
 
   <h1>Historial de modificaciones</h1>
 
+
+  <!-- =========================================
+       ENTRADAS DEL HISTORIAL
+  ========================================== -->
+
   <div
     class="history-entry"
     *ngFor="let history of histories; let i = index"
   >
 
-    <!-- CABECERA -->
+    <!-- =========================================
+         CABECERA
+    ========================================== -->
+
     <div class="history-header">
 
       <div class="history-number">
         #{{ i + 1 }}
       </div>
 
+
       <div class="history-title">
-        <h2>
-          Modificación de
-          <span>{{ history.objetoNuevo?.titulo }}</span>
-        </h2>
+
+        <div class="title-row">
+
+          <h2>
+            Modificación de
+            <span>{{ history.objetoNuevo?.titulo }}</span>
+          </h2>
+
+          <button
+            class="toggle-button"
+            (click)="toggleHistory(i)"
+            [attr.aria-label]="expandedHistories[i] ? 'Plegar' : 'Desplegar'"
+          >
+            <span
+              class="arrow"
+              [class.expanded]="expandedHistories[i]"
+            >
+              ›
+            </span>
+          </button>
+
+        </div>
+
 
         <div class="history-meta">
+
           <span>
-            📅 {{ history.fechaModificacion | date:'dd/MM/yyyy HH:mm:ss' }}
+            📅
+            {{ history.fechaModificacion | date:'dd/MM/yyyy HH:mm:ss' }}
           </span>
 
           <span>
             🆔 {{ history.mediaId }}
           </span>
+
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- CAMBIOS -->
-    <div class="section">
+    <!-- =========================================
+         CONTENIDO PLEGABLE
+    ========================================== -->
 
-      <h3>✏️ Cambios realizados</h3>
-
-      <table class="changes-table">
-
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Campo</th>
-            <th>Valor anterior</th>
-            <th>Valor nuevo</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr *ngFor="let cambio of history.cambios; let j = index">
-
-            <td class="change-number">
-              {{ j + 1 }}
-            </td>
-
-            <td class="field-name">
-              {{ cambio.campo }}
-            </td>
-
-            <td class="old-value">
-              <pre>{{ cambio.anterior | json }}</pre>
-            </td>
-
-            <td class="new-value">
-              <pre>{{ cambio.nuevo | json }}</pre>
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
+    <div *ngIf="expandedHistories[i]">
 
 
-    <!-- OBJETO ANTERIOR -->
-    <div class="section">
+      <!-- =========================================
+           CAMBIOS
+      ========================================== -->
 
-      <h3>📦 Objeto anterior</h3>
+      <div class="section">
 
-      <table class="object-table">
+        <h3>✏️ Cambios realizados</h3>
 
-        <thead>
-          <tr>
-            <th>Campo</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
+        <table class="changes-table">
 
-        <tbody>
+          <thead>
 
-          <tr *ngFor="let item of history.objetoAnterior | keyvalue">
+            <tr>
+              <th>#</th>
+              <th>Campo</th>
+              <th>Valor anterior</th>
+              <th>Valor nuevo</th>
+            </tr>
 
-            <td class="field-name">
-              {{ item.key }}
-            </td>
-
-            <td>
-              <pre>{{ item.value | json }}</pre>
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
+          </thead>
 
 
-    <!-- OBJETO NUEVO -->
-    <div class="section">
+          <tbody>
 
-      <h3>✨ Objeto nuevo</h3>
+            <tr
+              *ngFor="let cambio of history.cambios; let j = index"
+            >
 
-      <table class="object-table">
+              <td class="change-number">
+                {{ j + 1 }}
+              </td>
 
-        <thead>
-          <tr>
-            <th>Campo</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
+              <td class="field-name">
+                {{ cambio.campo }}
+              </td>
 
-        <tbody>
+              <td class="old-value">
+                <pre>{{ cambio.anterior | json }}</pre>
+              </td>
 
-          <tr *ngFor="let item of history.objetoNuevo | keyvalue">
+              <td class="new-value">
+                <pre>{{ cambio.nuevo | json }}</pre>
+              </td>
 
-            <td class="field-name">
-              {{ item.key }}
-            </td>
+            </tr>
 
-            <td>
-              <pre>{{ item.value | json }}</pre>
-            </td>
+          </tbody>
 
-          </tr>
+        </table>
 
-        </tbody>
+      </div>
 
-      </table>
+
+      <!-- =========================================
+           OBJETO ANTERIOR
+      ========================================== -->
+
+      <div class="section">
+
+        <h3>📦 Objeto anterior</h3>
+
+        <table class="object-table">
+
+          <thead>
+
+            <tr>
+              <th>Campo</th>
+              <th>Valor</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr
+              *ngFor="let item of history.objetoAnterior | keyvalue"
+            >
+
+              <td class="field-name">
+                {{ item.key }}
+              </td>
+
+              <td>
+                <pre>{{ item.value | json }}</pre>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- =========================================
+           OBJETO NUEVO
+      ========================================== -->
+
+      <div class="section">
+
+        <h3>✨ Objeto nuevo</h3>
+
+        <table class="object-table">
+
+          <thead>
+
+            <tr>
+              <th>Campo</th>
+              <th>Valor</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr
+              *ngFor="let item of history.objetoNuevo | keyvalue"
+            >
+
+              <td class="field-name">
+                {{ item.key }}
+              </td>
+
+              <td>
+                <pre>{{ item.value | json }}</pre>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
 
     </div>
 

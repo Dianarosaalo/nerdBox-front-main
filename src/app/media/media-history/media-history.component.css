@@ -1,13 +1,21 @@
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
 .history-container {
   width: 95%;
   max-width: 1400px;
+
   margin: 30px auto 60px;
+
   color: #e8e8e8;
 }
 
 .history-container h1 {
   margin-bottom: 30px;
+
   font-size: 30px;
+  font-weight: 600;
 }
 
 
@@ -17,11 +25,16 @@
 
 .history-entry {
   background: #1b1b1b;
+
   border: 1px solid #333;
   border-radius: 12px;
-  margin-bottom: 35px;
+
+  margin-bottom: 25px;
+
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -31,44 +44,144 @@
 
 .history-header {
   display: flex;
+
   align-items: center;
+
   gap: 20px;
+
   padding: 20px 25px;
+
   background: #242424;
+
   border-bottom: 1px solid #383838;
 }
+
+
+/* =========================================
+   NUMERO
+========================================= */
 
 .history-number {
   min-width: 50px;
   height: 50px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
 
   background: #3a3a3a;
+
   border: 1px solid #555;
 
   font-size: 18px;
   font-weight: bold;
 }
 
-.history-title h2 {
-  margin: 0 0 8px;
+
+/* =========================================
+   TITULO
+========================================= */
+
+.history-title {
+  flex: 1;
+}
+
+.title-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.title-row h2 {
+  margin: 0;
+
   font-size: 21px;
   font-weight: 500;
 }
 
-.history-title h2 span {
+.title-row h2 span {
   font-weight: bold;
 }
 
+
+/* =========================================
+   BOTON PLEGAR / DESPLEGAR
+========================================= */
+
+.toggle-button {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  background: #303030;
+
+  color: #ccc;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.toggle-button:hover {
+  background: #3a3a3a;
+
+  border-color: #666;
+}
+
+.toggle-button:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================================
+   FLECHA
+========================================= */
+
+.arrow {
+  display: inline-block;
+
+  font-size: 22px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease;
+}
+
+.arrow.expanded {
+  transform: rotate(90deg);
+}
+
+
+/* =========================================
+   INFORMACION DE LA ENTRADA
+========================================= */
+
 .history-meta {
   display: flex;
+
   gap: 20px;
+
+  margin-top: 8px;
+
   color: #999;
+
   font-size: 13px;
 }
 
@@ -79,6 +192,7 @@
 
 .section {
   padding: 25px;
+
   border-bottom: 1px solid #303030;
 }
 
@@ -88,6 +202,7 @@
 
 .section h3 {
   margin: 0 0 15px;
+
   font-size: 17px;
   font-weight: 600;
 }
@@ -99,25 +214,37 @@
 
 table {
   width: 100%;
+
   border-collapse: collapse;
+
   table-layout: fixed;
 }
 
+
+/* CABECERAS */
+
 th {
   text-align: left;
+
   padding: 11px 12px;
 
   background: #292929;
+
   color: #ccc;
 
   font-size: 13px;
+
   font-weight: 600;
 
   border-bottom: 1px solid #444;
 }
 
+
+/* CELDAS */
+
 td {
   padding: 10px 12px;
+
   vertical-align: top;
 
   border-bottom: 1px solid #303030;
@@ -147,29 +274,46 @@ tr:last-child td {
   width: 39%;
 }
 
+
+/* NUMERO DEL CAMBIO */
+
 .change-number {
   color: #888;
+
   text-align: center;
 }
 
+
+/* NOMBRE DEL CAMPO */
+
 .field-name {
   font-weight: 600;
+
   color: #ddd;
 }
 
 
 /* =========================================
-   VALORES
+   VALOR ANTERIOR
 ========================================= */
 
 .old-value {
   color: #e58c8c;
-  background: rgba(180, 60, 60, 0.05);
+
+  background:
+    rgba(180, 60, 60, 0.05);
 }
+
+
+/* =========================================
+   VALOR NUEVO
+========================================= */
 
 .new-value {
   color: #8fd19e;
-  background: rgba(60, 180, 90, 0.05);
+
+  background:
+    rgba(60, 180, 90, 0.05);
 }
 
 
@@ -181,10 +325,16 @@ pre {
   margin: 0;
 
   white-space: pre-wrap;
+
   word-break: break-word;
 
-  font-family: Consolas, Monaco, monospace;
+  font-family:
+    Consolas,
+    Monaco,
+    monospace;
+
   font-size: 12px;
+
   line-height: 1.5;
 
   color: inherit;
@@ -203,8 +353,14 @@ pre {
   color: #aaa;
 }
 
+
+/* =========================================
+   HOVER
+========================================= */
+
 .object-table tr:hover {
-  background: rgba(255, 255, 255, 0.025);
+  background:
+    rgba(255, 255, 255, 0.025);
 }
 
 
@@ -218,22 +374,23 @@ pre {
     width: 98%;
   }
 
+
   .history-header {
     align-items: flex-start;
   }
 
+
   .history-meta {
     flex-direction: column;
+
     gap: 5px;
   }
 
-  .changes-table {
-    display: block;
-    overflow-x: auto;
-  }
 
+  .changes-table,
   .object-table {
     display: block;
+
     overflow-x: auto;
   }
 
