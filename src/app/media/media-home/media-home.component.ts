@@ -47,10 +47,16 @@ export class MediaHomeComponent {
   }
 
   loadMedia(): void {
-    this.mediaService.getAll().subscribe((medias: Media[]) => {
-      this.medias= medias;
+  this.mediaService.getPaginated(0, 2500).subscribe((medias: Media[]) => {
+
+    this.medias = medias;
+
+    this.mediaService.getPaginated(2500, 2500).subscribe((moreMedias: Media[]) => {
+      this.medias = [...this.medias, ...moreMedias];
     });
-  }
+
+  });
+}
 
   typeOfOrders=[
     {value:"", label:"None"},

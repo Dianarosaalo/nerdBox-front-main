@@ -52,4 +52,15 @@ export class MediaService{
       .pipe(map(res => res.medias));
   }
 
+  getPaginated(offset: number, limit: number): Observable<Media[]> {
+  return this.http
+    .get<MediasResponse>('medias/paginated', {
+      params: {
+        offset: offset.toString(),
+        limit: limit.toString()
+      }
+    })
+    .pipe(map(res => res.medias));
+}
+
 }
