@@ -1,0 +1,240 @@
+.history-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 30px auto 60px;
+  color: #e8e8e8;
+}
+
+.history-container h1 {
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+
+/* =========================================
+   ENTRADA DEL HISTORIAL
+========================================= */
+
+.history-entry {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  border-radius: 12px;
+  margin-bottom: 35px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   CABECERA
+========================================= */
+
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 25px;
+  background: #242424;
+  border-bottom: 1px solid #383838;
+}
+
+.history-number {
+  min-width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #3a3a3a;
+  border: 1px solid #555;
+
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.history-title h2 {
+  margin: 0 0 8px;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.history-title h2 span {
+  font-weight: bold;
+}
+
+.history-meta {
+  display: flex;
+  gap: 20px;
+  color: #999;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   SECCIONES
+========================================= */
+
+.section {
+  padding: 25px;
+  border-bottom: 1px solid #303030;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h3 {
+  margin: 0 0 15px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TABLAS
+========================================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  text-align: left;
+  padding: 11px 12px;
+
+  background: #292929;
+  color: #ccc;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  border-bottom: 1px solid #444;
+}
+
+td {
+  padding: 10px 12px;
+  vertical-align: top;
+
+  border-bottom: 1px solid #303030;
+
+  font-size: 14px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   TABLA DE CAMBIOS
+========================================= */
+
+.changes-table th:nth-child(1) {
+  width: 45px;
+}
+
+.changes-table th:nth-child(2) {
+  width: 18%;
+}
+
+.changes-table th:nth-child(3),
+.changes-table th:nth-child(4) {
+  width: 39%;
+}
+
+.change-number {
+  color: #888;
+  text-align: center;
+}
+
+.field-name {
+  font-weight: 600;
+  color: #ddd;
+}
+
+
+/* =========================================
+   VALORES
+========================================= */
+
+.old-value {
+  color: #e58c8c;
+  background: rgba(180, 60, 60, 0.05);
+}
+
+.new-value {
+  color: #8fd19e;
+  background: rgba(60, 180, 90, 0.05);
+}
+
+
+/* =========================================
+   JSON
+========================================= */
+
+pre {
+  margin: 0;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: inherit;
+}
+
+
+/* =========================================
+   TABLAS DE OBJETOS
+========================================= */
+
+.object-table th:first-child {
+  width: 25%;
+}
+
+.object-table td:first-child {
+  color: #aaa;
+}
+
+.object-table tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .history-container {
+    width: 98%;
+  }
+
+  .history-header {
+    align-items: flex-start;
+  }
+
+  .history-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .changes-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .object-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+}

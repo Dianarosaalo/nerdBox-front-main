@@ -51,6 +51,14 @@ export const MEDIA_ROUTES: Routes = [
   },
 
   {
+    path: 'history',
+    loadComponent: () =>
+      import('./media-history/media-history.component').then(
+        (m) => m.MediaHistoryComponent
+      ),
+  },
+
+  {
     path: ':id',
     loadComponent: () =>
       import('./media-details/media-details.component').then(
