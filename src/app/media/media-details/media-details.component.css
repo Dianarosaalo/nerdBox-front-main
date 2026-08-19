@@ -1,92 +1,573 @@
-/* General Container */
-.minimalistic-container {
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+.media-detail {
+  width: 92%;
+  max-width: 1400px;
+
+  margin: 35px auto 60px;
+
+  padding: 30px;
+
+  background: #211d25;
+
+  color: #eeeeee;
+
+  border: 1px solid #38313f;
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================
+   CABECERA
+========================================= */
+
+.media-header {
   display: flex;
-  background-color: #28242c; /* Reverted to the original dark background */
-  color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  gap: 1rem;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding-bottom: 25px;
+
+  margin-bottom: 30px;
+
+  border-bottom: 1px solid #38313f;
 }
 
-img{
-  width: 65%
+
+.media-header-title {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
 }
 
-/* Image Styling */
+
+.media-header h1 {
+  margin: 0;
+
+  font-size: 2.4rem;
+
+  font-weight: 650;
+
+  color: #f4f1f7;
+
+  letter-spacing: -0.5px;
+}
+
+
+.media-type {
+  width: fit-content;
+
+  padding: 5px 11px;
+
+  border-radius: 6px;
+
+  background: rgba(108, 71, 228, 0.16);
+
+  border: 1px solid rgba(108, 71, 228, 0.35);
+
+  color: #a991f0;
+
+  font-size: 0.78rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+
+/* =========================================
+   NOTA
+========================================= */
+
+.score {
+  min-width: 90px;
+  height: 90px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  color: #111;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.score-value {
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+.score-label {
+  margin-top: 6px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   CONTENIDO
+========================================= */
+
+.media-content {
+  display: grid;
+
+  grid-template-columns: 280px 1fr;
+
+  gap: 40px;
+
+  align-items: start;
+}
+
+
+/* =========================================
+   IMAGEN
+========================================= */
+
+.image-container {
+  display: flex;
+
+  justify-content: center;
+
+  position: sticky;
+
+  top: 25px;
+}
+
+
 .image-container img {
-  max-width: 65%;
+  width: 100%;
+  max-width: 280px;
+
   height: auto;
-   /* Made the image smaller */
-  border-radius: 10px;
-  border: 2px solid #6c47e4;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+  display: block;
+
+  border-radius: 12px;
+
+  border: 1px solid #51475a;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.4);
+
+  object-fit: cover;
 }
 
-/* Text Details Styling */
+
+/* =========================================
+   INFORMACIÓN
+========================================= */
+
 .details-container {
-  flex: 1;
+  min-width: 0;
 }
 
-.details-container .title {
-  font-size: 1.8rem;
-  color: #6c47e4;
-  margin-bottom: 1rem;
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 30px;
 }
 
-.details-container .info p {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+
+.info-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 13px 15px;
+
+  background: #29242e;
+
+  border: 1px solid #39323f;
+
+  border-radius: 9px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
-.details-container .review-section h3 {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  color: #6c47e4;
+
+.info-item:hover {
+  background: #2d2832;
+
+  border-color: #4c4155;
 }
 
-.review-text {
+
+.info-label {
+  color: #99909f;
+
+  font-size: 0.72rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+}
+
+
+.info-value {
+  color: #eeeeee;
+
+  font-size: 0.98rem;
+
+  font-weight: 500;
+}
+
+
+/* =========================================
+   FECHAS DE FINALIZACIÓN
+========================================= */
+
+.finished-dates {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+.finished-item {
+  display: inline-flex;
+
+  gap: 6px;
+
+  align-items: center;
+}
+
+
+.finished-item strong {
+  color: #a991f0;
+}
+
+
+.date-separator {
+  color: #625a68;
+
+  margin: 0 2px;
+}
+
+
+/* =========================================
+   REVIEW / ANOTACIONES
+========================================= */
+
+.text-section {
+  margin-top: 25px;
+}
+
+
+.text-section h2 {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0 0 10px;
+
+  font-size: 1.1rem;
+
+  font-weight: 600;
+
+  color: #ddd7e3;
+}
+
+
+.section-icon {
+  color: #8e70e8;
+
   font-size: 1rem;
-  color: #e0e0e0;
 }
 
-/* Keeping the Score Styling as Provided */
-.score{
-  position: absolute;
-  font-size: 1rem;
-  text-align: right;
-  color:rgb(0, 0, 0);
-  right: 30px;
-  bottom: 1680px;
-  padding: 50px;
-  font-size: 25px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-color: rgb(6, 230, 6);
+
+.text-box {
+  min-height: 50px;
+
+  padding: 15px 17px;
+
+  background: #29242e;
+
+  border: 1px solid #39323f;
+
+  border-left: 3px solid #6c47e4;
+
+  border-radius: 8px;
+
+  color: #c9c5cc;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
 }
 
-/* Edit Button Styling */
+
+/* =========================================
+   METADATOS
+========================================= */
+
+.media-metadata {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 35px;
+
+  margin-top: 30px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #38313f;
+
+  color: #77717c;
+
+  font-size: 0.75rem;
+}
+
+
+.media-metadata div {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 3px;
+}
+
+
+.media-metadata span {
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  font-size: 0.65rem;
+}
+
+
+.media-metadata strong {
+  color: #aaa4ae;
+
+  font-weight: 500;
+}
+
+
+/* =========================================
+   BOTÓN EDITAR
+========================================= */
+
 .edit-button {
-  margin-top: 2rem;
-  position: absolute;
-  right: 75px;
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 25px;
 }
 
-.edit-button .btn {
-  background-color: #6c47e4;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+
+.edit-button button {
+  padding: 10px 18px;
+
+  border: 1px solid #6c47e4;
+
+  border-radius: 8px;
+
+  background: #6c47e4;
+
+  color: #ffffff;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
 }
 
-.edit-button .btn:hover {
-  background-color: #5730a8;
+
+.edit-button button:hover {
+  background: #7958e8;
+
+  box-shadow:
+    0 5px 15px rgba(108, 71, 228, 0.25);
 }
 
-.details-container span {
 
-  font-size: 1.2rem; /* Match the paragraph font size */
-  margin-bottom: 0.5rem; /* Match paragraph spacing */
+.edit-button button:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .media-detail {
+    width: 95%;
+
+    padding: 22px;
+  }
+
+
+  .media-content {
+    grid-template-columns: 210px 1fr;
+
+    gap: 25px;
+  }
+
+
+  .image-container img {
+    max-width: 210px;
+  }
+
+
+  .media-header h1 {
+    font-size: 2rem;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .media-detail {
+    width: 96%;
+
+    padding: 18px;
+  }
+
+
+  .media-header {
+    align-items: flex-start;
+  }
+
+
+  .media-header h1 {
+    font-size: 1.7rem;
+  }
+
+
+  .score {
+    min-width: 70px;
+    height: 70px;
+  }
+
+
+  .score-value {
+    font-size: 1.5rem;
+  }
+
+
+  .media-content {
+    grid-template-columns: 1fr;
+  }
+
+
+  .image-container {
+    position: static;
+  }
+
+
+  .image-container img {
+    width: 220px;
+
+    max-width: 70vw;
+  }
+
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .media-metadata {
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 10px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .media-header {
+    flex-direction: column;
+  }
+
+
+  .media-header-title {
+    width: 100%;
+  }
+
+
+  .score {
+    align-self: flex-start;
+  }
+
+
+  .media-metadata {
+    align-items: flex-start;
+  }
+
+
+  .media-metadata div {
+    align-items: flex-start;
+  }
+
 }
