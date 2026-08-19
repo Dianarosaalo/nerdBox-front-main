@@ -19,7 +19,7 @@
     <div class="history-header">
 
       <div class="history-number">
-        #{{ i + 1 }}
+        #{{ histories.length - i }}
       </div>
 
 
@@ -98,7 +98,7 @@
           <tbody>
 
             <tr
-              *ngFor="let cambio of history.cambios; let j = index"
+              *ngFor="let cambio of getVisibleChanges(history.cambios); let j = index"
             >
 
               <td class="change-number">

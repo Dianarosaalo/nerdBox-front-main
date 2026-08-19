@@ -42,4 +42,11 @@ export class MediaHistoryComponent implements OnInit {
   this.expandedHistories[index] = !this.expandedHistories[index];
 }
 
+getVisibleChanges(cambios: any[]): any[] {
+  return cambios.filter(cambio =>
+    cambio.campo !== '_id' &&
+    cambio.campo !== '__v'
+  );
+}
+
 }
