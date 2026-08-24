@@ -100,7 +100,7 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
   }
 
   loadMediaData(): void {
-    this.mediaService.getAll().subscribe((medias: Media[]) => {
+    this.mediaService.getActivity().subscribe((medias: Media[]) => {
       this.medias = medias;
       console.log('Medias received:', this.medias.slice(0, 5)); // Log first few items
       this.prepareChartData();

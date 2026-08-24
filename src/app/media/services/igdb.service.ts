@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class IgdbService {
   private clientId = 'v7mv3escl2t5ifeoc8w379sl4zm164'; // Replace with your actual client ID
-  private accessToken = 'jq90epvtzqbxn1uzhliusphg5hh5oq'; // Replace with your actual access token
+  private accessToken = 'wnte6zank2791gr9bwpgxi8pavmogv'; // Replace with your actual access token
 
   constructor(private http: HttpClient) {}
 

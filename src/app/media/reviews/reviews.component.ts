@@ -28,7 +28,7 @@ export class ReviewsComponent {
   }
 
   loadMedia(): void {
-    this.mediaService.getAll().subscribe((medias: Media[]) => {
+    this.mediaService.getActivity().subscribe((medias: Media[]) => {
       this.medias = medias.filter((m)=>m.review);
     });
   }
