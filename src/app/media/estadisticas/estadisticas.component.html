@@ -1,27 +1,98 @@
+<!-- Selector de tipo de media -->
+
 <select (change)="onMediaTypeChange($event)">
-  <option *ngFor="let option of typesOfMedia" [value]="option.value">
+  <option
+    *ngFor="let option of typesOfMedia"
+    [value]="option.value">
     {{ option.label }}
   </option>
 </select>
 
+
+<!-- Selector de género -->
+
+<select
+  *ngIf="selectedMediaType"
+  (change)="onGenreChange($event)">
+
+  <option value="">
+    [All Genres]
+  </option>
+
+  <option
+    *ngFor="let genre of getGenres()"
+    [value]="genre">
+
+    {{ genre }}
+
+  </option>
+
+</select>
+
+
+<!-- Selector de subgénero -->
+<!-- Por ahora NO lo necesitamos para filtrar la gráfica,
+     simplemente dejamos preparada la estructura para el siguiente nivel. -->
+
+<!--<select
+  *ngIf="selectedMediaType && selectedGenre">
+
+  <option value="">
+    [Todos los subgéneros]
+  </option>
+
+  <option
+    *ngFor="let subgenre of getSubgenres()"
+    [value]="subgenre">
+
+    {{ subgenre }}
+
+  </option>
+
+</select>-->
+
+
 <div class="chart-wrapper">
+
   <!-- Legend Section -->
+
   <div class="legend">
-    <div *ngFor="let label of chartData.labels; let i = index">
+
+    <div
+      *ngFor="let label of chartData.labels; let i = index">
+
       <span class="legend-item">
-        <!-- Color square with a fallback for undefined backgroundColor -->
-        <span class="color-square" [style.background-color]="getColor(i)"></span>
-        <strong>{{ label }}:&nbsp; </strong>
+
+        <span
+          class="color-square"
+          [style.background-color]="getColor(i)">
+        </span>
+
+        <strong>{{ label }}:&nbsp;</strong>
+
         {{ chartData.datasets[0].data[i] }}
+
       </span>
+
     </div>
+
   </div>
+
 
   <!-- Chart Section -->
-  <div class="canvas-wrapper">
-    <div class="chart-container">
-      <canvas baseChart [data]="chartData" [type]="chartType"></canvas>
-    </div>
-  </div>
-</div>
 
+  <div class="canvas-wrapper">
+
+    <div class="chart-container">
+
+      <canvas
+        baseChart
+        [data]="chartData"
+        [type]="chartType">
+      </canvas>
+
+    </div>
+
+  </div>
+
+</div>

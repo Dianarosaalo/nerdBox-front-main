@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
-import { ChartConfiguration, ChartType, Chart } from 'chart.js';
+import { ChartConfiguration, ChartType } from 'chart.js';
 import { Media } from '../interfaces/media';
 import { MediaService } from '../services/media.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -15,10 +15,14 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./estadisticas.component.css']
 })
 export class EstadisticasComponent implements OnInit, AfterViewInit {
+
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   medias: Media[] = [];
-  selectedMediaType= '';  // This will store the selected media type
+
+  selectedMediaType = '';
+  selectedGenre = '';
+
   typesOfMedia = [
     { value: '', label: '[Todos]' },
     { value: 'Videojuego', label: 'Videojuegos' },
@@ -39,41 +43,41 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
       {
         data: [],
         backgroundColor: [
-          '#FFA726', // Videojuegos - Orange
-          '#42A5F5', // Animes - Light Blue
-          '#EF5350', // Mangas - Red
-          '#66BB6A', // Libros - Green
-          '#AB47BC', // Peliculas - Purple
-          '#CE93D8', // Series - Light Purple
-          '#FFEB3B', // Cartoons - Yellow
-          '#8D6E63', // Comics - Brown
-          'Pink', // Peliculas (Anime genre) - Dark Blue
-          'Black', // Peliculas (Anime genre) - Dark Blue
-        ],
-      },
-    ],
+          '#FFA726',
+          '#42A5F5',
+          '#EF5350',
+          '#66BB6A',
+          '#AB47BC',
+          '#CE93D8',
+          '#FFEB3B',
+          '#8D6E63',
+          'Pink',
+          'Black'
+        ]
+      }
+    ]
   };
 
   chartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
     plugins: {
       legend: {
-        display: false, // Hide the legend
+        display: false
       },
       tooltip: {
-        enabled: false, // Completely disable tooltips
+        enabled: false,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        external: () => {}, // Ensure no external tooltip rendering
-      },
+        external: () => {}
+      }
     },
     hover: {
-      mode: 'nearest', // Set hover mode to nearest, but we'll override with interaction
+      mode: 'nearest'
     },
     interaction: {
-      mode: 'nearest', // Ensures the interaction is based on the nearest element
-      intersect: true,  // Only trigger interaction when directly over a segment
+      mode: 'nearest',
+      intersect: true
     },
-    events: ['click'],  // Only allow 'click' interactions, if necessary (no hover)
+    events: ['click']
   };
 
   chartType: ChartType = 'pie';
@@ -91,10 +95,12 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
     if (this.chart?.chart) {
       const chartInstance = this.chart.chart;
 
-      // Check if chartInstance.options.plugins and chartInstance.options.plugins.legend are defined
-      if (chartInstance.options.plugins && chartInstance.options.plugins.legend) {
+      if (
+        chartInstance.options.plugins &&
+        chartInstance.options.plugins.legend
+      ) {
         chartInstance.options.plugins.legend.display = false;
-        chartInstance.update(); // Update the chart to apply changes
+        chartInstance.update();
       }
     }
   }
@@ -102,65 +108,188 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
   loadMediaData(): void {
     this.mediaService.getActivity().subscribe((medias: Media[]) => {
       this.medias = medias;
-      console.log('Medias received:', this.medias.slice(0, 5)); // Log first few items
+
+      console.log(
+        'Medias received:',
+        this.medias.slice(0, 5)
+      );
+
       this.prepareChartData();
     });
   }
 
+  /**
+   * Cuando cambia el tipo de media.
+   */
   onMediaTypeChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
-    const selectedType = selectElement.value;
-    this.selectedMediaType = selectedType;  // Update the selected media type
-    this.prepareChartData();  // Re-prepare chart data based on the selected type
+    const selectElement = event.target as HTMLSelectElement;
+
+    this.selectedMediaType = selectElement.value;
+
+    // Al cambiar de tipo, reiniciamos el género.
+    this.selectedGenre = '';
+
+    this.prepareChartData();
   }
 
+  /**
+   * Cuando cambia el género.
+   */
+  onGenreChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+
+    this.selectedGenre = selectElement.value;
+
+    this.prepareChartData();
+  }
+
+  /**
+   * Devuelve los géneros disponibles para el tipo de media seleccionado.
+   */
+  getGenres(): string[] {
+
+    if (!this.selectedMediaType) {
+      return [];
+    }
+
+    const genres = this.medias
+      .filter(media => media.tipo === this.selectedMediaType)
+      .map(media => media.genero || 'Unknown')
+      .filter((genre, index, array) => array.indexOf(genre) === index);
+
+    return genres.sort();
+  }
+
+  /**
+   * Devuelve los subgéneros disponibles para el tipo y género seleccionados.
+   */
+  getSubgenres(): string[] {
+
+    if (!this.selectedMediaType || !this.selectedGenre) {
+      return [];
+    }
+
+    const subgenres = this.medias
+      .filter(media =>
+        media.tipo === this.selectedMediaType &&
+        (media.genero || 'Unknown') === this.selectedGenre
+      )
+      .map(media => media.subgenero || 'Unknown')
+      .filter((subgenre, index, array) =>
+        array.indexOf(subgenre) === index
+      );
+
+    return subgenres.sort();
+  }
+
+  /**
+   * Prepara los datos de la gráfica dependiendo
+   * del nivel seleccionado.
+   */
   prepareChartData(): void {
-    const mediaCounts = this.medias.reduce((acc: Record<string, number>, media) => {
-      // Ensure that if there is no genre, we assign 'Unknown'
-      const genre = media.genero || 'Unknown';
 
-      // Check if the selected type is "Todos" or any other type
-      if (this.selectedMediaType === '' || media.tipo === this.selectedMediaType) {
+    const mediaCounts = this.medias.reduce(
+      (acc: Record<string, number>, media) => {
+
+        /*
+         * NIVEL 1
+         * No hay tipo seleccionado:
+         * mostramos los tipos de media.
+         */
         if (this.selectedMediaType === '') {
-          // Count based on 'tipo' only, no need to check 'genero'
+
           acc[media.tipo] = (acc[media.tipo] || 0) + 1;
-        } else {
-          // If filtering by a specific type, only count the genre (use 'Unknown' if no genre)
-          acc[genre] = (acc[genre] || 0) + 1;
+
+          return acc;
         }
-      }
-      return acc;
-    }, {});
 
-    console.log('Media Counts:', mediaCounts); // Log the counts object
+        /*
+         * Comprobamos que pertenezca al tipo seleccionado.
+         */
+        if (media.tipo !== this.selectedMediaType) {
+          return acc;
+        }
 
-    // Update chart data with the processed counts
-    this.chartData.labels = Object.keys(mediaCounts);
-    this.chartData.datasets[0].data = Object.values(mediaCounts);
+        /*
+         * NIVEL 2
+         * Hay tipo seleccionado pero no género:
+         * mostramos los géneros.
+         */
+        if (this.selectedGenre === '') {
 
-    // Ensure backgroundColor is an array and matches the number of chart data items
-    const defaultColors = [
-      '#FFA726', '#42A5F5', '#EF5350', '#66BB6A', '#AB47BC',
-      '#CE93D8', '#FFEB3B', '#8D6E63', 'Pink', 'Black'
-    ];
+          const genre = media.genero || 'Unknown';
 
-    // Assign the backgroundColor array and ensure it's correctly set
-    this.chartData.datasets[0].backgroundColor = this.chartData.labels.map((_, i) =>
-      defaultColors[i % defaultColors.length] // Cycle through colors if there are more labels than colors
+          acc[genre] = (acc[genre] || 0) + 1;
+
+          return acc;
+        }
+
+        /*
+         * Comprobamos que pertenezca al género seleccionado.
+         */
+        const genre = media.genero || 'Unknown';
+
+        if (genre !== this.selectedGenre) {
+          return acc;
+        }
+
+        /*
+         * NIVEL 3
+         * Hay tipo + género seleccionados:
+         * mostramos los subgéneros.
+         */
+        const subgenre = media.subgenero || 'Unknown';
+
+        acc[subgenre] = (acc[subgenre] || 0) + 1;
+
+        return acc;
+
+      },
+      {}
     );
 
-    // Manually trigger change detection to update the view
+    console.log('Media Counts:', mediaCounts);
+
+    /*
+     * Actualizamos las etiquetas y valores de la gráfica.
+     */
+    this.chartData.labels = Object.keys(mediaCounts);
+
+    this.chartData.datasets[0].data = Object.values(mediaCounts);
+
+    /*
+     * Colores.
+     */
+    const defaultColors = [
+      '#FFA726',
+      '#42A5F5',
+      '#EF5350',
+      '#66BB6A',
+      '#AB47BC',
+      '#CE93D8',
+      '#FFEB3B',
+      '#8D6E63',
+      'Pink',
+      'Black'
+    ];
+
+    this.chartData.datasets[0].backgroundColor =
+      this.chartData.labels.map(
+        (_, i) => defaultColors[i % defaultColors.length]
+      );
+
     this.cdr.detectChanges();
 
-    // Trigger chart update after data change
-    if (this.chart && this.chart.chart) {
+    if (this.chart?.chart) {
       this.chart.chart.update();
     }
   }
 
   getColor(i: number): string {
-    const backgroundColor = this.chartData.datasets[0]?.backgroundColor as string[];
-    return backgroundColor?.[i] || '#ccc';  // Fallback to '#ccc' if undefined
-  }
 
+    const backgroundColor =
+      this.chartData.datasets[0]?.backgroundColor as string[];
+
+    return backgroundColor?.[i] || '#ccc';
+  }
 }
