@@ -17,6 +17,10 @@ export class MediaSearchComponent {
   search=''
   medias:Media[]=[]
 
+  ngOnInit(): void {
+    document.title="NB | Search";
+  }
+
   constructor(
       private readonly mediaService:MediaService,
       private readonly router: Router,

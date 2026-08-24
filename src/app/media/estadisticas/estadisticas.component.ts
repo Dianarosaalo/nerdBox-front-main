@@ -89,6 +89,7 @@ export class EstadisticasComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadMediaData();
+    document.title="NB | Estadísticas";
   }
 
   ngAfterViewInit(): void {

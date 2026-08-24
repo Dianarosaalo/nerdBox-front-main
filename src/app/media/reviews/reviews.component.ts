@@ -31,6 +31,7 @@ export class ReviewsComponent {
     this.mediaService.getActivity().subscribe((medias: Media[]) => {
       this.medias = medias.filter((m)=>m.review);
     });
+    document.title="NB | Reviews";
   }
 
   getScoreColor(score: number): string {

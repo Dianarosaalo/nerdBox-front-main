@@ -34,6 +34,7 @@ export class MediaFormComponent {
 
   ngOnInit(): void {
     this.newMedia = this.resetMedia();
+    document.title="NB | Add";
 
     const currentUrl = this.location.path(); // all of this means im editing
     currentUrl.split('/');

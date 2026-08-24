@@ -19,6 +19,7 @@ export class MediaHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHistory();
+    document.title="NB | Historial";
   }
 
   loadHistory(): void {

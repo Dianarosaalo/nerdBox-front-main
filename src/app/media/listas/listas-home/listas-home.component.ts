@@ -29,7 +29,7 @@ export class ListasHomeComponent {
   ) {}
 
   ngOnInit(): void {
-    document.title = "NerdBox Listas";
+    document.title = "NB | Listas";
     this.loadLists();
   }
 

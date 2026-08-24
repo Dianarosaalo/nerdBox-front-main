@@ -32,6 +32,7 @@ export class ActividadComponent implements OnInit {
   ngOnInit(): void {
     this.initializeYears();
     this.loadMedia();
+    document.title="NB | Actividad";
   }
 
   initializeYears(): void {
