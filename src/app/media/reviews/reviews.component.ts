@@ -28,8 +28,17 @@ export class ReviewsComponent {
   }
 
   loadMedia(): void {
-    this.mediaService.getActivity().subscribe((medias: Media[]) => {
-      this.medias = medias.filter((m)=>m.review);
+    this.mediaService.getPaginated(0, 2500).subscribe((medias: Media[]) => {
+
+      this.medias = medias.filter((m) => m.review);
+
+      this.mediaService.getPaginated(2500, 2500).subscribe((moreMedias: Media[]) => {
+        this.medias = [
+          ...this.medias,
+          ...moreMedias.filter((m) => m.review)
+        ];
+      });
+
     });
     document.title="NB | Reviews";
   }
