@@ -42,6 +42,7 @@ export class MediaFormComponent {
     if (currentUrl.split('/')[3]==="edit")
     {
       this.edit = true;
+      document.title="NB | Edit";
       console.log(id);
       this.mediaService.getById(String(id)).subscribe(
         c => {
